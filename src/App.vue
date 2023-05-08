@@ -1,6 +1,5 @@
 <template>
-  <!-- <router-view /> -->
-  {{ message }}
+  <router-view />
 </template>
 
 <script setup>
@@ -13,7 +12,7 @@
   onMounted(() => {
     axios.get('/test').then((res) => {
       console.log(res)
-      message.value = ""
+      message.value = res.data
     })
     .catch((error) => {
       console.log(error.res);
