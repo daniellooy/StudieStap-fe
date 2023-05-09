@@ -24,7 +24,7 @@ import {computed} from "vue";
 import {useAppStore} from "@/store/store";
 const route = useRoute()
 const store = useAppStore()
-const name = computed(() => store.getUser().first_name + ' ' + store.getUser().last_name)
+const name = computed(() => store.getSessionValid() ? store.getUser().first_name + ' ' + store.getUser().last_name : 'Niet ingelogd')
 const currentRouteName = computed(() => route.name)
 </script>
 
