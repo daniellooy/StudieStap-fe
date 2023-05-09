@@ -14,4 +14,5 @@ export function registerPlugins (app) {
   app
     .use(vuetify)
     .use(router)
+
 }
