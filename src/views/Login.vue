@@ -3,6 +3,8 @@
       <input type="text" id="email" v-model="email">
       <input type="password" id="password" v-model="password">
       <button @click="login()">Login</button>
+
+      <button @click="fetchUser()">Fetch User</button>
   </div>
 </template>
 
@@ -34,14 +36,18 @@ export default {
 
   methods: {
     login(){
-      console.log(this.email);
-      console.log(this.password);
       axiosInstance.post('/api/login',
         {
           email: this.email,
           password: this.password
         },
       )
+    },
+
+    fetchUser(){
+      axiosInstance.get('/api/user').then(response => {
+        console.log(response)
+      })
     }
   }
 }
