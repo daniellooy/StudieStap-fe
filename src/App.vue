@@ -32,6 +32,7 @@ axiosInstance.get('/api/user')
   }
 
   store.updateUserObj(userobj)
+  router.push('/')
 })
 .catch((error) => {
   store.updateSessionValid(false)

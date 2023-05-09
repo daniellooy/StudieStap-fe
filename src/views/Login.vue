@@ -3,13 +3,13 @@
       <input type="text" id="email" v-model="email">
       <input type="password" id="password" v-model="password">
       <button @click="login()">Login</button>
-
       <button @click="fetchUser()">Fetch User</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import router from "@/router";
 import {useAppStore} from "@/store/store";
 
 const store = useAppStore()
@@ -57,6 +57,8 @@ export default {
                 date_of_birth: data.date_of_birth
               }
               store.updateUserObj(userobj)
+              router.push('/')
+
             })
         }
       )
