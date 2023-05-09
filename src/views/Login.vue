@@ -10,6 +10,9 @@
 
 <script>
 import axios from "axios";
+import {useAppStore} from "@/store/store";
+
+const store = useAppStore()
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000',
   withCredentials: true,
@@ -41,14 +44,23 @@ export default {
           email: this.email,
           password: this.password
         },
+      ).then((response) => {
+          axiosInstance.get('/api/user')
+            .then((response) => {
+              console.log(response)
+              const data = response.data
+              store.updateSessionValid(true)
+              const userobj = {
+                first_name: data.firstname,
+                last_name: data.lastname,
+                email_name: data.email,
+                date_of_birth: data.date_of_birth
+              }
+              store.updateUserObj(userobj)
+            })
+        }
       )
     },
-
-    fetchUser(){
-      axiosInstance.get('/api/user').then(response => {
-        console.log(response)
-      })
-    }
   }
 }
 </script>
