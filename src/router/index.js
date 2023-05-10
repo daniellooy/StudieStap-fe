@@ -1,10 +1,21 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
 import {useAppStore} from "@/store/store";
+import LoginLayout from "@/layouts/default/Login.vue";
 
 
 
 const routes = [
+  {
+    path: '/login',
+    component: () => import('@/layouts/default/Login.vue'),
+    children: [
+      {
+        path: '',
+        component: import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
+      },
+    ],
+  },
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
@@ -56,14 +67,6 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Profiel.vue'),
-      },
-      {
-        path: 'login',
-        name: 'Inloggen',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
       },
     ],
   },
