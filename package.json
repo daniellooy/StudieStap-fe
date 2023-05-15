@@ -9,6 +9,11 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@braid/vue-formulate": "^2.5.3",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@mdi/font": "7.0.96",
     "@types/axios": "^0.14.0",
     "axios": "^1.4.0",
@@ -16,6 +21,7 @@
     "pinia": "^2.0.36",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
+    "vue-flip": "^3.0.2",
     "vue-router": "^4.0.0",
     "vuetify": "^3.0.0",
     "webfontloader": "^1.0.0"

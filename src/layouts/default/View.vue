@@ -17,7 +17,8 @@
 <script setup>
   //
 import Topbar from "@/components/navigation/topbar.vue";
-  import Sidebar from "@/components/navigation/sidebar.vue";
+import Sidebar from "@/components/navigation/sidebar.vue";
+
 </script>
 
 <style scoped>
