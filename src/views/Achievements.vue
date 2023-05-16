@@ -1,8 +1,8 @@
 <template>
   <section class="achievements__container">
-    <section class="achievement">
-      <achhead :data="achhead"/>
-      <section class="achievement__subs" v-for="sub in subs">
+    <section class="achievement" v-for="achhead in achheads">
+      <achhead :achhead="achhead"/>
+      <section class="achievement__subs" v-for="sub in getsubs(achhead)">
         <achsub :data="sub"/>
       </section>
     </section>
@@ -12,6 +12,7 @@
 <script>
 import achhead from "../components/achievement/achhead.vue";
 import achsub from "../components/achievement/achsub.vue";
+import axios from 'axios';
 
 export default {
   name: "Achievements",
@@ -21,30 +22,37 @@ export default {
   },
   data() {
     return {
-      achhead: {title: "LOB-influencer", description: "hoeveel workshops heb je gegeven"},
-      subs: [{amount: 5, points: 500}, {amount: 10, points: 500}, {amount: 50, points: 1000}, {amount: 100, points: 1500}],
+      achheads: [],
+      achsubs: [],
     };
   },
-  methods: {
-    getState(title, state) {
-      if (state == 2) {
-        return 2;
-      }
 
-      let itemAmount = title.length;
-      let itemsDone = 0;
-      for (let i = 0; i < itemAmount; i++) {
-        if (title[i][1] == 1) {
-          itemsDone++;
+  mounted() {
+    axios.get('http://127.0.0.1:8000/api/achievements').then((res) => {
+      this.achheads = res.data;
+      // console.log(this.achheads);
+    });
+
+    axios.get('http://127.0.0.1:8000/api/subs').then((res) => {
+      this.achsubs = res.data;
+      // console.log(this.achsubs);
+    });
+
+
+
+  },
+
+  methods: {
+    getsubs(achhead){
+      let sublist = [];
+      for(const sub of this.achsubs) {
+        if(sub.achievement_id == achhead.id){
+          sublist.push(sub);
         }
       }
-
-      if (itemAmount == itemsDone) {
-        return 0;
-      } else {
-        return 1;
-      }
-    },
+      console.log(sublist);
+      return sublist;
+    }
   },
 };
 </script>
@@ -54,6 +62,7 @@ export default {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
+  gap: 2rem;
 }
 
 .achievement{
