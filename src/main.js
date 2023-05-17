@@ -12,9 +12,15 @@ import { createApp } from 'vue'
 
 // Plugins
 import { registerPlugins } from '@/plugins'
+import axios from 'axios'
+import {createPinia} from "pinia";
 
+const pinia = createPinia()
 const app = createApp(App)
 
 registerPlugins(app)
 
 app.mount('#app')
+app.use(axios)
+
+
