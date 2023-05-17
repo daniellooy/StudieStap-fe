@@ -39,5 +39,6 @@ export default {
 
 .achmain__title {
   font-weight:500;
+  color: white;
 }
 </style>

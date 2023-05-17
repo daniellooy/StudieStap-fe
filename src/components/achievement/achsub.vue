@@ -39,5 +39,6 @@
 .achsub__title {
   font-weight:500;
   font-size: large;
+  color: white;
 }
 </style>

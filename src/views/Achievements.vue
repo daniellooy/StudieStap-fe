@@ -3,6 +3,7 @@
     <section class="achievement" v-for="achhead in achheads">
       <achhead :achhead="achhead"/>
       <section class="achievement__subs" v-for="sub in getsubs(achhead)">
+        <svg class="line" width="500" height="500"><line x1="100" y1="100" x2="10" y2="100" stroke="black"/></svg>
         <achsub :data="sub"/>
       </section>
     </section>
@@ -75,5 +76,9 @@ export default {
   display: flex;
   align-items: center;
   column-gap: 4rem;
+}
+
+.line{
+    position:absolute;
 }
 </style>
