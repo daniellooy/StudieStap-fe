@@ -3,16 +3,16 @@
     {{ title }}
   </h2>
   <ul class="video-list">
-    <list_item v-for="video in videos" v-bind:key="video" :video="video" />
+    <list_item v-for="module in modules" v-bind:key="module.id" :module="module" />
   </ul>
 </template>
 
 <script setup>
-import List_item from "@/components/zelfstudie/list_item.vue";
+import List_item from "@/components/zelfstudie/module_list_item.vue";
 
 const props = defineProps({
   title: String,
-  videos: Array,
+  modules: Array,
 })
 
 </script>

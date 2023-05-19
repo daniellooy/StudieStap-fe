@@ -1,25 +1,13 @@
 <template>
-  <module_list :title="'Uitgelicht'" :videos="videos"/>
+  <router-view>
+
+  </router-view>
 </template>
 
 <script setup>
 import Module_list from "@/components/zelfstudie/module_list.vue";
-
-
-const videos = [
-  {
-    title: 'Video 1',
-    slug: 'video1'
-  },
-  {
-    title: 'Video 2',
-    slug: 'video1'
-  },
-  {
-    title: 'Video 3',
-    slug: 'video1'
-  }
-]
+import {useRoute} from "vue-router";
+const route = useRoute();
 
 </script>
 

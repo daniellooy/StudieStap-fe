@@ -43,6 +43,7 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Voortgang.vue'),
+
       },
       {
         path: 'achievements',
@@ -53,12 +54,31 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Achievements.vue'),
       },
       {
-        path: 'zelfstudie',
+        path: '/zelfstudie/',
         name: 'Zelfstudie',
+
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Zelfstudie/index.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Overzicht',
+            component: () => import(/* webpackChunkName: "home" */ '@/views/Zelfstudie/overview.vue'),
+          },
+          {
+            path: 'module/:module_id',
+            name: 'Module overzicht',
+            component: () => import(/* webpackChunkName: "home" */ '@/views/Zelfstudie/module_overview.vue'),
+          },
+          {
+            path: 'video/:video_id',
+            name: 'Video',
+            params: true,
+            component: () => import(/* webpackChunkName: "home" */ '@/views/Zelfstudie/detail.vue'),
+          },
+        ]
       },
       {
         path: 'profiel',
@@ -70,6 +90,56 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/admin',
+    component: () => import('@/layouts/default/Admin.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Admin overzicht',
+        component: () => import('@/views/admin/overview.vue')
+      },
+      {
+        path: 'modules/',
+        name: 'Admin Modules',
+        component: () => import('@/views/admin/Modules.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Modules Overzicht',
+            component: () => import('@/views/admin/admin_modules_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Module toevoegen',
+            component: () => import('@/views/admin/add_edit_module.vue'),
+          },
+          {
+            name: 'Module bewerken',
+            path: 'edit/:module_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_module.vue'),
+          },
+        ]
+      },
+      {
+        path: 'videos/',
+        name: 'Admin Videos',
+        children: [
+          {
+            path: 'add',
+            name: 'Video toevoegen',
+            component: () => import('@/views/admin/add_edit_video.vue'),
+          },
+          {
+            path: 'edit',
+            name: 'Video bewerken',
+            component: () => import('@/views/admin/add_edit_video.vue'),
+          },
+        ]
+      }
+    ]
+  }
 ]
 
 const router = createRouter({
