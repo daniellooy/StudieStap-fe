@@ -29,9 +29,7 @@ axiosInstance.get('/api/user')
     email_name: data.email,
     date_of_birth: data.date_of_birth
   }
-
   store.updateUserObj(userobj)
-  router.push('/')
 })
 .catch((error) => {
   store.updateSessionValid(false)
