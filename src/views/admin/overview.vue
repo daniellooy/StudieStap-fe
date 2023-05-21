@@ -1,15 +1,17 @@
 <template>
     <div class="main">
-      <router-link class="admin-block" :to="{name: 'Admin Modules'}">
+      <router-link class="admin-block" :to="{name: 'Admin Modules Overzicht'}">
         <h2>Modules bekijken</h2>
       </router-link>
       <router-link class="admin-block" :to="{name: 'Module toevoegen'}">
         <h2>Module Toevoegen</h2>
       </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Videos Overzicht'}">
+        <h2>Videos Bekijken</h2>
+      </router-link>
       <router-link class="admin-block" :to="{name: 'Video toevoegen'}" >
         <h2>Video Toevoegen</h2>
       </router-link>
-      <router-link class="admin-block" to="" />
       <router-link class="admin-block" to="" />
       <router-link class="admin-block" to="" />
     </div>
@@ -34,6 +36,7 @@
 
 .admin-block h2{
   text-align: center;
+  width: 100%;
 }
 
 .wrapper{
