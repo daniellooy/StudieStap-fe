@@ -1,10 +1,10 @@
 <template>
-<p>Zelfstudie</p>
+
 </template>
 
 <script>
 export default {
-  name: "Zelfstudie"
+  name: "add_edit_video"
 }
 </script>
 

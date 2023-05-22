@@ -7,7 +7,6 @@ import axios from "axios";
 import router from "@/router";
 import { useAppStore } from "@/store/store";
 
-
 const store = useAppStore();
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000',
