@@ -7,7 +7,7 @@
       <div class="main">
         <topbar />
         <div class="main-content">
-            <router-view />
+          <router-view />
         </div>
       </div>
     </div>
@@ -15,36 +15,35 @@
 </template>
 
 <script setup>
-  //
+//
 import Topbar from "@/components/navigation/topbar.vue";
 import Sidebar from "@/components/navigation/sidebar.vue";
 
 </script>
 
 <style scoped>
-
-.wrapper{
+.wrapper {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
 }
 
-.sidebar{
+.sidebar {
   grid-column: span 2 / span 2;
 }
 
-.main{
+.main {
   grid-column: span 8 / span 8;
   background-color: #F4F6F3;
   position: relative;
 }
 
-.main-content{
+.main-content {
   max-height: calc(100vh - 90px);
-  margin-top: 91px;
+  height: 100%;
+  margin-top: 90px;
   padding-left: 70px;
   padding-right: 70px;
   padding-top: 40px;
   padding-bottom: 40px;
 }
-
 </style>
