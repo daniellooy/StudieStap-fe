@@ -1,10 +1,15 @@
 <template>
-  <h2 class="video-list-title">
-    Module: {{ module.title }}
-  </h2>
-  <ul class="video-list">
-    <video_list_item v-for="video in module.videos" :key="video.id" :video="video"/>
-  </ul>
+  <div class="overview-wrapper">
+    <h2 class="video-list-title">
+      Module: {{ module.title }}
+    </h2>
+    <p>
+      {{ module.description }}
+    </p>
+    <ul class="video-list">
+      <video_list_item v-for="video in module.videos" :key="video.id" :video="video"/>
+    </ul>
+  </div>
 </template>
 
 <script setup>
@@ -37,5 +42,11 @@ axiosInstance.get('/module/' + route.params.module_id).then((response) => {
   grid-template-columns: repeat(4, 1fr);
   column-gap: 24px;
   margin-top: 24px;
+}
+
+.overview-wrapper{
+  background-color: white;
+  border-radius: 20px;
+  padding: 25px;
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <module_list :modules="modules" title="Alle modules" />
+  <div class="overview-wrapper">
+    <module_list :modules="modules" title="Alle modules" />
+  </div>
 </template>
 
 <script setup>
@@ -28,5 +30,9 @@ axiosInstance.get('/api/modules')
 </script>
 
 <style scoped>
-
+.overview-wrapper{
+  background-color: white;
+  border-radius: 20px;
+  padding: 25px;
+}
 </style>
