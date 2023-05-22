@@ -27,13 +27,14 @@
               <p>{{ user.bio ? user.bio : "Geen Bio" }}</p>
             </div>
             <div class="align-end">
-              <button class="edit-button" @click="ShowEditSection(1)">aanpassen</button>
+              <button type="button" class="edit-button" @click="ShowEditSection(1)">aanpassen</button>
             </div>
           </section>
         </div>
       </template>
       <template v-slot:back class="back">
         <form @submit.prevent="submitForm" class="back section-wrapper">
+          
           <h2>Wie ben ik?</h2>
           <section class="section">
             <div class="section-content">
@@ -61,8 +62,8 @@
               <textarea v-model="Form.biography" name="biography" id="biography" cols="30" row="6"></textarea>
             </div>
             <div class="button-group align-end ">
-              <button class="cancel-button" @click="ShowEditSection(1)">Cancel</button>
-              <button class="save-button">Opslaan</button>
+              <button type="button" class="cancel-button" @click="ShowEditSection(1)">Cancel</button>
+              <button type="submit" class="save-button">Opslaan</button>
             </div>
           </section>
         </form>
@@ -98,7 +99,7 @@
               </div>
             </div>
             <div class="align-end">
-              <button class="edit-button" @click="ShowEditSection(2)">aanpassen</button>
+              <button type="button" class="edit-button" @click="ShowEditSection(2)">aanpassen</button>
             </div>
           </section>
         </div>
@@ -133,8 +134,8 @@
             </div>
 
             <div class="button-group align-end ">
-              <button class="cancel-button" @click="ShowEditSection(2)">Cancel</button>
-              <button class="save-button">Opslaan</button>
+              <button type="button" class="cancel-button" @click="ShowEditSection(2)">Cancel</button>
+              <button type="submit" class="save-button">Opslaan</button>
             </div>
           </section>
         </form>
@@ -160,9 +161,13 @@
                 <p>Straatnaam</p>
                 <p>{{ user.street ? user.street : "onbekend" }}</p>
               </div>
+              <div class="content-item-group">
+                <p>Huisnummer</p>
+                <p>{{ user.houseNumber ? user.houseNumber : "onbekend" }}</p>
+              </div>
             </div>
             <div class="align-end">
-              <button class="edit-button" @click="ShowEditSection(3)">aanpassen</button>
+              <button type="button" class="edit-button" @click="ShowEditSection(3)">aanpassen</button>
             </div>
 
           </section>
@@ -185,13 +190,17 @@
             <div class="content-item column">
               <div class="content-item-group">
                 <label for="street">Straatnaam</label>
-                <input placeholder="Wat is jouw straatnaam?" type="text" name="street" v-model="Form.street"> 
+                <input placeholder="Wat is jouw straatnaam?" type="text" name="street" v-model="Form.street">
+              </div>
+              <div class="content-item-group">
+                <label for="houseNumber">Huisnummer</label>
+                <input placeholder="Wat is jouw huisnummer?" type="number" name="houseNumber" v-model="Form.houseNumber">
               </div>
             </div>
             <div class="button-group align-end ">
-            <button class="cancel-button" @click="ShowEditSection(3)">Cancel</button>
-            <button class="save-button">Opslaan</button>
-          </div>
+              <button type="button" class="cancel-button" @click="ShowEditSection(3)">Cancel</button>
+              <button class="save-button" @click="Submit">Opslaan</button>
+            </div>
           </section>
         </form>
       </template>
@@ -219,21 +228,34 @@ const editSection1 = ref(false)
 const editSection2 = ref(false)
 const editSection3 = ref(false)
 
+
+console.log(user.value)
+
 const Form = reactive({
+  id: user.value.id,
   first_name: user.value.first_name,
   last_name: user.value.last_name,
   email: user.value.email,
   profile_image: user.value.Profile_image,
   biography: user.value.bio ? user.value.bio : "",
   city: user.value.city,
+  phone: user.value.phone,
   street: user.value.street,
   houseNumber: user.value.houseNumber,
-  zip: user.value.zipcode,
+  zip: user.value.zip,
   workshop: user.value.workshop,
   OldPassword: "",
   NewPassword: ""
 })
 
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:8000',
+  withCredentials: true,
+  headers: {
+    "accept": 'application/json',
+    "content-type": "application/json"
+  }
+})
 
 const onProfilePhotoChange = (event) => {
   const file = event.target.files[0]
@@ -252,6 +274,13 @@ const ShowEditSection = (sectie) => {
 }
 
 const submitForm = () => {
+  console.log(Form)
+  axiosInstance.put('/api/user', Form)
+    .then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    })
 }
 
 </script>
