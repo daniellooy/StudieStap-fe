@@ -1,25 +1,25 @@
 <template>
-  <div>
+  <div :key="route.fullPath">
     <div class="header">
-      <h1>Modules</h1>
-      <router-link :to="{name: 'Module toevoegen'}">Nieuwe module</router-link>
+      <h1>Videos</h1>
+      <router-link :to="{name: 'Video toevoegen'}">Nieuwe video</router-link>
     </div>
     <ul class="module-list">
-      <li class="module-list-item" v-for="(module, index) in modules" :key="module.id">
+      <li class="module-list-item" v-for="(video, index) in videos" :key="video.id + '-' + video.module_id">
         <div class="module-list-item-left">
-          <img :src="'http://localhost:8000' + module.thumbnail" alt="">
-          <div>{{ module.title }}</div>
+          <img :src="'http://localhost:8000' + video.thumbnail" alt="">
+          <div>{{video.module.title}}: {{ video.title }}</div>
         </div>
         <div class="module-list-item-buttons">
-          <div class="module-list-item-buttons-standard" v-if="!module.showconfirm">
-              <router-link class="button-neutral" :to="{ name: 'Module bewerken', params: { module_id: module.id } }">Bewerken</router-link>
-              <button class="button-deny" @click="module.showconfirm = true">Delete</button>
+          <div class="module-list-item-buttons-standard" v-if="!video.showconfirm">
+            <router-link class="button-neutral" :to="{ name: 'Video bewerken', params: { video_id: video.id } }">Bewerken</router-link>
+            <button class="button-deny" @click="video.showconfirm = true">Delete</button>
           </div>
-          <div class="module-list-item-buttons-confirm" v-if="module.showconfirm">
+          <div class="module-list-item-buttons-confirm" v-if="video.showconfirm">
             <span>Zeker weten?</span>
             <div class="module-list-item-buttons-confirm-buttons">
-              <button class="button-confirm" @click="deleteModule(module.id, index)">Ja!</button>
-              <button class="button-deny" @click="module.showconfirm = false">Nee :(</button>
+              <button class="button-confirm" @click="deleteVideo(video.id, index)">Ja!</button>
+              <button class="button-deny" @click="video.showconfirm = false">Nee :(</button>
             </div>
           </div>
         </div>
@@ -29,10 +29,11 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onUpdated, ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 import axios from "axios";
+import {useRoute} from "vue-router";
 
-const modules = ref([]);
+const route = useRoute();
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api/',
@@ -43,27 +44,29 @@ const axiosInstance = axios.create({
   }
 })
 
-function deleteModule(id, index) {
-  axiosInstance.delete('module/delete', {
+
+const videos = ref([])
+async function getContent(){
+  return (await axiosInstance.get('/videos/')).data
+}
+
+onBeforeMount(async () => {
+  await getContent().then((data) => {
+    videos.value = data
+  })
+})
+
+function deleteVideo(id, index){
+  axiosInstance.delete('video/delete', {
     data: {
       id: id
     }
   }).then((response) => {
     if(response.status === 200){
-      modules.value.splice(index, 1)
+      videos.value.splice(index, 1)
     }
   })
 }
-
-async function getContent(){
-  return (await axiosInstance.get('/modules/')).data
-}
-
-onBeforeMount(async () => {
-  await getContent().then((data) => {
-    modules.value = data
-  })
-})
 
 </script>
 
@@ -110,7 +113,6 @@ onBeforeMount(async () => {
 .module-list-item-buttons-standard{
   display: flex;
   gap: 16px;
-
 }
 
 .module-list-item img{

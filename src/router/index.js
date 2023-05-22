@@ -125,19 +125,26 @@ const routes = [
       {
         path: 'videos/',
         name: 'Admin Videos',
+        component: () => import('@/views/admin/Videos.vue'),
         children: [
+          {
+            path: '',
+            name: 'Admin Videos Overzicht',
+            component: () => import('@/views/admin/admin_videos_overview.vue'),
+          },
           {
             path: 'add',
             name: 'Video toevoegen',
             component: () => import('@/views/admin/add_edit_video.vue'),
           },
           {
-            path: 'edit',
             name: 'Video bewerken',
+            path: 'edit/:video_id',
+            params: true,
             component: () => import('@/views/admin/add_edit_video.vue'),
           },
         ]
-      }
+      },
     ]
   }
 ]

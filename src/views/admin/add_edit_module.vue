@@ -1,10 +1,10 @@
 <template>
   <div class="formwrapper">
-    <h1>Module bewerken</h1>
+    <h1>Module {{ editmode ? 'bewerken' : 'toevoegen'}}</h1>
 
     <div class="form">
-      <div class="form-group">
-        <img :src="'http://localhost:8000' + module.thumbnail" alt="">
+      <div class="form-group" >
+        <img v-if="editmode" :src="'http://localhost:8000' + module.thumbnail" alt="">
         <label for="thumb">Thumbnail afbeelding</label>
         <input id="file" @change="onFileChange($event)" type="file" >
       </div>
@@ -17,7 +17,7 @@
         <textarea v-model="module.description" name="description"/>
       </div>
       <div class="form-buttons">
-        <button>Annuleren</button>
+        <button @click="cancel()">Annuleren</button>
         <button @click="save()">Opslaan</button>
       </div>
     </div>
@@ -53,10 +53,14 @@ if(editmode.value){
     module.value = response.data
   })
 }
+else{
+  module.value.title = ''
+  module.value.description = ''
+  module.value.thumbnail = ''
+}
 
 function save(){
   if(editmode.value){
-    console.log(file.value);
     let data = new FormData();
     data.append('id', module.value.id);
     data.append('title', module.value.title)
@@ -67,8 +71,18 @@ function save(){
     router.push({name: 'Admin Modules Overzicht'});
   }
   else{
-    //nieuw
+    let data = new FormData();
+    data.append('title', module.value.title)
+    data.append('description', module.value.description)
+    data.append('thumbnail', file.value)
+    axiosInstance.post('/module/add', data).then((response) => {console.log(response)})
+    router.push({name: 'Admin Modules Overzicht'});
   }
+}
+
+function cancel(){
+  confirm('Zeker weten?')
+  router.push({name: 'Admin Modules Overzicht'});
 }
 
 function onFileChange(e){

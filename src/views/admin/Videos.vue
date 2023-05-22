@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-inner">
-    <router-view
+    <router-view :key="route.fullPath"
     ></router-view>
   </div>
 </template>
@@ -9,7 +9,7 @@
 
 import {useRoute} from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 
 </script>
 
