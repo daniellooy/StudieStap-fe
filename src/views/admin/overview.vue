@@ -12,8 +12,6 @@
       <router-link class="admin-block" :to="{name: 'Video toevoegen'}" >
         <h2>Video Toevoegen</h2>
       </router-link>
-      <router-link class="admin-block" to="" />
-      <router-link class="admin-block" to="" />
     </div>
 </template>
 
@@ -37,15 +35,6 @@
 .admin-block h2{
   text-align: center;
   width: 100%;
-}
-
-.wrapper{
-  background-color: #F4F6F3;
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
 }
 
 .main{

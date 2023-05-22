@@ -33,7 +33,6 @@ const currentRouteName = computed(() => route.name)
 .topbar{
   height: 90px;
   display: flex;
-  background-color: #F4F6F3;
   justify-content: space-between;
   border-bottom: 1px solid #E0DDCF;
   padding-left: 65px;
