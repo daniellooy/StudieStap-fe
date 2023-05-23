@@ -228,15 +228,13 @@ const editSection1 = ref(false)
 const editSection2 = ref(false)
 const editSection3 = ref(false)
 
-
-console.log(user.value)
-
 const Form = reactive({
   id: user.value.id,
   first_name: user.value.first_name,
   last_name: user.value.last_name,
   email: user.value.email,
   profile_image: user.value.Profile_image,
+  profile_image_file: "",
   biography: user.value.bio ? user.value.bio : "",
   city: user.value.city,
   phone: user.value.phone,
@@ -253,14 +251,15 @@ const axiosInstance = axios.create({
   withCredentials: true,
   headers: {
     "accept": 'application/json',
-    "content-type": "application/json"
+    "content-type": "multipart/form-data"
   }
 })
 
 const onProfilePhotoChange = (event) => {
   const file = event.target.files[0]
-  const ImageName = file.name
+  console.log(file)
   profile_image.value = URL.createObjectURL(file)
+  Form.profile_image_file = file
 }
 
 const ShowEditSection = (sectie) => {
@@ -274,8 +273,21 @@ const ShowEditSection = (sectie) => {
 }
 
 const submitForm = () => {
-  console.log(Form)
-  axiosInstance.put('/api/user', Form)
+  const data = new FormData()
+  data.append("id", Form.id)
+  data.append("first_name", Form.first_name)
+  data.append("last_name", Form.last_name)
+  data.append("email", Form.email)
+  data.append("biography", Form.biography)
+  data.append("city", Form.city)
+  data.append("phone", Form.phone)
+  data.append("street", Form.street)
+  data.append("houseNumber", Form.houseNumber)  
+  data.append("zip", Form.zip)  
+  data.append("profile_image_file", Form.profile_image_file)
+  data.append("workshop", Form.workshop)
+  data.append("_method", "PUT")
+  axiosInstance.post('/api/user', data)
     .then((response) => {
       console.log(response)
     }).catch((error) => {
