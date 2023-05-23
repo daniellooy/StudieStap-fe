@@ -1,10 +1,9 @@
 <template>
     <div>
-        {{ channelMessages }}
-        <input type="text">
-
+        <div v-for="message in channelMessages" :key="message.id">{{ message.message && message }}</div>
         <!-- channel messages -->
         <!-- message inputfield for posting messages -->
+        <input type="text">
     </div>
 </template>
 

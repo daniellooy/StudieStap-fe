@@ -1,7 +1,7 @@
 <template>
   <div class="Community__wrapper">
-    <community_channel_Selector  />
-    <community_channel :channelMessages="{messages}"/>
+    <community_channel_Selector  :selectedChannel="selectedChannel" />
+    <community_channel :channelMessages="messages"/>
   </div>
 </template>
 
@@ -28,8 +28,8 @@ const axiosInstance = axios.create({
 const getMessages = (channel_id) => {
   axiosInstance.get(`/channel/${channel_id}`)
   .then((response) => {
-    console.log(response.data)
-    messages.value = response.data
+    console.log(response.data.messages)
+    messages.value = response.data.messages
   })
   .catch((error) => {
     console.log(error)
