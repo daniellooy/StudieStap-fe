@@ -78,6 +78,12 @@ const routes = [
             params: true,
             component: () => import(/* webpackChunkName: "home" */ '@/views/Zelfstudie/detail.vue'),
           },
+          {
+            path: 'question/:question_id',
+            name: 'Vraag',
+            params: true,
+            component: () => import('@/views/Zelfstudie/question.vue')
+          }
         ]
       },
       {
@@ -142,6 +148,52 @@ const routes = [
             path: 'edit/:video_id',
             params: true,
             component: () => import('@/views/admin/add_edit_video.vue'),
+          },
+        ]
+      },
+      {
+        path: 'categorie/',
+        name: 'Admin Categorieën',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Categorieën Overzicht',
+            component: () => import('@/views/admin/admin_category_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Categorie toevoegen',
+            component: () => import('@/views/admin/add_edit_category.vue'),
+          },
+          {
+            name: 'Categorie bewerken',
+            path: 'edit/:category_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_category.vue'),
+          },
+        ]
+      },
+      {
+        path: 'vraag/',
+        name: 'Admin Vragen',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Vragen Overzicht',
+            component: () => import('@/views/admin/admin_question_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Vraag toevoegen',
+            component: () => import('@/views/admin/add_edit_question.vue'),
+          },
+          {
+            name: 'Vraag bewerken',
+            path: 'edit/:category_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_question.vue'),
           },
         ]
       },

@@ -1,10 +1,15 @@
 <template>
-  <h2 class="video-list-title">
-    {{ title }}
-  </h2>
-  <ul class="video-list">
-    <list_item v-for="module in modules" v-bind:key="module.id" :module="module" />
-  </ul>
+  <div>
+    <h2 class="video-list-title">
+      {{ title }}
+    </h2>
+    <p class="video-list-description">
+      {{ description }}
+    </p>
+    <ul class="video-list">
+      <list_item v-for="module in modules" v-bind:key="module.id" :module="module" />
+    </ul>
+  </div>
 </template>
 
 <script setup>
@@ -12,6 +17,7 @@ import List_item from "@/components/zelfstudie/module_list_item.vue";
 
 const props = defineProps({
   title: String,
+  description: String,
   modules: Array,
 })
 
@@ -26,7 +32,7 @@ const props = defineProps({
   column-gap: 24px;
 }
 
-.video-list-title{
+.video-list-description{
   margin-bottom: 16px;
 }
 

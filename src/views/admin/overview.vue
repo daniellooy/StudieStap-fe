@@ -1,5 +1,11 @@
 <template>
     <div class="main">
+      <router-link class="admin-block" :to="{name: 'Admin Categorieën Overzicht'}">
+        <h2>Categorieën bekijken</h2>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Categorie toevoegen'}">
+        <h2>Categorie Toevoegen</h2>
+      </router-link>
       <router-link class="admin-block" :to="{name: 'Admin Modules Overzicht'}">
         <h2>Modules bekijken</h2>
       </router-link>
