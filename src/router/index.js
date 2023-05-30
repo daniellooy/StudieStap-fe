@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
+        component: () =>  import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
       },
     ],
   },

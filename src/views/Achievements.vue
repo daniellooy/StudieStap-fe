@@ -1,10 +1,10 @@
 <template>
   <section class="achievements__container">
-    <section class="achievement" v-for="achhead in achheads">
-      <achhead :achhead="achhead"/>
-      <section class="achievement__subs" v-for="sub in getsubs(achhead)">
-        <svg class="line" width="500" height="500"><line x1="100" y1="100" x2="10" y2="100" stroke="black"/></svg>
-        <achsub :data="sub"/>
+    <section class="achievement" v-for="achievement in achievements">
+      <achhead :achievement="achievement"/>
+      <section class="achievement__subs" v-for="sub in achievement.subs">
+        <!-- <svg class="line" width="500" height="500"><line x1="100" y1="100" x2="10" y2="100" stroke="black"/></svg> -->
+        <achsub :sub="sub" :data="achievement.subs"/>
       </section>
     </section>
   </section>
@@ -23,24 +23,15 @@ export default {
   },
   data() {
     return {
-      achheads: [],
-      achsubs: [],
+      achievements: [],
     };
   },
 
   mounted() {
-    axios.get('http://127.0.0.1:8000/api/achievements').then((res) => {
-      this.achheads = res.data;
-      // console.log(this.achheads);
+    axios.get('http://localhost:8000/api/achievements').then((res) => {
+      this.achievements = res.data;
+      // console.log(this.achievements);
     });
-
-    axios.get('http://127.0.0.1:8000/api/subs').then((res) => {
-      this.achsubs = res.data;
-      // console.log(this.achsubs);
-    });
-
-
-
   },
 
   methods: {
@@ -51,7 +42,7 @@ export default {
           sublist.push(sub);
         }
       }
-      console.log(sublist);
+      // console.log(sublist);
       return sublist;
     }
   },
@@ -75,6 +66,7 @@ export default {
 .achievement__subs{
   display: flex;
   align-items: center;
+  justify-content: center;
   column-gap: 4rem;
 }
 

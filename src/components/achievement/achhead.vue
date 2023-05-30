@@ -1,7 +1,7 @@
 <template>
     <section class="achmain">
       <section class="achmain__inside">
-        <section class="achmain__title">{{ achhead.name }}</section>
+        <section class="achmain__title">{{ achievement.name }}</section>
       </section>
     </section>
 </template>
@@ -9,7 +9,7 @@
 <script>
 export default {
   props:[
-    "achhead"
+    "achievement"
   ]
 }
 </script>
