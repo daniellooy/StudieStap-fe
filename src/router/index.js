@@ -191,7 +191,7 @@ const routes = [
           },
           {
             name: 'Vraag bewerken',
-            path: 'edit/:category_id',
+            path: 'edit/:question_id',
             params: true,
             component: () => import('@/views/admin/add_edit_question.vue'),
           },

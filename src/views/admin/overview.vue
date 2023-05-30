@@ -18,6 +18,12 @@
       <router-link class="admin-block" :to="{name: 'Video toevoegen'}" >
         <h2>Video Toevoegen</h2>
       </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Vragen Overzicht'}">
+        <h2>Vragen Bekijken</h2>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Vraag toevoegen'}" >
+        <h2>Vraag Toevoegen</h2>
+      </router-link>
     </div>
 </template>
 
