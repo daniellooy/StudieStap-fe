@@ -218,12 +218,9 @@ import { VueFlip } from 'vue-flip';
 
 const store = useAppStore()
 const { user } = storeToRefs(store)
-const firstname = ref(user.value.first_name)
-const lastname = ref(user.value.last_name)
-const email = ref(user.value.email_name)
 const profile_image = ref("http://localhost:8000/" + user.value.Profile_image)
 
-const isEditing = ref(false)
+
 const editSection1 = ref(false)
 const editSection2 = ref(false)
 const editSection3 = ref(false)

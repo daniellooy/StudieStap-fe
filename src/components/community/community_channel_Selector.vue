@@ -5,9 +5,9 @@
         @click="getSelected(channel.channel_id)">
         <!-- show image of the channel  -->
         <svg v-if="selectedChannel === channel.channel_id" width="5" height="50" viewBox="0 0 5 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0C2.76142 0 5 2.23858 5 5V45C5 47.7614 2.76142 50 0 50V0Z" fill="#D9D9D9" />
+          <path d="M0 0C2.76142 0 5 2.23858 5 5V45C5 47.7614 2.76142 50 0 50V0Z" fill="#2C9B22" />
         </svg>
-        <img :src="URL_BASE + channel.channel.image_path">
+          <img class="wrapper__item" :src="URL_BASE + channel.channel.image_path">
       </li>
     </ul>
   </div>
@@ -17,6 +17,7 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { inject } from 'vue';
+
 
 const updateSelectedChannel = inject('updateSelectedChannel');
 const channels = ref();
@@ -31,8 +32,6 @@ const props = defineProps({
 const getSelected = (value) => {
   updateSelectedChannel(value)
 }
-
-
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -70,7 +69,9 @@ axiosInstance.get('/channels')
 .channel__list__item>img {
   width: 50px;
   height: 50px;
-
   border-radius: 100%;
 }
+
+
+
 </style>

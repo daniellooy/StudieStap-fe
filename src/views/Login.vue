@@ -120,7 +120,6 @@ export default {
               }
               store.updateUserObj(userobj)
               router.push('/')
-
             })
         }
       )

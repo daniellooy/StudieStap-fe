@@ -1,6 +1,6 @@
 <template>
   <div class="Community__wrapper">
-    <community_channel_Selector  :selectedChannel="selectedChannel" />
+    <community_channel_Selector class="selector"  :selectedChannel="selectedChannel" />
     <community_channel :channelMessages="messages"/>
   </div>
 </template>
@@ -28,7 +28,6 @@ const axiosInstance = axios.create({
 const getMessages = (channel_id) => {
   axiosInstance.get(`/channel/${channel_id}`)
   .then((response) => {
-    console.log(response.data.messages)
     messages.value = response.data.messages
   })
   .catch((error) => {
@@ -52,11 +51,15 @@ provide('updateSelectedChannel', updateSelectedChannel)
 <style scoped>
 .Community__wrapper {
   display: grid;
-  grid-template-columns: 0.1fr 1.2fr;
+  grid-template-columns: 0.05fr 1.2fr;
   grid-template-areas: ". .";
   height: 100%;
-  padding: 8px;
+  margin: 8px;
   border: #2C9B22 2px solid;
   border-radius: 8px;
+}
+
+.selector{
+  border-right: #2C9B22 2px solid;
 }
 </style>
