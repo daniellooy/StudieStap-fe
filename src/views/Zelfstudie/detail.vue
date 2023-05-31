@@ -10,7 +10,7 @@
         </p>
       </div>
     </div>
-    <video_sidebar :question="false" :video_id="video_id" />
+    <video_sidebar :video_id="video_id" />
 <!--    <div class="sidebar">-->
 <!--      <div class="sidebar-inner">-->
 <!--        <h3 class="sidebar-title">Content in deze module</h3>-->
@@ -43,7 +43,7 @@ import {useRoute} from "vue-router";
 import Video_sidebar from "@/views/Zelfstudie/video_sidebar.vue";
 
 const route = useRoute();
-const video_id = ref(1);
+const video_id = ref(route.params.video_id);
 const video = ref({});
 const module_videos = ref([]);
 const axiosInstance = axios.create({

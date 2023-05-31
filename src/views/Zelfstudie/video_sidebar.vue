@@ -5,14 +5,14 @@
       <ul class="sidebar-list">
         <li v-for="module_video in module_videos" v-bind:key="module_video.id" >
           <ul>
-            <router-link :to="{ name: 'Video', params: { video_id: module_video.id } }">
-              <li class="sidebar-item" :class="[module_video.id === video_id && !question ? 'darkbg': '']">
+            <router-link active-class="darkbg" :to="{ name: 'Video', params: { video_id: module_video.id } }">
+              <li class="sidebar-item">
                 <img class="sidebar-item-thumbnail" :src="'http://localhost:8000' + module_video.thumbnail" alt="">
                 <span>{{ module_video.title }}</span>
               </li>
             </router-link>
-            <router-link v-for="(question, index) in module_video.questions" v-bind:key="question.id" :to="{name: 'Vraag', params: {question_id: question.id}}">
-              <li class="sidebar-item" :class="[module_video.id === video_id && this.question ? 'darkbg': '']" >
+            <router-link active-class="darkbg" v-for="(question, index) in module_video.questions" v-bind:key="question.id" :to="{name: 'Vraag', params: {question_id: question.id}}">
+              <li class="sidebar-item">
                 Vraag {{ index + 1 }}
               </li>
             </router-link>
@@ -24,16 +24,17 @@
 </template>
 
 <script setup>
-import {ref, toRefs} from "vue";
+import {onBeforeMount, ref, toRefs} from "vue";
 import axios from "axios";
+import {useRoute} from "vue-router";
 const module_videos = ref([]);
+const route = useRoute();
 
 const props = defineProps({
   video_id: Number,
-  question: Boolean,
 })
 
-const {video_id, question} = toRefs(props)
+const {video_id} = toRefs(props)
 
 
 const axiosInstance = axios.create({
@@ -45,8 +46,14 @@ const axiosInstance = axios.create({
   }
 })
 
-axiosInstance.get('/api/video/' + video_id.value).then((response) => {
-  module_videos.value = [...response.data.module.videos]
+async function getContent(){
+  return (await axiosInstance.get('/api/video/' + video_id.value)).data
+}
+
+onBeforeMount(async () => {
+  await getContent().then((data) => {
+    module_videos.value = data.module.videos
+  })
 })
 
 </script>
@@ -70,7 +77,7 @@ axiosInstance.get('/api/video/' + video_id.value).then((response) => {
   align-items: center;
 }
 
-.darkbg{
+.darkbg li{
   background-color: #F5F6F4;
 }
 
