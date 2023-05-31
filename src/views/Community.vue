@@ -51,7 +51,7 @@ provide('updateSelectedChannel', updateSelectedChannel)
 <style scoped>
 .Community__wrapper {
   display: grid;
-  grid-template-columns: 0.05fr 1.2fr;
+  grid-template-columns: 0.1fr 1.2fr;
   grid-template-areas: ". .";
   height: 100%;
   margin: 8px;

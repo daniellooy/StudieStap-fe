@@ -17,15 +17,11 @@
         <!-- channel messages -->
         <div class="post__messages__wrapper">
             <!-- appendix list -->
-            <AppendixList :appendixList="appendixList"></AppendixList>
-            <!-- <div class="appendix__section"> -->
-                <!-- list met allemaal file object die toegevoegd kunnen worden -->
-                <!-- <ul class="appendix__list">
-                    <li v-for="appendix in appendixList" :key="appendix.id"> 
-                        <img class="appendix__image" :src="appendix.url">   
-                    </li>
-                </ul>
-            </div> -->
+            <div class="appendix__section">
+                <div v-for="file in files" :key="file.name">
+                    <img class="appendix__image" :src="getFilePreview(file)" alt="Preview" />
+                </div>
+            </div>
             <section class="post__messages__container">
                 <label for="appendix">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -33,7 +29,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
                     </svg>
-                    <input class="hidden" type="file" id="appendix" multiple @change="selectFiles">
+                    <input class="hidden" type="file" id="appendix" multiple @change="handleFileUpload">
                 </label>
                 <!-- button for adding an appendix -->
                 <input v-model="postMessage" class="post__message__input" type="text">
@@ -55,7 +51,6 @@ import { storeToRefs } from "pinia";
 import { useAppStore } from "@/store/store";
 import axios from 'axios'
 
-import AppendixList from './appendixList.vue'
 
 
 const store = useAppStore()
@@ -63,9 +58,26 @@ const { user } = storeToRefs(store)
 
 // houd de selected channel bij
 const selectedChannel = ref(inject('selectedChannel'));
-const appendixList = ref([]);
 const postMessage = ref('');
+const files = ref([]);
 
+const handleFileUpload = (event) => {
+    const uploadedFiles = event.target.files;
+    for (let i = 0; i < uploadedFiles.length; i++) {
+        files.value.push(uploadedFiles[i]);
+    }
+};
+
+
+
+const getFilePreview = (file) => {
+    if (file.type.startsWith('image')) {
+        return file.data;
+    } else {
+        // Return the path to your default image placeholder
+        return 'https://picsum.photos/200s';
+    }
+};
 
 watch(selectedChannel, (e) => {
     setMessageContainerScrollToBottom()
@@ -79,30 +91,15 @@ const props = defineProps({
 const setMessageContainerScrollToBottom = () => {
     const container = document.querySelector('.messages__wrapper')
     container.scrollTop = container.scrollHeight;
-    console.log(container.scrollHeight)
 }
 
-// zet de geselecteerde appendix files in een list
-const selectFiles = (e) => {
-    // appendixList.value = e.target.files
-    for (let i = 0; i < e.target.files.length; i++) {
-        const appendixImage = {
-            id: uuidv4(),
-            name: e.target.files[i].name,
-            url: URL.createObjectURL(e.target.files[i])
-        }
-        // appendixList.push(appendixImage)
-        // add to appendix list
-        appendixList.value.push(appendixImage)
-    }
-    // console.log(appendixList.value)
-}
+
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000/api',
     withCredentials: true,
     headers: {
         "accept": 'application/json',
-        "content-type": "application/json"
+        "content-type": "multipart/form-data"
     }
 })
 
@@ -111,11 +108,15 @@ const SendPost = () => {
     const data = new FormData()
     data.append('channel_id', selectedChannel.value)
     data.append('message', postMessage.value)
+    files.value.forEach((file) => {
+        data.append('appendix_files[]', file)
+    })
     data.append("_method", "POST")
 
     axiosInstance.post(`/channel/messages`, data)
         .then((response) => {
             postMessage.value = ''
+            files.value = []
             console.log(response)
         }).catch((error) => {
             console.log(error)
@@ -199,21 +200,21 @@ const SendPost = () => {
     /* make a shadow on hover */
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
 }
-.appendix__list{
+
+.appendix__section {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-    list-style-type: none;
-    padding-bottom: 16px
+    gap: 16px;
+    padding: 8px;
+    /* overflow-x: scroll; */
 }
 
-.appendix__list > li {
+.appendix__section>div {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    justify-content: space-evenly;
 }
-.appendix__image{
+
+.appendix__image {
     width: 100px;
     height: 100px;
 }
@@ -222,6 +223,7 @@ const SendPost = () => {
     width: 100%;
     outline: none;
 }
+
 .post__messages__wrapper {
     border: 2px solid #2C9B22;
     border-radius: 8px;
