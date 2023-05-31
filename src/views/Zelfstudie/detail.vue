@@ -1,8 +1,7 @@
 <template>
   <div class="videowrapper" :key="route.params.video_id">
     <div class="videowrapper-contentholder">
-      <video :src="'http://localhost:8000' + video.file_path" controls>
-      </video>
+      <video @ended="onVideoEnded()" :src="'http://localhost:8000' + video.file_path" controls></video>
       <div class="videowrapper-text">
         <h2 class="video-title">{{ video.title }}</h2>
         <p>
@@ -59,6 +58,11 @@ async function getContent(id){
   return (await axiosInstance.get('/api/video/' + id)).data
 }
 
+function onVideoEnded(){
+  if(!video.value.completed){
+    axios.post('/api/completevideo/')
+  }
+}
 
 onBeforeMount(async () => {
   await getContent(route.params.video_id).then((data) => {

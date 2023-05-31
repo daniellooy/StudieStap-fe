@@ -52,6 +52,7 @@ async function getContent(){
 
 onBeforeMount(async () => {
   await getContent().then((data) => {
+    console.log(data)
     videos.value = data
   })
 })

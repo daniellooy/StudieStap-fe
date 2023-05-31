@@ -49,6 +49,12 @@ const props = defineProps({
   object-fit: cover;
 }
 
+@media only screen and (min-width: 1280px){
+  .video-list-item-thumbnail img{
+    width: 250px;
+  }
+}
+
 .video-list-item-title{
   margin-top: 16px;
   font-weight: 500;
