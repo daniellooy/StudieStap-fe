@@ -23,11 +23,11 @@
         <div class="post__messages__wrapper">
             <!-- appendix list -->
             <div class="appendix__section">
-                <div class="appendix__item" v-for="file in files" :key="file.name" 
-             >
+                <div class="appendix__item" v-for="file in files" :key="file.name" @mouseover="hoveredIndex = index"
+                    @mouseleave="hoveredIndex = null">
                     <img class="appendix__image" :src="getFilePreview(file)" alt="Preview" />
-                    <button class='appendix__delete'
-                    @click="deleteFile(file)">x</button>
+                    <button class="appendix__delete"
+                     @click="deleteFile(file)">x</button>
                 </div>
             </div>
             <section class="post__messages__container">
@@ -66,7 +66,6 @@ const { user } = storeToRefs(store)
 const selectedChannel = ref(inject('selectedChannel'));
 const postMessage = ref('');
 const files = ref([]);
-const hovered = ref(false);
 
 const handleFileUpload = (event) => {
     const uploadedFiles = event.target.files;
