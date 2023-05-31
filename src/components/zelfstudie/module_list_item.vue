@@ -37,16 +37,15 @@ const props = defineProps({
 }
 
 .video-list-item-thumbnail{
-  max-width: 100%;
-  aspect-ratio: 4/3;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 10px;
 }
 
 .video-list-item-thumbnail img{
-  max-width: 100%;
-  height: 100%;
+  width: 150px;
+  height: auto;
+  aspect-ratio: 4/3;
   object-fit: cover;
 }
 

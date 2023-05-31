@@ -30,6 +30,8 @@ const props = defineProps({
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 24px;
+  max-width: 100%;
+  overflow-x: scroll;
 }
 
 .video-list-description{
