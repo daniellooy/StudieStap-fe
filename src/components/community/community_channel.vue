@@ -9,6 +9,11 @@
                             <h3 class="message__content__header__name">{{ message.user.firstname }} {{ message.user.lastname
                             }}</h3>
                         </div>
+
+                        <img class="appendix__image" v-for="appendix in message.appendix" :key="appendix.id"
+                            :src="`http://localhost:8000/` + appendix.appendix_path" alt="">
+                        <!-- make an embedded -->
+
                         <p class="message__content__text">{{ message.message }}</p>
                     </div>
                 </div>
@@ -18,8 +23,11 @@
         <div class="post__messages__wrapper">
             <!-- appendix list -->
             <div class="appendix__section">
-                <div v-for="file in files" :key="file.name">
+                <div class="appendix__item" v-for="file in files" :key="file.name" 
+             >
                     <img class="appendix__image" :src="getFilePreview(file)" alt="Preview" />
+                    <button class='appendix__delete'
+                    @click="deleteFile(file)">x</button>
                 </div>
             </div>
             <section class="post__messages__container">
@@ -46,11 +54,9 @@
 
 <script setup>
 import { ref, inject, watch } from 'vue'
-import { v4 as uuidv4 } from 'uuid';
 import { storeToRefs } from "pinia";
 import { useAppStore } from "@/store/store";
 import axios from 'axios'
-
 
 
 const store = useAppStore()
@@ -60,6 +66,7 @@ const { user } = storeToRefs(store)
 const selectedChannel = ref(inject('selectedChannel'));
 const postMessage = ref('');
 const files = ref([]);
+const hovered = ref(false);
 
 const handleFileUpload = (event) => {
     const uploadedFiles = event.target.files;
@@ -68,15 +75,17 @@ const handleFileUpload = (event) => {
     }
 };
 
+const deleteFile = (file) => {
+    files.value = files.value.filter((f) => f.name !== file.name);
+};
+
 
 
 const getFilePreview = (file) => {
     if (file.type.startsWith('image')) {
-        return file.data;
-    } else {
-        // Return the path to your default image placeholder
-        return 'https://picsum.photos/200s';
+        return URL.createObjectURL(file);
     }
+    return 'https://picsum.photos/200';
 };
 
 watch(selectedChannel, (e) => {
@@ -201,7 +210,19 @@ const SendPost = () => {
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
 }
 
+.appendix__item {
+    position: relative;
+}
+
+.appendix__delete {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    color: red;
+}
+
 .appendix__section {
+    position: relative;
     display: flex;
     gap: 16px;
     padding: 8px;
