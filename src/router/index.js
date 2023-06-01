@@ -153,23 +153,21 @@ const routes = [
           },
         ]
       },
-      // {
-      //   path: 'achievements',
-      //   name: 'Admin achievements',
-      //   component: () => import('@views/admin/Requests.vue'),
-        // children: [
-        //   {
-        //     path: 'shopitems',
-        //     name: 'add shopitems',
-        //     component: () => import('@views/admin/AddShopItems.vue'),
-        //   },
-        //   {
-        //     path: 'achievements',
-        //     name: 'add achievements',
-        //     component: () => import('@views/admin/AddAchievements.vue'),
-        //   }
-        // ]
-      // },
+      {
+        path: 'achievements/',
+        name: 'Requests',
+        component: () => import('@/views/admin/Requests.vue'),
+      },
+      {
+        path: 'addshopitem',
+        name: 'add shopitems',
+        component: () => import('@/views/admin/AddShopItems.vue'),
+      },
+      {
+        path: 'addachievement',
+        name: 'add achievement',
+        component: () => import('@/views/admin/AddAchievements.vue'),
+      },
     ]
   },
 ]

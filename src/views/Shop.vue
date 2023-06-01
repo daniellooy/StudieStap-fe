@@ -1,5 +1,6 @@
 <template>
     <button class="achievement__nav__button" @click="toShop()">Achievements</button>
+    <section>{{ user.points }}</section>
     <section class="shopitem__container" >
       <section class="shopitem" v-for="shopitem in shopitems">
         <section class="shopitem__name">{{ shopitem.name }}</section>
@@ -13,6 +14,11 @@
 <script>
 import axios from 'axios';
 import router from "@/router";
+import {useAppStore} from "@/store/store";
+import {storeToRefs} from "pinia";
+
+const store = useAppStore();
+const {user} = storeToRefs(store);
 
 
 export default {
@@ -23,6 +29,7 @@ export default {
   data() {
     return {
       shopitems: [],
+      user: user,
     };
   },
 

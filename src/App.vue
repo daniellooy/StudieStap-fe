@@ -27,7 +27,8 @@ axiosInstance.get('/api/user')
     first_name: data.firstname,
     last_name: data.lastname,
     email_name: data.email,
-    date_of_birth: data.date_of_birth
+    date_of_birth: data.date_of_birth,
+    points: data.points
   }
   store.updateUserObj(userobj)
 })

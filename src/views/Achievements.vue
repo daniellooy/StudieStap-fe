@@ -1,5 +1,6 @@
 <template>
   <button class="achievement__nav__button" @click="toShop()">Shop -></button>
+  <section class="points">{{ user.points }}</section>
   <section class="achievements__container">
     <section class="achievement" v-for="achievement in achievements">
       <achhead :achievement="achievement"/>
@@ -16,7 +17,11 @@ import achhead from "../components/achievement/achhead.vue";
 import achsub from "../components/achievement/achsub.vue";
 import axios from 'axios';
 import router from "@/router";
+import {useAppStore} from "@/store/store";
+import {storeToRefs} from "pinia";
 
+const store = useAppStore();
+const {user} = storeToRefs(store);
 
 export default {
   name: "Achievements",
@@ -27,6 +32,7 @@ export default {
   data() {
     return {
       achievements: [],
+      user: user
     };
   },
 
