@@ -54,6 +54,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Achievements.vue'),
       },
       {
+        path: 'shop',
+        name: 'Shop',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Shop.vue'),
+      },
+      {
         path: '/zelfstudie/',
         name: 'Zelfstudie',
 
@@ -145,8 +153,25 @@ const routes = [
           },
         ]
       },
+      // {
+      //   path: 'achievements',
+      //   name: 'Admin achievements',
+      //   component: () => import('@views/admin/Requests.vue'),
+        // children: [
+        //   {
+        //     path: 'shopitems',
+        //     name: 'add shopitems',
+        //     component: () => import('@views/admin/AddShopItems.vue'),
+        //   },
+        //   {
+        //     path: 'achievements',
+        //     name: 'add achievements',
+        //     component: () => import('@views/admin/AddAchievements.vue'),
+        //   }
+        // ]
+      // },
     ]
-  }
+  },
 ]
 
 const router = createRouter({

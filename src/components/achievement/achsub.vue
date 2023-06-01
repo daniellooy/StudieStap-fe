@@ -1,13 +1,15 @@
 <template>
   <!-- sub zit al in dubdone => aangevraagd, gedaan of denied-->
     <section class="achsub" v-if="checkIfDone() == true">
-      
+      <section class="achsub__inside">
+        <section class="achsub__title">done</section>
+      </section>
     </section>
 
     <!-- sub zit niet in subdone => locked of ontgrendeld -->
     <section :class="getClass()" v-else>
       <!-- unlocked -->
-      <section class="achsub__unlocked" v-if="checkIfLowestRang() == true" @mouseenter="hover = true" @mouseleave="hover = false">
+      <section class="achsub__unlocked" @mouseenter="hover = true" @mouseleave="hover = false">
         <section class="achsub__inside__hover" v-if="hover">
           <section class="achsub__content">
             <section class="achsub__title">{{ sub.amount }}</section>
@@ -25,11 +27,11 @@
       </section>
 
       <!-- locked -->
-      <section class="achsub__locked" v-else>
-        <section class="achsub__inside">
+      <!-- <section class="achsub__locked" v-else>
+        <section class="achsub__inside__lock">
           <section class="achsub__title">lock</section>
         </section>
-      </section>
+      </section> -->
 
 
 
@@ -54,6 +56,7 @@
     methods: {
       //checken of sub in subs_done zit
       checkIfDone(){
+        // console.log(this.sub);
         for(let i=0; i < this.sub.done.length; i++){
           if(this.sub.done[i].sub_id == this.sub.id){
             return true;
@@ -64,6 +67,8 @@
 
       checkIfLowestRang(){
         let highestRang = 0;
+        // console.log(this.sub);
+        // console.log(this.data);
         for(let i=0; i < this.sub.done.length; i++){
           if(this.data[this.sub.done[i].sub_id].rang > highestRang){
             highestRang = this.data[this.sub.done[i].sub_id].rang
@@ -126,6 +131,15 @@
   width: 4.4rem;
   border-radius: 1rem;
   background: #339529;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.achsub__inside__lock {
+  height: 4.4rem;
+  width: 4.4rem;
+  border-radius: 1rem;
+  background: #858585;
   display: flex;
   align-items: center;
   justify-content: center;

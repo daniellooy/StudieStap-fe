@@ -1,4 +1,5 @@
 <template>
+  <button class="achievement__nav__button" @click="toShop()">Shop -></button>
   <section class="achievements__container">
     <section class="achievement" v-for="achievement in achievements">
       <achhead :achievement="achievement"/>
@@ -14,6 +15,8 @@
 import achhead from "../components/achievement/achhead.vue";
 import achsub from "../components/achievement/achsub.vue";
 import axios from 'axios';
+import router from "@/router";
+
 
 export default {
   name: "Achievements",
@@ -44,17 +47,26 @@ export default {
       }
       // console.log(sublist);
       return sublist;
+    },
+
+    toShop(){
+      router.push("/shop");
     }
   },
 };
 </script>
 
 <style scoped>
+
+.achievement__nav__button{
+
+}
 .achievements__container {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .achievement{
