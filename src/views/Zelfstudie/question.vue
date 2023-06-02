@@ -2,13 +2,15 @@
   <div class="questionwrapper" :key="route.params.question_id">
     <div class="questionwrapper-contentholder">
       <h3 class="question-text">{{ question.question }}</h3>
-      <p class="answerwrapper" v-if="answerclicked" :class="[correct ?  'right' : 'wrong']">
-        {{ correct ? 'Nice!' : 'Jammer :(' }}
-        Toelichting:
-        {{ question.explanation }}
-      </p>
+      <div class="answerwrapper" v-if="answerclicked" :class="[correct ?  'right' : 'wrong']">
+        <p>Jouw Antwoord: {{ answerletters[question.question_answer.findIndex((answer) => answer.id == chosenAnswer)] }}</p>
+        <p>{{ correct ? 'Nice!' : 'Jammer :(' }}</p>
+        <p>Toelichting:</p>
+        <p>{{ question.explanation }}</p>
+
+      </div>
       <ul class="answer-list">
-        <li :class="[answerclicked ? answer.correct ? 'rightanswer' : 'wronganswer': '']" @click="answerClicked(index)" class="answer-list-item" v-for="(answer, index) in question.question_answer" v-bind:key="answer.id">
+        <li :class="[answerclicked ? answer.correct ? 'rightanswer' : 'wronganswer': '', chosenAnswer == index ? 'chosen':'']" @click="answerClicked(index, answer.id)" class="answer-list-item" v-for="(answer, index) in question.question_answer" v-bind:key="answer.id">
           <span><strong>{{ answerletters[index] }}</strong></span>
           <span>{{ answer.answer }}</span>
         </li>
@@ -26,8 +28,8 @@ import Video_sidebar from "@/views/Zelfstudie/video_sidebar.vue";
 const route = useRoute();
 const question = ref({});
 const video_id = ref(1);
-const answer = ref(null);
 const answerclicked = ref(false)
+const chosenAnswer = ref(null);
 const correct = ref(false);
 
 
@@ -43,14 +45,21 @@ const axiosInstance = axios.create({
 
 async function getContent(id){
   const response = (await axiosInstance.get('/api/question/' + id)).data
-  console.log(response)
   return response
 }
 
 onBeforeMount(async () => {
   await getContent(route.params.question_id).then((data) => {
+    console.log(data)
     question.value = data
     video_id.value = data.video_id
+    answerclicked.value = data.answered
+    if(data.answered){
+      chosenAnswer.value = data.userAnswer.answer_id
+      if(data.question_answer.find((answer) => answer.id == data.userAnswer.answer_id).correct == 1){
+        correct.value = true
+      }
+    }
   })
 })
 
@@ -58,19 +67,41 @@ watch(
   () => route.params.question_id,
   (newId, oldId) => {
     getContent(route.params.question_id).then((data) => {
+      answerclicked.value = false
+      chosenAnswer.value = null
+      chosenAnswer.value = false
       question.value = data
+      answerclicked.value = data.answered
+      if(data.answered){
+        chosenAnswer.value = data.userAnswer.answer_id
+        if(data.question_answer.find((answer) => answer.id == data.userAnswer.answer_id).correct == 1){
+          correct.value = true
+        }
+        else{
+          correct.value = false
+        }
+      }
       video_id.value = data.video_id
     })
   }
 )
 
-function answerClicked(index){
-  answerclicked.value = true
-  if(question.value.question_answer[index].correct == true){
-    correct.value = true
-  }
-  else{
-    correct.value = false
+function answerClicked(index, answerid){
+  if(!answerclicked.value){
+    answerclicked.value = true
+    chosenAnswer.value = answerid
+    if(question.value.question_answer[index].correct == true){
+      correct.value = true
+    }
+    else{
+      correct.value = false
+    }
+    axiosInstance.post("/api/answerquestion", {
+      answer_id: answerid,
+      question_id: question.value.id
+    }).then((response)=>{
+      console.log(response)
+    })
   }
 }
 
@@ -86,6 +117,9 @@ function answerClicked(index){
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+}
+
+.chosen{
 
 }
 
@@ -107,7 +141,7 @@ function answerClicked(index){
   box-shadow:   -8px 0 0 0 #2C9B22,
   8px 0 0 0 #2C9B22,
   0 -8px 0 0 #2C9B22,
-  0 8px 0 0 #2C9B22;
+  0 8px 0 0 #2C9B22 !important;
 }
 
 .wronganswer{
@@ -115,7 +149,7 @@ function answerClicked(index){
   box-shadow:   -8px 0 0 0 #d33643,
   8px 0 0 0 #d33643,
   0 -8px 0 0 #d33643,
-  0 8px 0 0 #d33643;
+  0 8px 0 0 #d33643 !important;
 }
 
 .wrong{

@@ -60,7 +60,9 @@ async function getContent(id){
 
 function onVideoEnded(){
   if(!video.value.completed){
-    axios.post('/api/completevideo/')
+    axiosInstance.post('/api/completevideo/', {
+      video_id: video_id.value
+    })
   }
 }
 

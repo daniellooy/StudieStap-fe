@@ -31,7 +31,12 @@ const props = defineProps({
   grid-template-columns: repeat(4, 1fr);
   column-gap: 24px;
   max-width: 100%;
-  overflow-x: scroll;
+}
+
+@media only screen and (max-width: 1280px){
+  .video-list{
+    overflow-x: scroll;
+  }
 }
 
 .video-list-description{

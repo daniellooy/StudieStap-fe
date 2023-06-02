@@ -6,14 +6,26 @@
         <li v-for="module_video in module_videos" v-bind:key="module_video.id" >
           <ul>
             <router-link active-class="darkbg" :to="{ name: 'Video', params: { video_id: module_video.id } }">
-              <li class="sidebar-item">
-                <img class="sidebar-item-thumbnail" :src="'http://localhost:8000' + module_video.thumbnail" alt="">
-                <span>{{ module_video.title }}</span>
+              <li class="sidebar-item" :class="[module_video.completed ? 'completed':'']">
+                <div class="sidebar-item-left">
+                  <img class="sidebar-item-thumbnail" :src="'http://localhost:8000' + module_video.thumbnail" alt="">
+                  <span>{{ module_video.title }}</span>
+                </div>
+                <span class="completed-check" v-if="module_video.completed">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="30" width="30">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
               </li>
             </router-link>
             <router-link active-class="darkbg" v-for="(question, index) in module_video.questions" v-bind:key="question.id" :to="{name: 'Vraag', params: {question_id: question.id}}">
-              <li class="sidebar-item">
-                Vraag {{ index + 1 }}
+              <li class="sidebar-item" :class="[question.answered ? 'completed':'']">
+                <span class="sidebar-item-left">Vraag {{ index + 1 }}</span>
+                <span class="completed-check" v-if="question.answered">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="30" width="30">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
               </li>
             </router-link>
           </ul>
@@ -52,6 +64,7 @@ async function getContent(){
 
 onBeforeMount(async () => {
   await getContent().then((data) => {
+    console.log(data)
     module_videos.value = data.module.videos
   })
 })
@@ -72,6 +85,12 @@ onBeforeMount(async () => {
 
 .sidebar-item{
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-item-left{
   display: flex;
   gap: 16px;
   align-items: center;
@@ -95,5 +114,16 @@ onBeforeMount(async () => {
 
 .sidebar ul{
   list-style-type: none;
+}
+
+.completed{
+  background-color: #2C9B22 !important;
+  color: white;
+}
+
+.completed-check{
+  align-self: center;
+  align-items: center;
+  display: flex;
 }
 </style>

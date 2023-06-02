@@ -25,7 +25,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-
 .video-list-item{
   display: flex;
   flex-direction: column;
@@ -37,23 +36,18 @@ const props = defineProps({
 }
 
 .video-list-item-thumbnail{
-  border-radius: 5px;
   overflow: hidden;
   margin-bottom: 10px;
+  min-width: 250px;
 }
 
 .video-list-item-thumbnail img{
-  width: 150px;
-  height: auto;
-  aspect-ratio: 4/3;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  border-radius: 10px;
 }
 
-@media only screen and (min-width: 1280px){
-  .video-list-item-thumbnail img{
-    width: 250px;
-  }
-}
 
 .video-list-item-title{
   margin-top: 16px;
