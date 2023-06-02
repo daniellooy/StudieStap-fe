@@ -19,6 +19,7 @@
         <section class="achsub__inside" v-if="!hover">
           <section class="achsub__inside">
             <section class="achsub__title">{{ sub.amount }}</section>
+            <section class="achsub__title">{{ sub.points }}</section>
           </section>
         </section>
 
@@ -134,6 +135,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .achsub__inside__lock {
   height: 4.4rem;
