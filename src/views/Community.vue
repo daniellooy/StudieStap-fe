@@ -57,6 +57,7 @@ provide('updateSelectedChannel', updateSelectedChannel)
   margin: 8px;
   border: #2C9B22 2px solid;
   border-radius: 8px;
+  background-color: #F4F6F3;
 }
 
 .selector{

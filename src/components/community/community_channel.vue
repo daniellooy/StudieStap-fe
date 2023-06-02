@@ -4,16 +4,19 @@
             <div @change="messageContainer" v-for="message in channelMessages" :key="message.id">
                 <div :class="[user.id === message.user_id ? 'message__item own' : 'message__item']">
                     <img :src="'http://localhost:8000/' + message.user.image" v-if="message.user.image">
-                    <div class="message__content">
+                    <div @mousedown="showMessage(message)" class="message__content">
                         <div class="message__content__header">
                             <h3 class="message__content__header__name">{{ message.user.firstname }} {{ message.user.lastname
                             }}</h3>
+                            <div class="message__response" v-if="message.response_to">
+                                <h3>
+                                    {{ message.response_to.user.firstname }} {{ message.response_to.user.lastname }}
+                                </h3>
+                                <p class="message__content__text">{{ message.response_to.message }}</p>
+                            </div>
                         </div>
-
                         <img class="appendix__image" v-for="appendix in message.appendix" :key="appendix.id"
                             :src="`http://localhost:8000/` + appendix.appendix_path" alt="">
-                        <!-- make an embedded -->
-
                         <p class="message__content__text">{{ message.message }}</p>
                     </div>
                 </div>
@@ -22,14 +25,22 @@
         <!-- channel messages -->
         <div class="post__messages__wrapper">
             <!-- appendix list -->
-            <div class="appendix__section">
+            <div :class="[files.length === 0 ? 'hidden' : 'appendix__section']">
                 <div class="appendix__item" v-for="file in files" :key="file.name" @mouseover="hoveredIndex = index"
                     @mouseleave="hoveredIndex = null">
                     <img class="appendix__image" :src="getFilePreview(file)" alt="Preview" />
-                    <button class="appendix__delete"
-                     @click="deleteFile(file)">x</button>
+                    <button class="appendix__delete" @click="deleteFile(file)">x</button>
                 </div>
             </div>
+            <div :class="[responseTo ? 'responseTo message__content ' : 'hidden']">
+                <div class="message__content__header">
+                    <h3 class="message__content__header__name">{{ responseTo ? responseTo.user.firstname : '' }} {{
+                        responseTo ? responseTo.user.lastname : '' }}</h3>
+                </div>
+                <p class="message__content__text">{{ responseTo ? responseTo.message : '' }}</p>
+                <button class="delete__response" @click="deleteResponse">x</button>
+            </div>
+
             <section class="post__messages__container">
                 <label for="appendix">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -66,6 +77,7 @@ const { user } = storeToRefs(store)
 const selectedChannel = ref(inject('selectedChannel'));
 const postMessage = ref('');
 const files = ref([]);
+const responseTo = ref(null);
 
 const handleFileUpload = (event) => {
     const uploadedFiles = event.target.files;
@@ -77,7 +89,9 @@ const handleFileUpload = (event) => {
 const deleteFile = (file) => {
     files.value = files.value.filter((f) => f.name !== file.name);
 };
-
+const deleteResponse = () => {
+    responseTo.value = null;
+};
 
 
 const getFilePreview = (file) => {
@@ -95,6 +109,10 @@ const props = defineProps({
     channelMessages: Object
 })
 
+const showMessage = (message) => {
+    responseTo.value = message
+    console.log(message)
+}
 // zet de scroll van de message container op de bodem 
 const setMessageContainerScrollToBottom = () => {
     const container = document.querySelector('.messages__wrapper')
@@ -115,6 +133,7 @@ const SendPost = () => {
     console.log('send post')
     const data = new FormData()
     data.append('channel_id', selectedChannel.value)
+    data.append('response_to', responseTo.value ? responseTo.value.id : null)
     data.append('message', postMessage.value)
     files.value.forEach((file) => {
         data.append('appendix_files[]', file)
@@ -125,6 +144,7 @@ const SendPost = () => {
         .then((response) => {
             postMessage.value = ''
             files.value = []
+            responseTo.value = null
             console.log(response)
         }).catch((error) => {
             console.log(error)
@@ -157,6 +177,11 @@ const SendPost = () => {
     display: none;
 }
 
+.responseTo {
+    max-width: 100% !important;
+    margin-bottom: 8px;
+}
+
 .own {
     flex-direction: row-reverse;
 }
@@ -177,6 +202,7 @@ const SendPost = () => {
 }
 
 .message__content {
+    position: relative;
     background: #C8D7EC;
     padding: 4px 8px;
     border-radius: 8px;
@@ -209,11 +235,27 @@ const SendPost = () => {
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
 }
 
+.message__response {
+    position: relative;
+    background: #a1acbb;
+    padding: 4px 8px;
+    border-radius: 8px;
+    scale: 0.75;
+}
+
+
 .appendix__item {
     position: relative;
 }
 
 .appendix__delete {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    color: red;
+}
+
+.delete__response {
     position: absolute;
     top: 0;
     right: 8px;
