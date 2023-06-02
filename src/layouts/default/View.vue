@@ -63,14 +63,6 @@ import Topbar from "@/components/navigation/topbar.vue";
 
 .main-content {
   max-height: calc(100vh - 90px);
-<<<<<<< HEAD
-  height: 100%;
-  margin-top: 90px;
-  padding-left: 70px;
-  padding-right: 70px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-=======
   margin-top: 90px;
   padding: 40px 70px;
   position: relative;
@@ -95,6 +87,5 @@ import Topbar from "@/components/navigation/topbar.vue";
 .bg svg{
   width: 100%;
   height: 100%;
->>>>>>> dev
 }
 </style>
