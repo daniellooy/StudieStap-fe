@@ -145,6 +145,28 @@ const routes = [
           },
         ]
       },
+      {
+        path: 'channels/',
+        name: 'StudieStap Channels',
+        component: () => import('@/views/admin/Channels.vue'),
+        children: [
+          {
+            path: '',
+            name: "Channel Overzicht",
+            component: () => import('@/views/admin/admin_channels_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Channel toevoegen',
+            component: () => import('@/views/admin/add_edit_channel.vue'),
+          },
+          {
+            path: 'edit/:channel_id',
+            name: 'Channel bewerken',
+            component: () => import('@/views/admin/add_edit_channel.vue'),
+          }
+        ]
+      }
     ]
   }
 ]
