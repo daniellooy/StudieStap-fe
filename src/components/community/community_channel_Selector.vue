@@ -7,6 +7,7 @@
         <svg v-if="selectedChannel === channel.channel_id" width="5" height="50" viewBox="0 0 5 50" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0C2.76142 0 5 2.23858 5 5V45C5 47.7614 2.76142 50 0 50V0Z" fill="#2C9B22" />
         </svg>
+        {{ channel.channel.name }}
           <img class="wrapper__item" :src="URL_BASE + channel.channel.image_path">
       </li>
     </ul>
@@ -28,7 +29,7 @@ const props = defineProps({
     type: Number
   }
 })
-
+console.log(channels.value)
 const getSelected = (value) => {
   updateSelectedChannel(value)
 }

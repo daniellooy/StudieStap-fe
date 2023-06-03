@@ -22,6 +22,33 @@
         <label for="description">Beschrijving</label>
         <textarea v-model="channel.description" name="description" />
       </div>
+      <div class="form-section">
+        <div class="form-group">
+          <label for="users">Channel Gebruikers</label>
+          <div class="selected-users">
+            <div class="badge" v-for="user in selectedUsersData" :key="user.id">
+              <img :src="user.image" alt="">
+              <span>{{ truncatedName(user.name) }}</span>
+              <button @click="removeUser(user.id)">Verwijderen</button>
+            </div>
+          </div>
+
+          <div class="custom-multiselect">
+            <input type="text" v-model="searchQuery" placeholder="Zoek gebruikers" @input="filterUsers" />
+            <ul class="user-list">
+              <li v-for="user in filteredUsers" :key="user.id">
+                <label>
+                  <input type="checkbox" :value="user.id" v-model="selectedUsers" />
+                  <span :class="{ 'selected-user': isSelected(user.id) }">
+                    {{ user.name }}
+                  </span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
       <div class="form-buttons">
         <button @click="cancel()">Annuleren</button>
         <button @click="save()">Opslaan</button>
@@ -33,13 +60,17 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
-import { ref, reactive } from "vue";
+import { ref, computed } from "vue";
+
 const route = useRoute();
 const router = useRouter();
 const channel = ref({});
+const value = ref(null);
 const editmode = ref(route.params.channel_id ? true : false);
 const channelImage = ref('');
-
+const selectedUsers = ref([]);
+const searchQuery = ref('');
+const users = ref([]);
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
   withCredentials: true,
@@ -49,12 +80,36 @@ const axiosInstance = axios.create({
   }
 });
 
+const filteredUsers = computed(() => {
+  return users.value.filter((user) => {
+    return user.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  })
+})
+const selectedUsersData = computed(() => {
+  return users.value.filter(user => selectedUsers.value.includes(user.id));
+});
 
+function isSelected(userId) {
+  return selectedUsers.value.includes(userId);
+}
+
+function filterUsers() {
+  // Voeg eventueel extra logica toe voor het filteren van gebruikers
+}
+
+function removeUser(userId) {
+  const index = selectedUsers.value.indexOf(userId);
+  if (index !== -1) {
+    selectedUsers.value.splice(index, 1);
+  }
+}
 
 if (editmode.value) {
   axiosInstance.get('/channel/' + route.params.channel_id).then((response) => {
     channel.value = response.data
-  })
+    selectedUsers.value = response.data.users.map(user => user.user.id,
+  )
+})
 }
 else {
   channel.value.name = ''
@@ -62,6 +117,24 @@ else {
   channel.value.imageFile = ''
   channel.value.users = []
 }
+
+axiosInstance.get('/users').then((response) => {
+  users.value = response.data.map(user => {
+    return {
+      id: user.id,
+      name: user.firstname + ' ' + user.lastname,
+      image: user.image ? ('http://localhost:8000/' + user.image) : 'https://cataas.com/cat'
+    }
+  })
+})
+
+const truncatedName = (name) => {
+  if (name.length <= 20) {
+    return name;
+  } else {
+    return name.substring(0, 17) + '...';
+  }
+};
 
 const onImageChange = (event) => {
   const file = event.target.files[0]
@@ -71,26 +144,30 @@ const onImageChange = (event) => {
 }
 
 const save = () => {
-  if(editmode.value){
+  if (editmode.value) {
     let data = new FormData();
     data.append('id', channel.value.id);
     data.append('name', channel.value.name)
     data.append('description', channel.value.description)
     data.append('image_file', channel.value.imageFile)
+    data.append('users', selectedUsers.value)
     data.append('_method', 'PUT')
-    axiosInstance.post('/channel/update', data).then((response) => {console.log(response)})
-    router.push({name: 'Channel Overzicht'});
+    console.log(data.get('users'))
+    axiosInstance.post('/channel/update', data).then((response) => { console.log(response) })
+    // router.push({ name: 'Channel Overzicht' });
   }
-  else{
+  else {
     let data = new FormData();
     data.append('name', channel.value.name)
     data.append('description', channel.value.description)
     data.append('image_file', channel.value.imageFile)
-    axiosInstance.post('/channel/add', data).then((response) => {console.log(response)})
-    router.push({name: 'Channel Overzicht'});
+    data.append('_method', 'POST')
+    axiosInstance.post('/channel/add', data).then((response) => { console.log(response) })
+    router.push({ name: 'Channel Overzicht' });
   }
 }
 </script>
+
 
 <style scoped>
 .hidden {
@@ -177,4 +254,36 @@ select {
 .form-buttons {
   display: flex;
   justify-content: space-between;
-}</style>
+}
+
+
+/* multiselect stylinbg */
+.selected-user {
+  color: blue;
+  /* Voeg hier je gewenste stijl toe */
+}
+
+.selected-users {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 8px;
+  margin-right: 5px;
+  border-radius: 16px;
+  background-color: #f1f1f1;
+}
+
+.badge>img {
+  height: 36px;
+  width: 36px;
+  border-radius: 100%;
+  margin-right: 5px;
+}
+</style>
