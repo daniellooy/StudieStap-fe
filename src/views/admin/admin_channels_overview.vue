@@ -116,6 +116,7 @@ function deleteChannel(id, index) {
     width: 100%;
     max-width: 100px;
     height: auto;
+    border-radius: 100%;
 }
 
 .channel__list__item__buttons__confirm {

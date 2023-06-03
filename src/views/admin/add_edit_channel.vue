@@ -105,8 +105,9 @@ function removeUser(userId) {
 }
 
 if (editmode.value) {
-  axiosInstance.get('/channel/' + route.params.channel_id).then((response) => {
+  axiosInstance.get('/channel/' + route.params.channel_id + "/edit").then((response) => {
     channel.value = response.data
+    console.log(response.data)
     selectedUsers.value = response.data.users.map(user => user.user.id,
   )
 })
@@ -154,7 +155,7 @@ const save = () => {
     data.append('_method', 'PUT')
     console.log(data.get('users'))
     axiosInstance.post('/channel/update', data).then((response) => { console.log(response) })
-    // router.push({ name: 'Channel Overzicht' });
+    router.push({ name: 'Channel Overzicht' });
   }
   else {
     let data = new FormData();
