@@ -51,6 +51,7 @@ async function getChannels() {
 }
 onBeforeMount(async () => {
     await getChannels().then((data) => {
+        console.log(data)
         channels.value = data
     })
 })
