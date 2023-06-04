@@ -1,13 +1,7 @@
 <template>
-    <router-link :to="{name: 'Requests'}">
-        <span>Requests</span>
-    </router-link>
-    <router-link :to="{name: 'add shopitems'}">
-        <span>Add shopitem</span>
-    </router-link>
-    <router-link :to="{name: 'add achievement'}">
-        <span>Add achievements</span>
-    </router-link>
+  
+    <NavAdmin />
+  
     
     <section class="request__container">
       <section class="request" v-for="(request, idx) in requests">
@@ -23,13 +17,14 @@
 <script>
 import router from '@/router';
 import axios from 'axios';
+import NavAdmin from '../../components/achievement/NavAdmin.vue'
 
 
 
 export default {
   name: "Requests",
   components: {
-
+    NavAdmin
   },
   data() {
     return {

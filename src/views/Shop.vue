@@ -32,7 +32,7 @@ import {useAppStore} from "@/store/store";
 import {storeToRefs} from "pinia";
 
 const store = useAppStore();
-const {user} = storeToRefs(store);
+const {user} = storeToRefs(store);  
 
 
 export default {
