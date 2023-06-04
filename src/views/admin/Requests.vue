@@ -3,15 +3,33 @@
     <NavAdmin />
   
     
-    <section class="request__container">
-      <section class="request" v-for="(request, idx) in requests">
-        <section>{{ request.user.firstname }}</section>
-        <section>{{ request.sub.achievement.name }}</section>
-        <section>{{ request.sub.amount }}</section>
-        <button @click="accept(request.id, idx)">Accept</button>
-        <button @click="deny(request.id, idx)">Deny</button>
-      </section>
-    </section>
+    <v-expansion-panels class="request__container">
+      <v-expansion-panel class="request" v-for="(request, idx) in requests">
+        <v-expansion-panel-title class="request__title">
+          <section class="bold">{{ request.user.firstname }}</section>
+          <p class="text">heeft een aanvraag gedaan voor de achievement</p>
+          <section class="bold">{{ request.sub.achievement.name }}</section>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <section class="request__text">
+            <section class="request__data">
+              <section>{{ request.sub.achievement.description}}</section>
+              <section class="request__doel">
+                <p class="text">Aangevraagd doel:</p>
+                <section class="bold">{{ request.sub.amount }}</section>
+              </section>
+            </section>
+            <section class="request__buttons">
+              <button class="request__button request__accept" @click="accept(request.id, idx)">Accept</button>
+              <button class="request__button request__deny" @click="deny(request.id, idx)">Deny</button>
+            </section>
+          </section>
+        </v-expansion-panel-text>
+
+
+
+      </v-expansion-panel>
+    </v-expansion-panels>
 </template>
 
 <script>
@@ -73,16 +91,68 @@ export default {
 
 <style scoped>
 .request__container{
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  width: 70%;
+  margin-top: 2rem;
 }
 
 .request{
-  width: 40rem;
+  /* width: 40rem;
   display: flex;;
   flex-direction: row;
   gap: 1rem;
-  border: 0.1rem solid #339529;
+  border: 0.1rem solid #339529; */
+}
+
+.request__title{
+  display: flex;
+  flex-direction: row;
+}
+
+.request__text{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bold{
+  font-weight: bold;
+  padding-right: 0.6rem;
+}
+
+.text{
+  padding-right: 0.6rem;
+}
+
+.request__data{
+  display: flex;
+  flex-direction: column;
+}
+
+.request__doel{
+  display: flex;
+  flex-direction: row;
+}
+
+.request__buttons{
+  display: flex;
+  flex-direction: row;
+  gap:1rem;
+}
+
+.request__button{
+  width: 10rem;
+  height: 2.5rem;
+  color: white;
+  border-radius: 1.5rem;
+  border: 1px solid black;
+}
+
+.request__accept{
+  background: #339529;
+}
+
+.request__deny{
+  background: #ff3838d2;
 }
 </style>
