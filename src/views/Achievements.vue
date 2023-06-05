@@ -12,7 +12,7 @@
     <section class="achievement" v-for="achievement in achievements">
       <achhead :achievement="achievement"/>
       <section class="achievement__subs" v-for="sub in achievement.subs">
-        <!-- <svg class="line" width="500" height="500"><line x1="100" y1="100" x2="10" y2="100" stroke="black"/></svg> -->
+        <svg class="line" width="50" height="100"><line x1="500" y1="50" x2="0" y2="50" stroke="black"/></svg>
         <achsub :sub="sub" :data="achievement.subs"/>
       </section>
     </section>
@@ -89,18 +89,18 @@ export default {
 .achievement{
   display: flex;
   align-items: center;
-  column-gap: 4rem;
+  column-gap: 1rem;
 }
 
 .achievement__subs{
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 4rem;
+  column-gap: 1rem;
 }
 
 .line{
-    position:absolute;
+    /* position:absolute; */
 }
 
 .sidebar-list-item-icon{
