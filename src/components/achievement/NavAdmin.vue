@@ -18,4 +18,9 @@
   flex-direction: row;
   gap: 5rem;
 }
+
+span{
+    text-decoration: underline;
+    font-size: large;
+}
 </style>
