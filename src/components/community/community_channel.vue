@@ -69,7 +69,6 @@ import { storeToRefs } from "pinia";
 import { useAppStore } from "@/store/store";
 import axios from 'axios'
 
-
 const store = useAppStore()
 const { user } = storeToRefs(store)
 

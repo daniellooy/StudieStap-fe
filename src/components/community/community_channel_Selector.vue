@@ -1,13 +1,16 @@
 <template>
   <div>
     <ul class="channel__list">
-      <li class="channel__list__item" v-for="channel in channels" :key="channel.id"
-        @click="getSelected(channel.id)">
+      <li  v-for="channel in channels" :key="channel.id" >
         <!-- show image of the channel  -->
-        <svg v-if="selectedChannel === channel.id" width="5" height="50" viewBox="0 0 5 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div :class="[channel.users.find((user2) => user2.user_id === user.id) ? 'channel__list__item' : 'disabled channel__list__item' ]" @click="getSelected(channel.id)">
+          <svg v-if="selectedChannel === channel.id" width="5" height="50" viewBox="0 0 5 50" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0C2.76142 0 5 2.23858 5 5V45C5 47.7614 2.76142 50 0 50V0Z" fill="#2C9B22" />
         </svg>
-          <img class="wrapper__item" :src="URL_BASE + channel.image_path">
+        <div >{{ channel.name }}</div>
+        <img class="wrapper__item" :src="URL_BASE + channel.image_path">
+      </div>
       </li>
     </ul>
   </div>
@@ -17,7 +20,11 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { inject } from 'vue';
+import { storeToRefs } from "pinia";
+import { useAppStore } from "@/store/store";
 
+const store = useAppStore()
+const { user } = storeToRefs(store)
 
 const updateSelectedChannel = inject('updateSelectedChannel');
 const channels = ref();
@@ -32,7 +39,6 @@ const getSelected = (value) => {
 
   updateSelectedChannel(value)
 }
-
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
   withCredentials: true,
@@ -54,9 +60,11 @@ axiosInstance.get('/channels')
 </script>
 
 <style scoped>
-.channel__list{
+.channel__list {
   padding: 8px;
+  list-style: none;
 }
+
 .channel__list__item {
   display: flex;
   justify-content: space-between;
@@ -72,7 +80,9 @@ axiosInstance.get('/channels')
   height: 50px;
   border-radius: 100%;
 }
-
-
-
+.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 </style>

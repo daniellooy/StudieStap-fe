@@ -5,7 +5,7 @@
             <router-link :to="{ name: 'Channel toevoegen' }">Channel Toevoegen</router-link>
         </div>
         <ul class="channel__list">
-            <li class="channel__list__item" v-for="channel in channels" :key="channel">
+            <li class="channel__list__item" v-for="channel,index in channels" :key="channel">
                 <div class="channel__list__item__left">
                     <img :src="'http://localhost:8000/' + channel.image_path" alt="">
                     <div><Strong>{{ channel.name }}: </Strong>{{ channel.description }}</div>
@@ -35,8 +35,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const channels = ref([]);
-
-
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000/api/',
     withCredentials: true,
@@ -55,6 +53,20 @@ onBeforeMount(async () => {
         channels.value = data
     })
 })
+
+function deleteChannel(id, index) {
+  axiosInstance.delete('channel/delete', {
+    data: {
+      id: id
+    }
+  }).then((response) => {
+    if(response.status === 200){
+      channels.value.splice(index, 1)
+    }
+  })
+}
+
+
 </script>
 
 <style scoped>
@@ -105,6 +117,7 @@ onBeforeMount(async () => {
     width: 100%;
     max-width: 100px;
     height: auto;
+    border-radius: 100%;
 }
 
 .channel__list__item__buttons__confirm {
