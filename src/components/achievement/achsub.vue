@@ -1,4 +1,5 @@
 <template>
+  <section class="subcontainer" @mouseenter="hover = true" @mouseleave="hover = false">
   <!-- sub zit al in dubdone => aangevraagd, gedaan of denied-->
     <section class="achsub" v-if="status == 'accepted'">
       <section class="achsub__inside">
@@ -19,7 +20,7 @@
     <!-- sub zit niet in subdone => locked of ontgrendeld -->
     <section v-else>
       <!-- unlocked -->
-      <section class="achsub__hover" v-if="isUnlocked()"  @mouseenter="hover = true" @mouseleave="hover = false">
+      <section class="achsub__hover" v-if="isUnlocked()"  >
         <section class="achsub__inside__hover">
           <section class="achsub__content">
             <section class="achsub__title"> Doel: {{ sub.amount }}</section>
@@ -32,12 +33,6 @@
             <button class="achsub__button" @click="requestAchievement" v-if="hover">Request</button>
           </section>
         </section>
-        <!-- <section class="achsub__inside" v-if="!hover">
-          <section class="achsub__inside">
-            <section class="achsub__title">{{ sub.amount }}</section>
-            <section class="achsub__title">{{ sub.points }}</section>
-          </section>
-        </section> -->
 
 
         
@@ -56,6 +51,7 @@
       
       
     </section>
+  </section>
 </template>
 
 <script>
@@ -90,10 +86,11 @@
       isUnlocked(){
         let highestRang = 0;
         for(let i=0; i < this.data.length; i++){
-          // console.log(this.data[i]);
           if(this.data[i].done.length > 0){
-            if(this.data[i].rang > highestRang){
-              highestRang = this.data[i].rang
+            if(this.data[i].done[0].status == "accepted"){
+              if(this.data[i].rang > highestRang){
+                highestRang = this.data[i].rang
+              }
             }
           }
         }
