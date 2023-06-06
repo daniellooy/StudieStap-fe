@@ -59,8 +59,8 @@
         </div>
       </div>
       <div class="form-buttons">
-        <button @click="cancel()">Annuleren</button>
-        <button @click="save()">Opslaan</button>
+        <button class="btn-cancel" @click="cancel()">Annuleren</button>
+        <button class="btn-save" @click="save()">Opslaan</button>
       </div>
     </div>
   </div>
@@ -176,6 +176,10 @@ const save = () => {
     router.push({ name: 'Channel Overzicht' });
   }
 }
+
+const cancel = () => {
+  router.push({ name: 'Channel Overzicht' });
+}
 </script>
 
 
@@ -266,7 +270,32 @@ select {
   justify-content: space-between;
 }
 
-
+.btn-cancel {
+  background-color: #999;
+  color: white;
+  border: 1px solid #999;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn-cancel:hover {
+  background-color: white;
+  color: #999;
+}
+.btn-save {
+  background-color: #2C9B22;
+  color: white;
+  border: 1px solid #2C9B22;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn-save:hover {
+  background-color: white;
+  color: #2C9B22;
+}
 /* multiselect stylinbg */
 .custom-multiselect {
   margin-top: 16px;
