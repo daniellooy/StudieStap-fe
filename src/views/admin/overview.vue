@@ -1,16 +1,40 @@
 <template>
     <div class="main">
+      <router-link class="admin-block" :to="{name: 'Admin Categorieën Overzicht'}">
+        <h3>Categorieën bekijken</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Categorie toevoegen'}">
+        <h3>Categorie Toevoegen</h3>
+      </router-link>
       <router-link class="admin-block" :to="{name: 'Admin Modules Overzicht'}">
-        <h2>Modules bekijken</h2>
+        <h3>Modules bekijken</h3>
       </router-link>
       <router-link class="admin-block" :to="{name: 'Module toevoegen'}">
-        <h2>Module Toevoegen</h2>
+        <h3>Module Toevoegen</h3>
       </router-link>
       <router-link class="admin-block" :to="{name: 'Admin Videos Overzicht'}">
-        <h2>Videos Bekijken</h2>
+        <h3>Videos Bekijken</h3>
       </router-link>
       <router-link class="admin-block" :to="{name: 'Video toevoegen'}" >
-        <h2>Video Toevoegen</h2>
+        <h3>Video Toevoegen</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Vragen Overzicht'}">
+        <h3>Vragen Bekijken</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Vraag toevoegen'}" >
+        <h3>Vraag Toevoegen</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Rubrics Overzicht'}" >
+        <h3>Evaluatie Rubrics Bekijken</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Rubric toevoegen'}" >
+        <h3>Evaluatie Rubric Toevoegen</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Evaluatie Overzicht'}" >
+        <h3>Evaluaties Bekijken</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Evaluatie toevoegen'}" >
+        <h3>Evaluatie Toevoegen</h3>
       </router-link>
       <router-link class="admin-block" :to="{name: 'Channel Overzicht'}" >
         <h2>Channel Overzicht</h2>
@@ -35,7 +59,7 @@
   justify-items: center;
 }
 
-.admin-block h2{
+.admin-block h3{
   text-align: center;
   width: 100%;
 }

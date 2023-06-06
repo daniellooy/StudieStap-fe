@@ -1,6 +1,6 @@
 <template>
   <div class="overview-wrapper">
-    <module_list :modules="modules" title="Alle modules" />
+    <module_list :modules="category.modules" :description="category.description" :title="category.title" v-for="category in categories" />
   </div>
 </template>
 
@@ -18,10 +18,11 @@ const axiosInstance = axios.create({
   }
 })
 
-let modules = ref(null)
-axiosInstance.get('/api/modules')
+let categories = ref(null)
+
+axiosInstance.get('/api/categories')
   .then((response) => {
-  modules.value = response.data
+  categories.value = response.data
   })
   .catch((error) => {
     console.log(error);
@@ -31,6 +32,9 @@ axiosInstance.get('/api/modules')
 
 <style scoped>
 .overview-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   background-color: white;
   border-radius: 20px;
   padding: 25px;

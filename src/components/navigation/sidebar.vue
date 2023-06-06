@@ -1,7 +1,14 @@
 <template>
   <div class="sidebar">
     <div class="logoholder sidebar-padding-util">
-      <img class="" src="/src/assets/logo.png" alt="">
+      <div class="logoholder-inner">
+        <img class="" src="/src/assets/logo.png" alt="">
+      </div>
+      <span class="closebutton" @click="closeSidebar()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="24" width="24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </span>
     </div>
     <div class="sidebar-content sidebar-padding-util">
       <ul class="sidebar-list">
@@ -64,10 +71,25 @@ export default {
 }
 </script>
 
+<script setup>
+import {ref} from "vue";
+const isOpen = ref(false);
+const emit = defineEmits(['close']);
+function closeSidebar(){
+  emit('close');
+}
+
+</script>
+
 <style scoped>
   .sidebar{
     background-color: white;
     min-height: 100vh;
+  }
+
+  .logoholder-inner{
+    display: flex;
+    align-items: center;
   }
 
   .sidebar-active{
@@ -75,7 +97,7 @@ export default {
   }
 
   .sidebar-padding-util{
-    padding-left: 65px;
+    padding-left: 45px;
     padding-right: 65px;
   }
 
@@ -116,6 +138,36 @@ export default {
   }
 
   .logoholder img{
-    height: 30px;
+    width: 100%;
+    height: auto;
   }
+
+  .closebutton{
+    display: none;
+  }
+
+
+  @media only screen and (max-width: 1280px){
+    .sidebar-padding-util{
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+
+    .logoholder{
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .logoholder img{
+      max-width: 100%;
+      height: auto
+    }
+
+    .closebutton{
+      display: flex;
+      align-items: center;
+    }
+  }
+
+
 </style>

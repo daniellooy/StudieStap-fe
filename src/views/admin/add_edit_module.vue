@@ -16,6 +16,14 @@
         <label for="description">Beschrijving</label>
         <textarea v-model="module.description" name="description"/>
       </div>
+      <div class="form-group">
+        <label for="module">Categorie</label>
+        <select @change="onCategoryChange($event)" name="module" id="">
+          <option :selected="editmode && module.learningcategory_id === category.id" v-for="category in categories" :key="category.id" :value="category.id">
+            {{ category.title }}
+          </option>
+        </select>
+      </div>
       <div class="form-buttons">
         <button @click="cancel()">Annuleren</button>
         <button @click="save()">Opslaan</button>
@@ -34,6 +42,8 @@ const module = ref({})
 const errors = ref({});
 const file = ref(null);
 const editmode = ref(false);
+const chosen_category = ref(1);
+const categories = ref({});
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -48,9 +58,14 @@ if(route.params.module_id !== undefined){
   editmode.value = true;
 }
 
+axiosInstance.get('/categories').then((response)=>{
+  categories.value = response.data
+})
+
 if(editmode.value){
   axiosInstance.get('/module/' + route.params.module_id).then((response) => {
-    module.value = response.data
+    module.value = response.data;
+    chosen_category.value = response.data.learningcategory_id
   })
 }
 else{
@@ -65,6 +80,7 @@ function save(){
     data.append('id', module.value.id);
     data.append('title', module.value.title)
     data.append('description', module.value.description)
+    data.append('learningcategory_id', chosen_category.value)
     data.append('thumbnail', file.value)
     data.append('_method', 'PUT')
     axiosInstance.post('/module/edit', data).then((response) => {console.log(response)})
@@ -74,6 +90,7 @@ function save(){
     let data = new FormData();
     data.append('title', module.value.title)
     data.append('description', module.value.description)
+    data.append('learningcategory_id', chosen_category.value)
     data.append('thumbnail', file.value)
     axiosInstance.post('/module/add', data).then((response) => {console.log(response)})
     router.push({name: 'Admin Modules Overzicht'});
@@ -83,6 +100,11 @@ function save(){
 function cancel(){
   confirm('Zeker weten?')
   router.push({name: 'Admin Modules Overzicht'});
+}
+
+function onCategoryChange(e){
+  console.log(e.target.value);
+  chosen_category.value = e.target.value
 }
 
 function onFileChange(e){

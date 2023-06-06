@@ -1,40 +1,48 @@
 <template>
   <div class="videowrapper" :key="route.params.video_id">
     <div class="videowrapper-contentholder">
-      <video :src="'http://localhost:8000' + video.file_path" controls>
-
-      </video>
+      <video @ended="onVideoEnded()" :src="'http://localhost:8000' + video.file_path" controls></video>
       <div class="videowrapper-text">
         <h2 class="video-title">{{ video.title }}</h2>
         <p>
           {{ video.description }}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
     </div>
-    <div class="sidebar">
-      <div class="sidebar-inner">
-        <h3 class="sidebar-title">Andere videos in deze module</h3>
-        <ul class="sidebar-list">
-          <router-link v-for="module_video in module_videos" v-bind:key="module_video.id" :to="{ name: 'Video', params: { video_id: module_video.id } }">
-            <li class="sidebar-item"  >
-              <img class="sidebar-item-thumbnail" :src="'http://localhost:8000' + module_video.thumbnail" alt="">
-              <span>{{ module_video.title }}</span>
-            </li>
-          </router-link>
-        </ul>
-      </div>
-    </div>
+    <video_sidebar :video_id="video_id" />
+<!--    <div class="sidebar">-->
+<!--      <div class="sidebar-inner">-->
+<!--        <h3 class="sidebar-title">Content in deze module</h3>-->
+<!--        <ul class="sidebar-list">-->
+<!--          <li v-for="module_video in module_videos" v-bind:key="module_video.id" >-->
+<!--            <ul>-->
+<!--              <router-link :to="{ name: 'Video', params: { video_id: module_video.id } }">-->
+<!--                <li class="sidebar-item" :class="[module_video.id === video.id ? 'darkbg': '']">-->
+<!--                  <img class="sidebar-item-thumbnail" :src="'http://localhost:8000' + module_video.thumbnail" alt="">-->
+<!--                  <span>{{ module_video.title }}</span>-->
+<!--                </li>-->
+<!--              </router-link>-->
+<!--              <router-link v-for="(question, index) in module_video.questions" v-bind:key="question.id" :to="{name: 'Vraag', params: {question_id: question.id}}">-->
+<!--                <li class="sidebar-item" >-->
+<!--                  Vraag {{ index + 1 }}-->
+<!--                </li>-->
+<!--              </router-link>-->
+<!--            </ul>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script setup>
 import axios from "axios";
-import {onBeforeMount, onBeforeUpdate, ref, watch} from "vue";
-import {onBeforeRouteUpdate, useRoute} from "vue-router";
-const route = useRoute();
+import {onBeforeMount, ref, watch} from "vue";
+import {useRoute} from "vue-router";
+import Video_sidebar from "@/views/Zelfstudie/video_sidebar.vue";
 
+const route = useRoute();
+const video_id = ref(route.params.video_id);
 const video = ref({});
 const module_videos = ref([]);
 const axiosInstance = axios.create({
@@ -47,14 +55,22 @@ const axiosInstance = axios.create({
 })
 
 async function getContent(id){
-  const response = (await axiosInstance.get('/api/video/' + id)).data
-  return response
+  return (await axiosInstance.get('/api/video/' + id)).data
+}
+
+function onVideoEnded(){
+  if(!video.value.completed){
+    axiosInstance.post('/api/completevideo/', {
+      video_id: video_id.value
+    })
+  }
 }
 
 onBeforeMount(async () => {
   await getContent(route.params.video_id).then((data) => {
     video.value = data.video
     module_videos.value = [...data.module.videos]
+    video_id.value = data.video.id
   })
 })
 
@@ -65,13 +81,12 @@ watch(
     getContent(route.params.video_id).then((data) => {
       video.value = data.video
       module_videos.value = [...data.module.videos]
+      video_id.value = data.video.id
     })
   }
 )
 
 </script>
-
-
 
 <style scoped>
 .videowrapper{
@@ -86,6 +101,7 @@ watch(
   flex-direction: column;
   background: white;
   border-radius: 20px;
+  height: min-content;
 }
 
 .videowrapper video{
@@ -105,10 +121,7 @@ watch(
 .sidebar-inner{
   background-color: white;
   border-radius: 20px;
-}
-
-.sidebar-list{
-  margin-top: 10px;
+  overflow: hidden;
 }
 
 .sidebar-title{
@@ -137,6 +150,16 @@ watch(
 
 .sidebar ul{
   list-style-type: none;
+}
+
+.darkbg{
+  background-color: #F5F6F4;
+}
+
+.question{
+  min-height: 100%;
+  max-height: 80vh;
+  padding: 20px;
 }
 
 </style>
