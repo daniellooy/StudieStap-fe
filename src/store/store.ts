@@ -6,6 +6,7 @@ export interface UserObj{
   last_name: String,
   email: String,
   date_of_birth: Date,
+  points: Number,
 }
 
 

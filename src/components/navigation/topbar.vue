@@ -23,16 +23,18 @@
       <div class="profile-info-avatar"></div>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
-import {useRoute} from "vue-router";
-import {computed, ref} from "vue";
-import {useAppStore} from "@/store/store";
-import {storeToRefs} from "pinia";
+import { useRoute } from "vue-router";
+import { computed, ref } from "vue";
+// import { useAppStore } from "@/store/store";
+// import { storeToRefs } from "pinia";
+import Profile from "@/components/profile/Profile.vue";
 const route = useRoute()
-const store = useAppStore()
-const {user} = storeToRefs(store)
+// const store = useAppStore()
+// const { user } = storeToRefs(store)
 const currentRouteName = computed(() => route.name)
 
 const emit = defineEmits(['open']);
@@ -42,7 +44,7 @@ function openSidebar(){
 </script>
 
 <style scoped>
-.topbar{
+.topbar {
   height: 90px;
   display: flex;
   justify-content: space-between;
@@ -56,26 +58,26 @@ function openSidebar(){
   width: 80%;
 }
 
-.profile-info{
+.profile-info {
   display: flex;
   font-weight: 500;
   align-items: center;
   gap: 16px;
 }
 
-.profile-info-avatar{
+.profile-info-avatar {
   height: 40px;
   width: 40px;
   border-radius: 999999px;
   background-color: #C9C9C9;
 }
 
-.profile-info-notifications{
+.profile-info-notifications {
   display: flex;
   position: relative;
 }
 
-.profile-info-notifications .number{
+.profile-info-notifications .number {
   height: 15px;
   width: 15px;
   border-radius: 999999px;
@@ -91,7 +93,7 @@ function openSidebar(){
   bottom: 2px;
 }
 
-.profile-info-notifications svg{
+.profile-info-notifications svg {
   height: 30px;
   width: 30px;
   align-self: center;

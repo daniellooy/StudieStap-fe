@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
+        component: () =>  import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
       },
     ],
   },
@@ -52,6 +52,14 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Achievements.vue'),
+      },
+      {
+        path: 'shop',
+        name: 'Shop',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Shop.vue'),
       },
       {
         path: '/zelfstudie/',
@@ -242,9 +250,46 @@ const routes = [
             component: () => import('@/views/admin/add_edit_evaluation.vue'),
           },
         ]
+        }, 
+        {
+        path: 'channels/',
+        name: 'StudieStap Channels',
+        component: () => import('@/views/admin/Channels.vue'),
+        children: [
+          {
+            path: '',
+            name: "Channel Overzicht",
+            component: () => import('@/views/admin/admin_channels_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Channel toevoegen',
+            component: () => import('@/views/admin/add_edit_channel.vue'),
+          },
+          {
+            path: 'edit/:channel_id',
+            name: 'Channel bewerken',
+            component: () => import('@/views/admin/add_edit_channel.vue'),
+          }
+        ]
+      },
+      {
+        path: 'achievements/',
+        name: 'Requests',
+        component: () => import('@/views/admin/Requests.vue'),
+      },
+      {
+        path: 'addshopitem',
+        name: 'add shopitems',
+        component: () => import('@/views/admin/AddShopItems.vue'),
+      },
+      {
+        path: 'addachievement',
+        name: 'add achievement',
+        component: () => import('@/views/admin/AddAchievements.vue'),
       },
     ]
-  }
+  },
 ]
 
 const router = createRouter({

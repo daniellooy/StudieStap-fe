@@ -103,14 +103,23 @@ export default {
               const data = response.data
               store.updateSessionValid(true)
               const userobj = {
+                id: data.id,
+                address: data.address,
+                bio: data.bio,
+                city: data.city,
+                date_of_birth: data.date_of_birth,
+                Profile_image: data.image,
                 first_name: data.firstname,
                 last_name: data.lastname,
-                email_name: data.email,
-                date_of_birth: data.date_of_birth
+                email: data.email,
+                phone: data.phone,
+                street: data.street,
+                workshop: data.workshop,
+                zip: data.zip,
+
               }
               store.updateUserObj(userobj)
               router.push('/')
-
             })
         }
       )

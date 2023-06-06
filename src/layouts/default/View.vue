@@ -8,7 +8,7 @@
       <div class="main">
         <topbar @open="openSidebar()" />
         <div class="main-content">
-            <router-view />
+          <router-view />
         </div>
       </div>
     </div>
@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-
 import Topbar from "@/components/navigation/topbar.vue";
   import Sidebar from "@/components/navigation/sidebar.vue";
   import {ref} from "vue";
@@ -64,18 +63,18 @@ import Topbar from "@/components/navigation/topbar.vue";
   background-position: center;
 }
 
-.sidebar{
+.sidebar {
   grid-column: span 2 / span 2;
   background-color: white;
   z-index: 5;
 }
 
-.main{
+.main {
   grid-column: span 8 / span 8;
   position: relative;
 }
 
-.main-content{
+.main-content {
   max-height: calc(100vh - 90px);
   margin-top: 90px;
   padding: 40px 70px;
@@ -142,5 +141,4 @@ import Topbar from "@/components/navigation/topbar.vue";
   width: 100%;
   height: 100%;
 }
-
 </style>
