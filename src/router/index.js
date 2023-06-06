@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
+        component: () =>  import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
       },
     ],
   },
@@ -54,6 +54,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Achievements.vue'),
       },
       {
+        path: 'shop',
+        name: 'Shop',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Shop.vue'),
+      },
+      {
         path: '/zelfstudie/',
         name: 'Zelfstudie',
 
@@ -78,6 +86,12 @@ const routes = [
             params: true,
             component: () => import(/* webpackChunkName: "home" */ '@/views/Zelfstudie/detail.vue'),
           },
+          {
+            path: 'question/:question_id',
+            name: 'Vraag',
+            params: true,
+            component: () => import('@/views/Zelfstudie/question.vue')
+          }
         ]
       },
       {
@@ -146,6 +160,98 @@ const routes = [
         ]
       },
       {
+        path: 'categorie/',
+        name: 'Admin Categorieën',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Categorieën Overzicht',
+            component: () => import('@/views/admin/admin_category_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Categorie toevoegen',
+            component: () => import('@/views/admin/add_edit_category.vue'),
+          },
+          {
+            name: 'Categorie bewerken',
+            path: 'edit/:category_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_category.vue'),
+          },
+        ]
+      },
+      {
+        path: 'vraag/',
+        name: 'Admin Vragen',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Vragen Overzicht',
+            component: () => import('@/views/admin/admin_question_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Vraag toevoegen',
+            component: () => import('@/views/admin/add_edit_question.vue'),
+          },
+          {
+            name: 'Vraag bewerken',
+            path: 'edit/:question_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_question.vue'),
+          },
+        ]
+      },
+      {
+        path: 'evaluationrubrics/',
+        name: 'Admin Evaluatie Rubrics',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Rubrics Overzicht',
+            component: () => import('@/views/admin/admin_rubrics_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Rubric toevoegen',
+            component: () => import('@/views/admin/add_edit_rubric.vue'),
+          },
+          {
+            name: 'Rubric bewerken',
+            path: 'edit/:rubric_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_rubric.vue'),
+          },
+        ]
+      },
+      {
+        path: 'evaluations/',
+        name: 'Admin Evaluaties',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Evaluatie Overzicht',
+            component: () => import('@/views/admin/admin_evaluation_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Evaluatie toevoegen',
+            component: () => import('@/views/admin/add_edit_evaluation.vue'),
+          },
+          {
+            name: 'Evaluatie bewerken',
+            path: 'edit/:evaluation_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_evaluation.vue'),
+          },
+        ]
+        }, 
+        {
         path: 'channels/',
         name: 'StudieStap Channels',
         component: () => import('@/views/admin/Channels.vue'),
@@ -166,9 +272,24 @@ const routes = [
             component: () => import('@/views/admin/add_edit_channel.vue'),
           }
         ]
-      }
+      },
+      {
+        path: 'achievements/',
+        name: 'Requests',
+        component: () => import('@/views/admin/Requests.vue'),
+      },
+      {
+        path: 'addshopitem',
+        name: 'add shopitems',
+        component: () => import('@/views/admin/AddShopItems.vue'),
+      },
+      {
+        path: 'addachievement',
+        name: 'add achievement',
+        component: () => import('@/views/admin/AddAchievements.vue'),
+      },
     ]
-  }
+  },
 ]
 
 const router = createRouter({

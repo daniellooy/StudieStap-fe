@@ -15,9 +15,9 @@ const route = useRoute();
 
 <style scoped>
 .wrapper-inner{
-  padding: 20px;
+  padding: 25px;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 20px;
   margin: 0 auto;
   max-width: 768px;
   width: 100%;

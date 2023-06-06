@@ -30,6 +30,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.get('/module/' + route.params.module_id).then((response) => {
+  console.log(response.data)
   module.value = response.data
 })
 
