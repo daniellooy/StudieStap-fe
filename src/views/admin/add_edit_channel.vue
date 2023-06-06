@@ -170,8 +170,12 @@ const save = () => {
     let data = new FormData();
     data.append('name', channel.value.name)
     data.append('description', channel.value.description)
+    if(!channel.value.imageFile){
+      data.append('catApi', 'https://cataas.com/cat');
+    }
     data.append('image_file', channel.value.imageFile)
     data.append('_method', 'POST')
+    console.log(channel.value.imageFile)
     axiosInstance.post('/channel/add', data).then((response) => { console.log(response) })
     router.push({ name: 'Channel Overzicht' });
   }

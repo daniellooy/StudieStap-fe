@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <div class="messages__wrapper">
-            <div @change="messageContainer" v-for="message in channelMessages" :key="message.id">
+            <div @change="messageContainer" v-for="message in modifiedChannelMessages" :key="message.id">
                 <div :class="[user.id === message.user_id ? 'message__item own' : 'message__item']">
                     <img :src="'http://localhost:8000/' + message.user.image" v-if="message.user.image">
-                    <div  class="message__content">
+                    <div class="message__content">
                         <div @mousedown="showMessage(message)" class="message__content__header">
                             <h3 class="message__content__header__name">{{ message.user.firstname }} {{ message.user.lastname
                             }}</h3>
@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref, inject, watch } from 'vue'
+import { ref, inject, computed, watch } from 'vue'
 import { storeToRefs } from "pinia";
 import { useAppStore } from "@/store/store";
 import axios from 'axios'
@@ -104,14 +104,16 @@ const showModal = ref(false)
 const selectedAppendix = ref(null);
 const appendixList = ref([])
 const currentIndex = ref(0);
-
-
 const handleFileUpload = (event) => {
     const uploadedFiles = event.target.files;
     for (let i = 0; i < uploadedFiles.length; i++) {
         files.value.push(uploadedFiles[i]);
     }
 };
+const modifiedChannelMessages = computed(() => {
+  const modifiedMessages = { ...props.channelMessages };
+  return modifiedMessages;
+});
 
 const deleteFile = (file) => {
     files.value = files.value.filter((f) => f.name !== file.name);
@@ -128,8 +130,10 @@ const getFilePreview = (file) => {
     return 'https://picsum.photos/200';
 };
 
-watch(selectedChannel, (e) => {
-    setMessageContainerScrollToBottom()
+watch(selectedChannel, async (e) => {
+    setTimeout(() => {
+        setMessageContainerScrollToBottom()
+    }, 500);
 })
 
 const props = defineProps({
@@ -175,6 +179,12 @@ const SendPost = () => {
             console.log(response)
         }).catch((error) => {
             console.log(error)
+        })
+    axiosInstance.get(`/channel/${selectedChannel.value}`)
+        .then((response) => {
+            console.log(response.data.messages)
+            modifiedChannelMessages.value = response.data.messages
+            console.log(modifiedChannelMessages)
         })
 }
 
@@ -441,6 +451,7 @@ const closeModal = () => {
     cursor: pointer;
     transition: all;
 }
+
 .modal__close:hover {
     background: #fff;
     color: #000;
