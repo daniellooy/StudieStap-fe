@@ -1,12 +1,10 @@
 <template>
     <div class="profile">
         <v-row class="d-flex flex-row flex align-center justify-end" >
-            <v-avatar color="surface-variant" class="mr-4">
-                <!-- hier kan de img van de gebruiker in -->
-            </v-avatar>
+            <img class="profile-image" :src="'http://localhost:8000/' + user.Profile_image" v-if="user.Profile_image">
             <div class="mr-4">
                 <span>Welkome terug, </span>
-                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                <p>{{ user ?  user.first_name : "" }} {{ user ? user.last_name : '' }}</p>
             </div>
             <button class="profile-settings" @click="showMenu = !showMenu">
                 <!-- make a settings icon from vuetify -->
@@ -120,6 +118,13 @@ const logout = () =>{
     cursor: pointer;
 }
 
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
 /* change dthe styling for the last child of the list */
 .profile-menu-list-item:last-child {
     border-bottom: none;
