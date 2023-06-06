@@ -23,7 +23,6 @@
       <div class="profile-info-avatar"></div>
     </div>
   </div>
-</div>
 </template>
 
 <script setup>
