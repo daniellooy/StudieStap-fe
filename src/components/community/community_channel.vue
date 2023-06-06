@@ -4,8 +4,8 @@
             <div @change="messageContainer" v-for="message in channelMessages" :key="message.id">
                 <div :class="[user.id === message.user_id ? 'message__item own' : 'message__item']">
                     <img :src="'http://localhost:8000/' + message.user.image" v-if="message.user.image">
-                    <div @mousedown="showMessage(message)" class="message__content">
-                        <div class="message__content__header">
+                    <div  class="message__content">
+                        <div @mousedown="showMessage(message)" class="message__content__header">
                             <h3 class="message__content__header__name">{{ message.user.firstname }} {{ message.user.lastname
                             }}</h3>
                             <div class="message__response" v-if="message.response_to">

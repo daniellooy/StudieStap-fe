@@ -29,6 +29,7 @@ const getMessages = (channel_id) => {
   axiosInstance.get(`/channel/${channel_id}`)
   .then((response) => {
     messages.value = response.data.messages
+    console.log(messages.value)
   })
   .catch((error) => {
     console.log(error)

@@ -133,7 +133,7 @@ function deleteChannel(id, index) {
 .channel__list__item img {
     width: 100%;
     max-width: 100px;
-    height: auto;
+    height: 100px;
     border-radius: 100%;
 }
 
