@@ -48,7 +48,6 @@ const props = defineProps({
 
 const {video_id} = toRefs(props)
 
-
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000',
   withCredentials: true,

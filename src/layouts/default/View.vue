@@ -26,7 +26,7 @@ import Topbar from "@/components/navigation/topbar.vue";
   const day = ref(true);
   const showSidebar = ref(true);
 
-  if(time >= 18){
+  if(time >= 18 || time >= 0 && time <= 6){
     day.value = false
   }
 

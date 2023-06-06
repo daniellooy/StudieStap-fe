@@ -52,7 +52,7 @@ onBeforeMount(async () => {
   await getContent(route.params.question_id).then((data) => {
     console.log(data)
     question.value = data
-    video_id.value = data.video_id
+    video_id.value = Number(data.video_id);
     answerclicked.value = data.answered
     if(data.answered){
       chosenAnswer.value = data.userAnswer.answer_id
@@ -66,11 +66,12 @@ onBeforeMount(async () => {
 watch(
   () => route.params.question_id,
   (newId, oldId) => {
-    getContent(route.params.question_id).then((data) => {
+    getContent(newId).then((data) => {
       answerclicked.value = false
       chosenAnswer.value = null
       chosenAnswer.value = false
       question.value = data
+      video_id.value = Number(data.video_id)
       answerclicked.value = data.answered
       if(data.answered){
         chosenAnswer.value = data.userAnswer.answer_id
@@ -81,7 +82,7 @@ watch(
           correct.value = false
         }
       }
-      video_id.value = data.video_id
+
     })
   }
 )

@@ -197,6 +197,52 @@ const routes = [
           },
         ]
       },
+      {
+        path: 'evaluationrubrics/',
+        name: 'Admin Evaluatie Rubrics',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Rubrics Overzicht',
+            component: () => import('@/views/admin/admin_rubrics_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Rubric toevoegen',
+            component: () => import('@/views/admin/add_edit_rubric.vue'),
+          },
+          {
+            name: 'Rubric bewerken',
+            path: 'edit/:rubric_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_rubric.vue'),
+          },
+        ]
+      },
+      {
+        path: 'evaluations/',
+        name: 'Admin Evaluaties',
+        component: () => import('@/views/admin/Videos.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Admin Evaluatie Overzicht',
+            component: () => import('@/views/admin/admin_evaluation_overview.vue'),
+          },
+          {
+            path: 'add',
+            name: 'Evaluatie toevoegen',
+            component: () => import('@/views/admin/add_edit_evaluation.vue'),
+          },
+          {
+            name: 'Evaluatie bewerken',
+            path: 'edit/:evaluation_id',
+            params: true,
+            component: () => import('@/views/admin/add_edit_evaluation.vue'),
+          },
+        ]
+      },
     ]
   }
 ]

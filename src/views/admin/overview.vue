@@ -24,6 +24,18 @@
       <router-link class="admin-block" :to="{name: 'Vraag toevoegen'}" >
         <h3>Vraag Toevoegen</h3>
       </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Rubrics Overzicht'}" >
+        <h3>Evaluatie Rubrics Bekijken</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Rubric toevoegen'}" >
+        <h3>Evaluatie Rubric Toevoegen</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Admin Evaluatie Overzicht'}" >
+        <h3>Evaluaties Bekijken</h3>
+      </router-link>
+      <router-link class="admin-block" :to="{name: 'Evaluatie toevoegen'}" >
+        <h3>Evaluatie Toevoegen</h3>
+      </router-link>
     </div>
 </template>
 
