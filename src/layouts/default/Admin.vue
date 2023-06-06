@@ -58,6 +58,10 @@
             <span>Channel toevoegen</span>
           </li>
         </router-link>
+
+        <router-link exact-active-class="sidebar-active" :to="{name: 'Requests'}">
+          <span>Achievements</span>
+        </router-link>
         
       </ul>
     </div>
