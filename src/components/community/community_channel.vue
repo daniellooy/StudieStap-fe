@@ -17,8 +17,11 @@
                         </div>
                         <ul class="appendix__list">
                             <li class="appendix__list__item" v-for="appendix in message.appendix" :key="appendix.id">
-                                <img class="appendix__image" :src="`http://localhost:8000/` + appendix.appendix_path" alt=""
+                                <img v-if="isImage(appendix.appendix_path)" class="appendix__image"
+                                    :src="getAppendixUrl(appendix.appendix_path)" alt=""
                                     @click="showAppendixModal(message.appendix, appendix)">
+                                <video class="appendix__video" v-if="isVideo(appendix.appendix_path)" :src="getAppendixUrl(appendix.appendix_path)"
+                                    controls />
                             </li>
                         </ul>
                         <p class="message__content__text">{{ message.message }}</p>
@@ -111,8 +114,8 @@ const handleFileUpload = (event) => {
     }
 };
 const modifiedChannelMessages = computed(() => {
-  const modifiedMessages = { ...props.channelMessages };
-  return modifiedMessages;
+    const modifiedMessages = { ...props.channelMessages };
+    return modifiedMessages;
 });
 
 const deleteFile = (file) => {
@@ -127,8 +130,8 @@ const getFilePreview = (file) => {
     if (file.type.startsWith('image')) {
         return URL.createObjectURL(file);
     }
-    return 'https://picsum.photos/200';
 };
+
 
 watch(selectedChannel, async (e) => {
     setTimeout(() => {
@@ -201,7 +204,17 @@ const closeModal = () => {
     currentIndex.value = 0;
 }
 
+const isImage = (appendixPath) => {
+    return appendixPath.startsWith('image')
+}
 
+const isVideo = (appendixPath) => {
+    return appendixPath.startsWith('video')
+}
+
+const getAppendixUrl = (appendixPath) => {
+    return `http://localhost:8000/${appendixPath}`; // Pas de URL-structuur aan als dat nodig is
+}
 </script>
 
 <style scoped>
@@ -373,11 +386,18 @@ const closeModal = () => {
 }
 
 .appendix__image {
+    border-radius: 16px;
     width: 100px;
     height: 100px;
 }
 
+.appendix__video {
+    border-radius: 16px;
+    height: 200px;
+}
+
 .post__message__input {
+    
     width: 100%;
     outline: none;
 }
@@ -455,23 +475,22 @@ const closeModal = () => {
     background: #fff;
     color: #000;
 }
+
 /* custom scrollbar */
 
 .messages__wrapper::-webkit-scrollbar {
-  width: 10px;
-  background-color: rgba(44, 455, 34, 0.2);
+    width: 10px;
+    background-color: rgba(44, 455, 34, 0.2);
 }
 
 /* Handle */
 .messages__wrapper::-webkit-scrollbar-thumb {
-  background-color: #2C9B22;
-  border-radius: 5px;
+    background-color: #2C9B22;
+    border-radius: 5px;
 }
 
 /* Handle on hover */
 .messages__wrapper::-webkit-scrollbar-thumb:hover {
-  background: rgba(44, 455, 34, 0.8);
+    background: rgba(44, 455, 34, 0.8);
 
-}
-
-</style>
+}</style>
