@@ -173,6 +173,7 @@ const save = () => {
     if(!channel.value.imageFile){
       data.append('catApi', 'https://cataas.com/cat');
     }
+    data.append('users', selectedUsers.value)
     data.append('image_file', channel.value.imageFile)
     data.append('_method', 'POST')
     console.log(channel.value.imageFile)

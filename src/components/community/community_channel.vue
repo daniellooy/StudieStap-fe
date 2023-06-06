@@ -164,7 +164,7 @@ const SendPost = () => {
     console.log('send post')
     const data = new FormData()
     data.append('channel_id', selectedChannel.value)
-    data.append('response_to', responseTo.value ? responseTo.value.id : null)
+    data.append('response_to_id', responseTo.value ? responseTo.value.id : null)
     data.append('message', postMessage.value)
     files.value.forEach((file) => {
         data.append('appendix_files[]', file)
