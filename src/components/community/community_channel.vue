@@ -182,7 +182,6 @@ const SendPost = () => {
         })
     axiosInstance.get(`/channel/${selectedChannel.value}`)
         .then((response) => {
-            console.log(response.data.messages)
             modifiedChannelMessages.value = response.data.messages
             console.log(modifiedChannelMessages)
         })
