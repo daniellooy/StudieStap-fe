@@ -404,7 +404,6 @@ select {
 /* Handle on hover */
 .user-list::-webkit-scrollbar-thumb:hover {
   background: rgba(44, 455, 34, 0.8);
-
 }
 
 
