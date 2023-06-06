@@ -81,7 +81,7 @@ axiosInstance.get('/channels')
 }
 .disabled {
   color: #ccc;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
   pointer-events: none;
 }
 </style>
