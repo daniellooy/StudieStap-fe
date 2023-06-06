@@ -456,4 +456,23 @@ const closeModal = () => {
     background: #fff;
     color: #000;
 }
+/* custom scrollbar */
+
+.messages__wrapper::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(44, 455, 34, 0.2);
+}
+
+/* Handle */
+.messages__wrapper::-webkit-scrollbar-thumb {
+  background-color: #2C9B22;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.messages__wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 455, 34, 0.8);
+
+}
+
 </style>

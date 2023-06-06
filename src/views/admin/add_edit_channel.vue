@@ -397,13 +397,13 @@ select {
 
 /* Handle */
 .user-list::-webkit-scrollbar-thumb {
-  background-color: rgba(44, 455, 34, 0.8);
+  background-color: #2C9B22;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 .user-list::-webkit-scrollbar-thumb:hover {
-  background: #2C9B22;
+  background: rgba(44, 455, 34, 0.8);
 
 }
 
