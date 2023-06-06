@@ -158,19 +158,34 @@ function deleteChannel(id, index) {
 
 .button__neutral {
     border-radius: 5px;
-    background-color: #3841a5;
+    background-color: #2C9B22;
+    border: 1px solid #2C9B22;
     padding: 5px 10px;
     color: white;
     font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+.button__neutral:hover{
+    background-color: white;
+    color: #2C9B22;
     text-decoration: none;
 }
 
 .button__deny {
     border-radius: 5px;
     background-color: #d33643;
+    border: 1px solid #d33643;
     padding: 5px 10px;
     color: white;
     font-weight: 500;
+    transition: all 0.3s ease-in-out;
+}
+
+.button__deny:hover {
+    background-color: white;
+    color: #d33643;
+    text-decoration: none;
 }
 .button{
     position : relative ;
@@ -213,7 +228,7 @@ function deleteChannel(id, index) {
     --main_color : #f4cf47 ;
     --sub_color1 : rgba(44, 455, 34, 0.2);
     --sub_color2 : #ff8108 ;
-    --base_color : #000 ;
+    --base_color : white ;
     --border_radius1 : 60px 60px 40px 40px / 48px 48px 30px 30px ;
     --border_radius2 : 70px 70px 40px 40px / 48px 48px 30px 30px ;
     --border_radius3 : 40px 40px 40px 40px / 48px 48px 30px 30px ;
