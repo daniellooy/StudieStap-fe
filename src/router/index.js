@@ -114,6 +114,11 @@ const routes = [
         component: () => import('@/views/admin/overview.vue')
       },
       {
+        path:  '/funfact',
+        name: 'Funfact',
+        component: () => import('@/views/admin/editfunfact.vue')
+      },
+      {
         path: 'modules/',
         name: 'Admin Modules',
         component: () => import('@/views/admin/Modules.vue'),
@@ -250,7 +255,7 @@ const routes = [
             component: () => import('@/views/admin/add_edit_evaluation.vue'),
           },
         ]
-        }, 
+        },
         {
         path: 'channels/',
         name: 'StudieStap Channels',
