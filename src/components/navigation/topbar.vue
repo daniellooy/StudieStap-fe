@@ -1,14 +1,7 @@
 <template>
   <div class="topbar">
-    <div class="topbar-left">
-      <div class="menubutton" @click="openSidebar()">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" height="24" width="24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </div>
-      <div class="font">
-        {{ currentRouteName }}
-      </div>
+    <div class="font">
+      {{ currentRouteName }}
     </div>
     <Profile />
   </div>
@@ -16,19 +9,12 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-import { computed, ref } from "vue";
-// import { useAppStore } from "@/store/store";
-// import { storeToRefs } from "pinia";
+import { computed } from "vue";
+
 import Profile from "@/components/profile/Profile.vue";
 const route = useRoute()
-// const store = useAppStore()
-// const { user } = storeToRefs(store)
-const currentRouteName = computed(() => route.name)
 
-const emit = defineEmits(['open']);
-function openSidebar(){
-  emit('open');
-}
+const currentRouteName = computed(() => route.name)
 </script>
 
 <style scoped>
@@ -45,6 +31,8 @@ function openSidebar(){
   position: fixed;
   width: 80%;
   z-index: 5;
+  position: relative;
+  width: 100%;
 }
 
 .profile-info {
@@ -86,32 +74,5 @@ function openSidebar(){
   height: 30px;
   width: 30px;
   align-self: center;
-}
-
-.menubutton{
-  display: none;
-}
-
-@media only screen and (max-width: 1280px){
-  .topbar{
-    padding-right: 22px;
-    padding-left: 22px;
-    width: 100%;
-  }
-
-  .menubutton{
-    display: flex;
-    align-items: center;
-  }
-
-  .topbar-left{
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
-
-  .username{
-    display: none;
-  }
 }
 </style>

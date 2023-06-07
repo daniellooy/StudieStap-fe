@@ -37,7 +37,7 @@
         <h3>Evaluatie Toevoegen</h3>
       </router-link>
       <router-link class="admin-block" :to="{name: 'Channel Overzicht'}" >
-        <h2>Channel Overzicht</h2>
+        <h3>Channel Overzicht</h3>
       </router-link>
     </div>
 </template>
