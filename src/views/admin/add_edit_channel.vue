@@ -27,20 +27,29 @@
           <label for="users">Channel Gebruikers</label>
           <div class="selected-users">
             <div class="badge" v-for="user in selectedUsersData" :key="user.id">
-              <img :src="user.image" alt="">
+              <img class="user-image" :src="user.image" alt="">
               <span>{{ truncatedName(user.name) }}</span>
-              <button @click="removeUser(user.id)">Verwijderen</button>
+              <button @click="removeUser(user.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" >
+                <path stroke-linecap="round" stroke-linejoin="round"
+                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+            </button>
             </div>
+
           </div>
 
           <div class="custom-multiselect">
-            <input type="text" v-model="searchQuery" placeholder="Zoek gebruikers" @input="filterUsers" />
+            <input type="text" v-model="searchQuery" placeholder="Wie wil je toevoegen aan de channel"
+              @input="filterUsers" />
             <ul class="user-list">
-              <li v-for="user in filteredUsers" :key="user.id">
-                <label>
-                  <input type="checkbox" :value="user.id" v-model="selectedUsers" />
-                  <span :class="{ 'selected-user': isSelected(user.id) }">
-                    {{ user.name }}
+              <li class="user-list-item" v-for="user in filteredUsers" :key="user.id">
+                <label :class="{ 'selected-user': isSelected(user.id) }">
+                  <input class="hidden" type="checkbox" :value="user.id" v-model="selectedUsers" />
+                  <img class="user-image" :src="user.image" alt="">
+                  <span class="user-name">
+                    {{ truncatedName(user.name) }}
                   </span>
                 </label>
               </li>
@@ -50,8 +59,8 @@
         </div>
       </div>
       <div class="form-buttons">
-        <button @click="cancel()">Annuleren</button>
-        <button @click="save()">Opslaan</button>
+        <button class="btn-cancel" @click="cancel()">Annuleren</button>
+        <button class="btn-save" @click="save()">Opslaan</button>
       </div>
     </div>
   </div>
@@ -109,8 +118,8 @@ if (editmode.value) {
     channel.value = response.data
     console.log(response.data)
     selectedUsers.value = response.data.users.map(user => user.user.id,
-  )
-})
+    )
+  })
 }
 else {
   channel.value.name = ''
@@ -161,11 +170,20 @@ const save = () => {
     let data = new FormData();
     data.append('name', channel.value.name)
     data.append('description', channel.value.description)
+    if(!channel.value.imageFile){
+      data.append('catApi', 'https://cataas.com/cat');
+    }
+    data.append('users', selectedUsers.value)
     data.append('image_file', channel.value.imageFile)
     data.append('_method', 'POST')
+    console.log(channel.value.imageFile)
     axiosInstance.post('/channel/add', data).then((response) => { console.log(response) })
     router.push({ name: 'Channel Overzicht' });
   }
+}
+
+const cancel = () => {
+  router.push({ name: 'Channel Overzicht' });
 }
 </script>
 
@@ -257,11 +275,83 @@ select {
   justify-content: space-between;
 }
 
-
+.btn-cancel {
+  background-color: #999;
+  color: white;
+  border: 1px solid #999;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn-cancel:hover {
+  background-color: white;
+  color: #999;
+}
+.btn-save {
+  background-color: #2C9B22;
+  color: white;
+  border: 1px solid #2C9B22;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn-save:hover {
+  background-color: white;
+  color: #2C9B22;
+}
 /* multiselect stylinbg */
+.custom-multiselect {
+  margin-top: 16px;
+}
+
+.custom-multiselect>input {
+  width: 100%;
+}
+
+.user-list {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  max-height: calc(3 * (50px + 10px));
+  overflow-y: scroll;
+  list-style-type: none;
+  scrollbar-width: thin;
+  transition: all 0.2s ease-in-out;
+}
+
+.user-list-item {
+  display: flex;
+}
+
+.user-list-item>label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.user-list-item>label:hover {
+  color: #2C9B22;
+  background: rgba(44, 455, 34, 0.2);
+}
+
+.user-name {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
 .selected-user {
-  color: blue;
-  /* Voeg hier je gewenste stijl toe */
+  color: #2C9B22;
+  width: 100%;
+  background: rgba(44, 455, 34, 0.4);
 }
 
 .selected-users {
@@ -278,13 +368,44 @@ select {
   gap: 8px;
   margin-right: 5px;
   border-radius: 16px;
-  background-color: #f1f1f1;
+  font-weight: 500;
+  color: #2C9B22;
+  background: rgba(44, 455, 34, 0.4);
 }
 
-.badge>img {
+.badge > button{
+  width: 24px;
+  height: 24px;
+  color: #000;
+  transition: all 0.2s ease-in-out;
+}
+.badge > button:hover{
+  color : red;
+}
+
+.user-image {
   height: 36px;
   width: 36px;
   border-radius: 100%;
   margin-right: 5px;
 }
+/* custom scrollbar */
+/* Track */
+.user-list::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgba(44, 455, 34, 0.2);
+}
+
+/* Handle */
+.user-list::-webkit-scrollbar-thumb {
+  background-color: #2C9B22;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.user-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 455, 34, 0.8);
+}
+
+
 </style>

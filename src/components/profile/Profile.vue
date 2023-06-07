@@ -1,9 +1,7 @@
 <template>
     <div class="profile">
         <v-row class="d-flex flex-row flex align-center justify-end" >
-            <v-avatar color="surface-variant" class="mr-4">
-              <img class="image" :src="'http://localhost:8000/' + user.Profile_image" alt="">
-            </v-avatar>
+            <img class="profile-image" :src="'http://localhost:8000/' + user.Profile_image" v-if="user">
             <div class="mr-4">
                 <p>{{ user ?  user.first_name : "" }} {{ user ? user.last_name : '' }}</p>
             </div>
@@ -18,7 +16,7 @@
     <transition name="fade">
         <div class="profile-menu-list-wrapper" v-if="showMenu">
             <ul class="profile-menu-list">
-                <li class="profile-menu-list-item" v-for="(item, id) in menuItems" :key="id" >{{ item.title }}</li>
+                <router-link class="profile-menu-list-item" :to="{ name: 'Admin overzicht'}">Admin</router-link>
                 <li class="profile-menu-list-item" @click="logout()">Logout</li>
             </ul>
         </div>
@@ -30,6 +28,7 @@ import { storeToRefs } from "pinia";
 import { useAppStore } from "@/store/store";
 import { ref } from 'vue';
 import axios from 'axios'
+
 // define props
 const props = defineProps({
     items: {
@@ -37,7 +36,7 @@ const props = defineProps({
         default:
             [
                 { title: "Profile" },
-                { title: "Settings" },
+                { title: "Admin" },
             ]
     },
     isShow: {
@@ -113,11 +112,21 @@ const logout = () =>{
 }
 
 .profile-menu-list-item {
+    display: flex;
+    text-decoration: none;
+    color: black;
     padding: 10px 20px;
     border-bottom: 1px solid #C9C9C9;
     cursor: pointer;
 }
 
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
 /* change dthe styling for the last child of the list */
 .profile-menu-list-item:last-child {
     border-bottom: none;

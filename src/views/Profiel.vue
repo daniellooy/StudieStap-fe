@@ -2,8 +2,8 @@
   <h1 class="profile-header">StudieStapper informatie</h1>
   <div class="card-wrapper">
     <vue-flip class="card1" v-model="editSection1" transition="1.6s">
-      <template v-slot:front class="front">
-        <div class="section-wrapper">
+      <template v-slot:front class="front ">
+        <div class="section-wrapper bg-1">
           <h2>Wie ben ik?</h2>
           <section class="section">
             <div class="section-content">
@@ -33,8 +33,8 @@
         </div>
       </template>
       <template v-slot:back class="back">
-        <form @submit.prevent="submitForm" class="back section-wrapper">
-          
+        <form @submit.prevent="submitForm" class="back section-wrapper bg-1">
+
           <h2>Wie ben ik?</h2>
           <section class="section">
             <div class="section-content">
@@ -71,7 +71,7 @@
     </vue-flip>
     <vue-flip class="card2" v-model="editSection2" transition="1.6s">
       <template v-slot:front class="front">
-        <div class="section-wrapper">
+        <div class="section-wrapper bg-2">
           <h2>Persoons Informatie</h2>
           <section class="section-grid">
             <div class="content-item column">
@@ -105,7 +105,7 @@
         </div>
       </template>
       <template v-slot:back class="back">
-        <form @submit.prevent="submitForm" class="back section-wrapper">
+        <form @submit.prevent="submitForm" class="back section-wrapper bg-2">
           <h2>Persoons Informatie</h2>
           <section class="section-grid">
             <div class="content-item column">
@@ -143,7 +143,7 @@
     </vue-flip>
     <vue-flip class="card3" v-model="editSection3" transition="1.6s">
       <template v-slot:front class="front">
-        <div class="section-wrapper">
+        <div class="section-wrapper bg-1">
           <h2>Adress</h2>
           <section class="section-grid">
             <div class="content-item column">
@@ -174,7 +174,7 @@
         </div>
       </template>
       <template v-slot:back class="back">
-        <form @submit.prevent="submitForm" class="back section-wrapper">
+        <form @submit.prevent="submitForm" class="section-wrapper bg-1">
           <h2>Adress</h2>
           <section class="section-grid">
             <div class="content-item column">
@@ -279,8 +279,8 @@ const submitForm = () => {
   data.append("city", Form.city)
   data.append("phone", Form.phone)
   data.append("street", Form.street)
-  data.append("houseNumber", Form.houseNumber)  
-  data.append("zip", Form.zip)  
+  data.append("houseNumber", Form.houseNumber)
+  data.append("zip", Form.zip)
   data.append("profile_image_file", Form.profile_image_file)
   data.append("workshop", Form.workshop)
   data.append("_method", "PUT")
@@ -301,6 +301,22 @@ const submitForm = () => {
   justify-content: center;
   align-items: center;
   gap: 16px
+}
+
+.bg-1 {
+  background-color: #f1f1f1 !important;
+  background-image: url('/src/assets/Background_profiel_1.svg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: bottom;
+}
+
+.bg-2{
+  background-color: #f1f1f1 !important;
+  background-image: url('/src/assets/Background_profiel_2.svg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: bottom;
 }
 
 .card1 {

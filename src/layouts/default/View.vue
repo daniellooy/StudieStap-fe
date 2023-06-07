@@ -76,7 +76,6 @@ import Topbar from "@/components/navigation/topbar.vue";
 
 .main-content {
   max-height: calc(100vh - 90px);
-  margin-top: 90px;
   padding: 40px 70px;
   position: relative;
   overflow-y: scroll;

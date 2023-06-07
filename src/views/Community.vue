@@ -29,6 +29,7 @@ const getMessages = (channel_id) => {
   axiosInstance.get(`/channel/${channel_id}`)
   .then((response) => {
     messages.value = response.data.messages
+    console.log(messages.value)
   })
   .catch((error) => {
     console.log(error)
@@ -58,6 +59,9 @@ provide('updateSelectedChannel', updateSelectedChannel)
   border: #2C9B22 2px solid;
   border-radius: 8px;
   background-color: #F4F6F3;
+  background-image: url('/src/assets/background_community.svg');
+  background-size: cover;
+  background-position: center;
 }
 
 .selector{
