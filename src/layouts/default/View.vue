@@ -66,7 +66,7 @@ import Topbar from "@/components/navigation/topbar.vue";
 .sidebar {
   grid-column: span 2 / span 2;
   background-color: white;
-  z-index: 5;
+  z-index: 10;
 }
 
 .main {
@@ -97,7 +97,7 @@ import Topbar from "@/components/navigation/topbar.vue";
     grid-column: span 10 / span 10;
     position: absolute;
     width: 90%;
-    z-index: 5;
+    z-index: 10;
   }
 
   .overlay{
@@ -120,7 +120,7 @@ import Topbar from "@/components/navigation/topbar.vue";
     grid-column: span 10 / span 10;
     position: absolute;
     width: 60%;
-    z-index: 5;
+    z-index: 10;
   }
 }
 

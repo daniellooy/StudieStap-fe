@@ -1,8 +1,11 @@
 <template>
     <div class="profile">
         <v-row class="d-flex flex-row flex align-center justify-end" >
-            <img class="profile-image" :src="'http://localhost:8000/' + user.Profile_image" v-if="user">
-            <div class="mr-4">
+            <v-avatar color="surface-variant" class="mr-4">
+              <img class="image" :src="'http://localhost:8000/' + user.Profile_image" alt="">
+            </v-avatar>
+            <div class="mr-4 hideonsmallscreens">
+
                 <p>{{ user ?  user.first_name : "" }} {{ user ? user.last_name : '' }}</p>
             </div>
             <button class="profile-settings" @click="showMenu = !showMenu">
@@ -148,6 +151,16 @@ const logout = () =>{
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.hideonsmallscreens{
+  display: block;
+}
+
+@media only screen and (max-width: 768px) {
+  .hideonsmallscreens{
+    display: none;
+  }
 }
 
 </style>
