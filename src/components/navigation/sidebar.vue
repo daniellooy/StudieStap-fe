@@ -65,11 +65,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "sidebar"
-}
-</script>
 
 <script setup>
 import {ref} from "vue";

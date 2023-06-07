@@ -5,8 +5,7 @@
                 <!-- hier kan de img van de gebruiker in -->
             </v-avatar>
             <div class="mr-4">
-                <span>Welkome terug, </span>
-                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                <p>{{ user ?  user.first_name : "" }} {{ user ? user.last_name : '' }}</p>
             </div>
             <button class="profile-settings" @click="showMenu = !showMenu">
                 <!-- make a settings icon from vuetify -->

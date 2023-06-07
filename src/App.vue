@@ -22,7 +22,6 @@ axiosInstance.get('/api/user')
   .then((response) => {
     console.log(response)
     const data = response.data
-    store.updateSessionValid(true)
     const userobj = {
       id: data.id,
       address: data.address,
@@ -39,12 +38,11 @@ axiosInstance.get('/api/user')
       zip: data.zip,
       points: data.points
     }
-
     store.updateUserObj(userobj)
+    store.updateSessionValid(true)
   })
   .catch((error) => {
     store.updateSessionValid(false)
-    console.log(error)
     router.push('/login')
   })
 

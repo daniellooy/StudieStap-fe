@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<script setup name="appendix_item">
+<script setup>
 import { defineProps } from 'vue'
 
 const props = defineProps({
