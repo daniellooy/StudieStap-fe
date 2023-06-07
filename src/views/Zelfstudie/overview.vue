@@ -38,5 +38,6 @@ axiosInstance.get('/api/categories')
   background-color: white;
   border-radius: 20px;
   padding: 25px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 </style>

@@ -62,6 +62,8 @@ function onVideoEnded(){
   if(!video.value.completed){
     axiosInstance.post('/api/completevideo/', {
       video_id: video_id.value
+    }).then((response)=>{
+      video.value.completed = true
     })
   }
 }
@@ -160,6 +162,13 @@ watch(
   min-height: 100%;
   max-height: 80vh;
   padding: 20px;
+}
+
+@media only screen and (max-width: 1280px) {
+  .videowrapper{
+    grid-template-columns: 1fr;
+    gap: 30px 0px;
+  }
 }
 
 </style>
