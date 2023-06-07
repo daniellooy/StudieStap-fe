@@ -1,10 +1,9 @@
 <template>
-  <h1 class="profile-header">StudieStapper informatie</h1>
   <div class="card-wrapper">
     <vue-flip class="card1" v-model="editSection1" transition="1.6s">
       <template v-slot:front class="front ">
         <div class="section-wrapper bg-1">
-          <h2>Wie ben ik?</h2>
+          <h3>Wie ben ik?</h3>
           <section class="section">
             <div class="section-content">
               <div>
@@ -34,8 +33,7 @@
       </template>
       <template v-slot:back class="back">
         <form @submit.prevent="submitForm" class="back section-wrapper bg-1">
-
-          <h2>Wie ben ik?</h2>
+          <h3>Wie ben ik?</h3>
           <section class="section">
             <div class="section-content">
               <div class="content-profileImage">
@@ -72,7 +70,7 @@
     <vue-flip class="card2" v-model="editSection2" transition="1.6s">
       <template v-slot:front class="front">
         <div class="section-wrapper bg-2">
-          <h2>Persoons Informatie</h2>
+          <h3>Persoonsinformatie</h3>
           <section class="section-grid">
             <div class="content-item column">
               <div class="content-item-group">
@@ -106,7 +104,7 @@
       </template>
       <template v-slot:back class="back">
         <form @submit.prevent="submitForm" class="back section-wrapper bg-2">
-          <h2>Persoons Informatie</h2>
+          <h3>Persoonsinformatie</h3>
           <section class="section-grid">
             <div class="content-item column">
               <div class="content-item-group">
@@ -144,7 +142,7 @@
     <vue-flip class="card3" v-model="editSection3" transition="1.6s">
       <template v-slot:front class="front">
         <div class="section-wrapper bg-1">
-          <h2>Adress</h2>
+          <h3>Adres</h3>
           <section class="section-grid">
             <div class="content-item column">
               <div class="content-item-group">
@@ -304,19 +302,21 @@ const submitForm = () => {
 }
 
 .bg-1 {
-  background-color: #f1f1f1 !important;
-  background-image: url('/src/assets/Background_profiel_1.svg');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: bottom;
+  background-color: white;
+  /*background-color: #f1f1f1 !important;*/
+  /*background-image: url('/src/assets/Background_profiel_1.svg');*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: 100% auto;*/
+  /*background-position: bottom;*/
 }
 
 .bg-2{
-  background-color: #f1f1f1 !important;
-  background-image: url('/src/assets/Background_profiel_2.svg');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: bottom;
+  background-color: white;
+  /*background-color: #f1f1f1 !important;*/
+  /*background-image: url('/src/assets/Background_profiel_2.svg');*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: 100% auto;*/
+  /*background-position: bottom;*/
 }
 
 .card1 {
@@ -355,19 +355,19 @@ const submitForm = () => {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  justify-content: space-between;
-  background-color: transparent;
+  /*background-color: transparent;*/
   padding: 16px;
-  border: 2px solid #2C9B22;
-  border-radius: 8px;
-  gap: 8px;
+  /*border: 2px solid #2C9B22;*/
+  border-radius: 20px;
+  gap: 20px;
+  background-color: white;
 }
 
 .section {
   display: grid;
   grid-template-columns: minmax(300px, 1fr) minmax(300px, 2fr) 1fr;
   width: 100%;
-  gap: 16px;
+  gap: 32px;
 }
 
 .section-grid {

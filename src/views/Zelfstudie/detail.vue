@@ -62,6 +62,8 @@ function onVideoEnded(){
   if(!video.value.completed){
     axiosInstance.post('/api/completevideo/', {
       video_id: video_id.value
+    }).then((response)=>{
+      video.value.completed = true
     })
   }
 }
