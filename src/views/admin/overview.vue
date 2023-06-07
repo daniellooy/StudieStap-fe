@@ -42,6 +42,9 @@
       <router-link class="admin-block" :to="{name: 'Funfact'}" >
         <h3>Leuk feitje aanpassen</h3>
       </router-link>
+      <router-link class="admin-block" :to="{name: 'Uitgelichte Module'}" >
+        <h3>Uitgelichte module</h3>
+      </router-link>
     </div>
 </template>
 

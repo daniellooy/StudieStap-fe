@@ -5,16 +5,18 @@
         <p>Wist je dat?</p>
       </div>
       <div class="dashboard-item-content">
-        <p>{{ funfact }}</p>
+        <p>{{ funfact.fact }}</p>
       </div>
     </div>
     <div class="dashboard-item">
       <div class="dashboard-item-title">
         <p>Uitgelichte module</p>
       </div>
-      <div class="dashboard-item-content">
-        <p>De uitgelichte module van deze week is: <strong>Klassenmanagement</strong></p>
-        Bekijk hem <router-link :to="{name: 'Module overzicht', params: { module_id: 1 } }">hier!</router-link>
+      <div class="dashboard-item-content featuredmodule">
+        <p>De uitgelichte module van deze week is: <strong>{{ moduletitle }}</strong></p>
+        <p>Deze module gaat over:</p>
+        <p>{{ moduledesc }}</p>
+        <p><strong>Bekijk hem <router-link :to="{name: 'Module overzicht', params: { module_id: moduleid } }">hier!</router-link></strong></p>
       </div>
     </div>
     <div class="dashboard-item medium">
@@ -53,15 +55,22 @@ const axiosInstance = axios.create({
 })
 
 const users = ref([]);
-const funfact = ref('');
+const funfact = ref({});
+const featuredmodule = ref({});
+const moduletitle = ref('');
+const moduleid = ref(0);
+const moduledesc = ref('');
 
-axiosInstance.get('/api/users').then((response)=> {
-  users.value = response.data
+axiosInstance.get('/api/dashboard').then((response)=>{
+  console.log(response.data)
+  users.value = response.data.users
+  funfact.value = response.data.funfact
+  featuredmodule.value = response.data.featuredmodule;
+  moduletitle.value = response.data.featuredmodule.moduledata.title
+  moduleid.value = response.data.featuredmodule.module_id
+  moduledesc.value  = response.data.featuredmodule.moduledata.description
 })
 
-axiosInstance.get('/api/funfact').then((response)=>{
-  funfact.value = response.data.fact
-})
 
 
 </script>
@@ -113,6 +122,12 @@ axiosInstance.get('/api/funfact').then((response)=>{
   grid-column: span 1 / span 6;
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.featuredmodule{
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
