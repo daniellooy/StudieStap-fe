@@ -88,6 +88,7 @@ axiosInstance.get('/api/dashboard').then((response)=>{
   border-radius: 20px;
   background-color: white;
   grid-column: span 1.5 / span 3;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .dashboard-item-title{
