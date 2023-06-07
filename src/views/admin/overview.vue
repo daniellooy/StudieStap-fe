@@ -39,6 +39,9 @@
       <router-link class="admin-block" :to="{name: 'Channel Overzicht'}" >
         <h3>Channel Overzicht</h3>
       </router-link>
+      <router-link class="admin-block" :to="{name: 'Funfact'}" >
+        <h3>Leuk feitje aanpassen</h3>
+      </router-link>
     </div>
 </template>
 

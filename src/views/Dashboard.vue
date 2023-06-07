@@ -5,7 +5,7 @@
         <p>Wist je dat?</p>
       </div>
       <div class="dashboard-item-content">
-        <p>Als je actief bent geweest voordat je gaat leren, je hersenen dat dan ook zijn? Hierdoor kun je daadwerkelijk meer leerstof opslaan.</p>
+        <p>{{ funfact }}</p>
       </div>
     </div>
     <div class="dashboard-item">
@@ -53,11 +53,15 @@ const axiosInstance = axios.create({
 })
 
 const users = ref([]);
+const funfact = ref('');
 
 axiosInstance.get('/api/users').then((response)=> {
   users.value = response.data
 })
 
+axiosInstance.get('/api/funfact').then((response)=>{
+  funfact.value = response.data.fact
+})
 
 
 </script>
