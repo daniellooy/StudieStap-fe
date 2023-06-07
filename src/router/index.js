@@ -119,6 +119,11 @@ const routes = [
         component: () => import('@/views/admin/editfunfact.vue')
       },
       {
+        path:  '/featuredmodule',
+        name: 'Uitgelichte Module',
+        component: () => import('@/views/admin/editfeaturedmodule.vue')
+      },
+      {
         path: 'modules/',
         name: 'Admin Modules',
         component: () => import('@/views/admin/Modules.vue'),
