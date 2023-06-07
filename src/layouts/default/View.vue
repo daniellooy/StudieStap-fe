@@ -55,12 +55,14 @@ import Topbar from "@/components/navigation/topbar.vue";
   background-image: url('/src/assets/background-day.svg');
   background-size: cover;
   background-position: center;
+  height: 100%;
 }
 
 .bg-night{
   background-image: url('/src/assets/background-night.svg');
   background-size: cover;
   background-position: center;
+  height: 100%;
 }
 
 .sidebar {
