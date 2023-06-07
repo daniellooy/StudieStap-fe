@@ -67,7 +67,7 @@
             <span>Achievements</span>
           </li>
         </router-link>
-        
+
       </ul>
     </div>
     <div class="main">
@@ -78,11 +78,6 @@
   </div>
 </template>
 
-<script setup>
-
-
-
-</script>
 
 <style scoped>
 .wrapper{

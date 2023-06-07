@@ -6,7 +6,7 @@
         </ul>
     </div>
 </template>
-<script scoped name="appendixList">
+<script>
 import { defineProps } from 'vue'
 
 const props = defineProps({

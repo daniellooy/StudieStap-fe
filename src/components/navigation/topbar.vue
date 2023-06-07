@@ -4,7 +4,6 @@
       {{ currentRouteName }}
     </div>
     <Profile />
-
 </div>
 </template>
 
