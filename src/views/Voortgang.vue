@@ -168,4 +168,23 @@ export default {
 .rubriclist-title{
   margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 768px){
+  .radar-wrapper{
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .line-wrapper{
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+  .radar-wrapper{
+    margin-bottom: 80px;
+  }
+}
 </style>
