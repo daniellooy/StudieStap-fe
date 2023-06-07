@@ -4,7 +4,7 @@
       {{ currentRouteName }}
     </div>
     <Profile />
-</div>
+  </div>
 </template>
 
 <script setup>
@@ -28,6 +28,9 @@ const currentRouteName = computed(() => route.name)
   align-items: center;
   font-weight: 600;
   font-size: 18px;
+  position: fixed;
+  width: 80%;
+  z-index: 5;
   position: relative;
   width: 100%;
 }
