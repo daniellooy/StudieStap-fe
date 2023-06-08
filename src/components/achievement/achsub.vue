@@ -1,4 +1,7 @@
 <template>
+  
+  
+  
   <section class="subcontainer" @mouseenter="hover = true" @mouseleave="hover = false">
   <!-- sub zit al in dubdone => aangevraagd, gedaan of denied-->
     <section class="achsub" v-if="status == 'accepted'">
@@ -195,8 +198,7 @@
   border: 2px solid black;
 }
 .achsub__inside__hover {
-  height: 6.4rem;
-  width: 9.4rem;
+  
   border-radius: 1rem;
   background: #339529;
   display: flex;

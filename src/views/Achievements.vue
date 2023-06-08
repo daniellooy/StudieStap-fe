@@ -21,7 +21,7 @@
 
 <script>
 import achhead from "../components/achievement/achhead.vue";
-import achsub from "../components/achievement/achsub.vue";
+import achsub from "../components/achievement/achsubNew.vue";
 import axios from 'axios';
 import router from "@/router";
 import {useAppStore} from "@/store/store";
