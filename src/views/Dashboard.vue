@@ -45,6 +45,7 @@
 <script setup>
 import axios from "axios";
 import {ref} from "vue";
+
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000',
   withCredentials: true,
@@ -61,15 +62,20 @@ const moduletitle = ref('');
 const moduleid = ref(0);
 const moduledesc = ref('');
 
-axiosInstance.get('/api/dashboard').then((response)=>{
-  console.log(response.data)
-  users.value = response.data.users
-  funfact.value = response.data.funfact
-  featuredmodule.value = response.data.featuredmodule;
-  moduletitle.value = response.data.featuredmodule.moduledata.title
-  moduleid.value = response.data.featuredmodule.module_id
-  moduledesc.value  = response.data.featuredmodule.moduledata.description
-})
+async function getDashboardContent()
+{
+  await axiosInstance.get('/api/dashboard').then((response) => {
+    console.log(response.data)
+    users.value = response.data.users
+    funfact.value = response.data.funfact
+    featuredmodule.value = response.data.featuredmodule;
+    moduletitle.value = response.data.featuredmodule.moduledata.title
+    moduleid.value = response.data.featuredmodule.module_id
+    moduledesc.value = response.data.featuredmodule.moduledata.description
+  })
+}
+
+getDashboardContent();
 
 
 

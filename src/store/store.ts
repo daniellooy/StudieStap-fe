@@ -2,20 +2,21 @@ import {defineStore} from "pinia";
 
 
 interface UserObj {
-  first_name: String,
-  last_name: String,
-  email: String,
-  date_of_birth: Date,
-  points: Number,
   id: Number,
   address: String,
   bio: String,
   city: String,
+  date_of_birth: Date,
   Profile_image: String,
+  first_name: String,
+  last_name: String,
+  email: String,
   phone: String,
   street: String,
   workshop: String,
   zip: String,
+  points: Number,
+
 }
 
 

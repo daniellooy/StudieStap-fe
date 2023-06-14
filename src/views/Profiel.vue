@@ -206,7 +206,7 @@
   </div>
 </template>
 
-<script setup name="Profiel">
+<script setup>
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useAppStore } from "@/store/store";
