@@ -72,9 +72,6 @@ onBeforeMount(async () => {
 
 <style scoped>
 
-.sidebar{
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
 .sidebar-inner{
   background-color: white;
   border-radius: 20px;
