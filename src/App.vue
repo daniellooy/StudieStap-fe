@@ -17,10 +17,19 @@ const axiosInstance = axios.create({
   }
 })
 
+async function getUserData(){
+  return await axiosInstance.get('/api/user').then((response)=>
+  {
+    return response
+  }
+  ).catch((error)=>{
+    return error.message
+  })
+}
 
-axiosInstance.get('/api/user')
-  .then((response) => {
-    console.log(response)
+
+getUserData().then((response)=> {
+  if(response.status == 200) {
     const data = response.data
     const userobj = {
       id: data.id,
@@ -40,11 +49,12 @@ axiosInstance.get('/api/user')
     }
     store.updateUserObj(userobj)
     store.updateSessionValid(true)
-  })
-  .catch((error) => {
+  }
+  else {
     store.updateSessionValid(false)
     router.push('/login')
-  })
+  }
+})
 
 </script>
 <style>

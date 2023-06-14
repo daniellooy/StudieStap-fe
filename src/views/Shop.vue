@@ -32,14 +32,11 @@ import {useAppStore} from "@/store/store";
 import {storeToRefs} from "pinia";
 
 const store = useAppStore();
-const {user} = storeToRefs(store);  
+const {user} = storeToRefs(store);
 
 
 export default {
   name: "Shop",
-  components: {
-
-  },
   data() {
     return {
       shopitems: [],
@@ -50,7 +47,7 @@ export default {
   mounted() {
     axios.get('http://localhost:8000/api/shopitems').then((res) => {
       this.shopitems = res.data;
-      console.log(this.shopitems); 
+      console.log(this.shopitems);
     });
   },
 
@@ -67,7 +64,7 @@ export default {
           // console.log(response);
         });
       ;
-      
+
     },
 
     checkIfBought(shopitem){
