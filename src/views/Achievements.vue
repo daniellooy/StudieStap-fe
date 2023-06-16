@@ -44,7 +44,7 @@ export default {
   },
 
   mounted() {
-    axios.get('https://185-220-205-7.cloud-xip.com/api/achievements').then((res) => {
+    axios.get(import.meta.env.VITE_API_ENDPOINT + '/api/achievements').then((res) => {
       this.achievements = res.data;
       // console.log(this.achievements);
     });

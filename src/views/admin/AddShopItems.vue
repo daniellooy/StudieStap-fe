@@ -31,6 +31,7 @@
 <script>
 import NavAdmin from '../../components/achievement/NavAdmin.vue'
 import axios from 'axios';
+import router from "@/router";
 
 export default {
   name: "Requests",
@@ -45,7 +46,7 @@ export default {
 
   methods:{
     addshopitem(shopitem){
-      axios.post('http://localhost:8000/api/shopitems', shopitem).then((response) => {console.log(response)});
+      axios.post(import.meta.env.VITE_API_ENDPOINT + '/api/shopitems', shopitem).then((response) => {console.log(response)});
       router.push("/admin/achievements");
     }
   }

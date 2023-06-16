@@ -13,9 +13,9 @@
           <textarea name="description" v-model="achievement.description" ></textarea>
         </section>
 
-        
+
         <h1>Doelen toevoegen</h1>
-        
+
         <section class="sub-row" v-for="sub in subs">
           <section class="form-group form-group-sub">
             <label for="amount">Doel hoeveelheid</label>
@@ -30,7 +30,7 @@
             <input type="number" v-model="sub.points" name="points">
           </section>
         </section>
-        
+
         <section class="button-section">
           <button class="sub-add__button" @click="addsub()" >Extra doel toevoegen</button>
           <button class="sub-remove__button" @click="removesub()" >Verwijder laatste doel</button>
@@ -64,12 +64,12 @@ export default {
 
   methods:{
     addachievement(achievement, subs){
-      axios.post('http://localhost:8000/api/achievements', achievement)
+      axios.post(import.meta.env.VITE_API_ENDPOINT +'/api/achievements', achievement)
       .then((response) => {
         for(let i=0; i<this.subs.length; i++){
-          axios.post('http://localhost:8000/api/achievements/' + response.data.id + '/subs', subs[i])
+          axios.post(import.meta.env.VITE_API_ENDPOINT + '/api/achievements/' + response.data.id + '/subs', subs[i])
           .then((res) => {
-            
+
           });
         }
       });

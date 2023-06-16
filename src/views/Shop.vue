@@ -45,7 +45,7 @@ export default {
   },
 
   mounted() {
-    axios.get('https://185-220-205-7.cloud-xip.com/api/shopitems').then((res) => {
+    axios.get(import.meta.env.VITE_API_ENDPOINT + '/api/shopitems').then((res) => {
       this.shopitems = res.data;
       console.log(this.shopitems);
     });
@@ -57,7 +57,7 @@ export default {
     },
 
     buyItem(item, idx){
-      axios.post('https://185-220-205-7.cloud-xip.com/api/shopitems/' + item.id + '/purchase')
+      axios.post(import.meta.env.VITE_API_ENDPOINT + '/api/shopitems/' + item.id + '/purchase')
       .then((response)=>{
           this.shopitems[idx].purchases.length = 1;
           this.user.points -= item.price;

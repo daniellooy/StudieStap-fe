@@ -1,8 +1,8 @@
 <template>
-  
+
     <NavAdmin />
-  
-    
+
+
     <v-expansion-panels class="request__container">
       <v-expansion-panel class="request" v-for="(request, idx) in requests">
         <v-expansion-panel-title class="request__title">
@@ -51,7 +51,7 @@ export default {
   },
 
   mounted() {
-    axios.get('http://localhost:8000/api/subsdone').then((res) => {
+    axios.get(import.meta.env.VITE_API_ENDPOINT+'/api/subsdone').then((res) => {
       this.requests = res.data;
       console.log(this.requests);
     });
@@ -67,7 +67,7 @@ export default {
     },
 
     accept(id, idx){
-      axios.post('http://localhost:8000/api/subs/requests/' + id + '/status', {
+      axios.post(import.meta.env.VITE_API_ENDPOINT+'/api/subs/requests/' + id + '/status', {
         status: "accepted"
       })
         .then((response)=>{
@@ -76,7 +76,7 @@ export default {
         });
     },
     deny(id, idx){
-      axios.post('http://localhost:8000/api/subs/requests/' + id + '/status', {
+      axios.post(import.meta.env.VITE_API_ENDPOINT+'/api/subs/requests/' + id + '/status', {
         status: "denied"
       })
         .then((response)=>{
