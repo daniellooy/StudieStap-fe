@@ -6,10 +6,10 @@
 import axios from "axios";
 import router from "@/router";
 import { useAppStore } from "@/store/store";
-
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 const store = useAppStore();
 const axiosInstance = axios.create({
-  baseURL: 'https://113-30-188-44.cloud-xip.com/',
+  baseURL: endpoint,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

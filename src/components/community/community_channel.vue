@@ -97,7 +97,7 @@ import axios from 'axios'
 
 const store = useAppStore()
 const { user } = storeToRefs(store)
-
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 // houd de selected channel bij
 const selectedChannel = ref(inject('selectedChannel'));
 const postMessage = ref('');
@@ -147,7 +147,7 @@ const showMessage = (message) => {
     responseTo.value = message
     console.log(message)
 }
-// zet de scroll van de message container op de bodem 
+// zet de scroll van de message container op de bodem
 const setMessageContainerScrollToBottom = () => {
     const container = document.querySelector('.messages__wrapper')
     container.scrollTop = container.scrollHeight;
@@ -155,7 +155,7 @@ const setMessageContainerScrollToBottom = () => {
 
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: endpoint + '/api',
     withCredentials: true,
     headers: {
         "accept": 'application/json',
@@ -397,7 +397,7 @@ const getAppendixUrl = (appendixPath) => {
 }
 
 .post__message__input {
-    
+
     width: 100%;
     outline: none;
 }

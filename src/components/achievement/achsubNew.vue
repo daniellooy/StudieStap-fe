@@ -107,12 +107,12 @@
       </section>
     </section>
   </section>
-  
+
 </template>
 
 <script>
   import axios from 'axios';
-
+  const endpoint = import.meta.env.VITE_API_ENDPOINT
   export default {
     props:["data", "sub"],
 
@@ -123,16 +123,16 @@
       }
     },
 
-    
-    methods: {      
+
+    methods: {
       requestAchievement(){
-        axios.post('http://localhost:8000/api/subs/' + this.sub.id + '/request')
+        axios.post(endpoint + '/api/subs/' + this.sub.id + '/request')
         .then((response)=>{
           this.status = "pending";
         });
       },
       requestdenied(){
-        axios.post('http://localhost:8000/api/subs/requests/' + this.sub.id + '/status', {
+        axios.post(endpoint +'/api/subs/requests/' + this.sub.id + '/status', {
           status: "pending"
         })
         .then((response)=>{
