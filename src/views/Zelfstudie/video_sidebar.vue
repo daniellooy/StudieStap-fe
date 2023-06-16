@@ -8,7 +8,7 @@
             <router-link active-class="darkbg" :to="{ name: 'Video', params: { video_id: module_video.id } }">
               <li class="sidebar-item" :class="[module_video.completed ? 'completed':'']">
                 <div class="sidebar-item-left">
-                  <img class="sidebar-item-thumbnail" :src="'http://localhost:8000' + module_video.thumbnail" alt="">
+                  <img class="sidebar-item-thumbnail" :src="import.meta.env.VITE_API_ENDPOINT + module_video.thumbnail" alt="">
                   <span>{{ module_video.title }}</span>
                 </div>
                 <span class="completed-check" v-if="module_video.completed">
@@ -49,7 +49,7 @@ const props = defineProps({
 const {video_id} = toRefs(props)
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

@@ -3,7 +3,7 @@
     <ul class="channel__list">
       <li v-for="channel in channels" :key="channel.id">
         <!-- show image of the channel  -->
-        <div 
+        <div
           :class="[channel.users.find((user2) => user2.user_id === user.id) ? 'channel__list__item' : 'disabled channel__list__item']"
           @click="getSelected(channel)">
           <svg v-if="selectedChannel === channel.id" width="5" height="50" viewBox="0 0 5 50" fill="none"
@@ -30,7 +30,7 @@ const { user } = storeToRefs(store)
 
 const updateSelectedChannel = inject('updateSelectedChannel');
 const channels = ref();
-const URL_BASE = 'http://localhost:8000/'
+const URL_BASE = import.meta.env.VITE_API_ENDPOINT
 
 const props = defineProps({
   selectedChannel: {
@@ -44,7 +44,7 @@ const getSelected = (value) => {
   updateSelectedChannel(value.id)
 }
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: import.meta.env.VITE_API_ENDPOINT + '/api',
   withCredentials: true,
   headers: {
     "accept": 'application/json',

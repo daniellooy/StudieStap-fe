@@ -61,7 +61,7 @@ const videos = ref([]);
 const chosen_video = ref(1);
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: import.meta.env.VITE_API_ENDPOINT + '/api',
   withCredentials: true,
   headers: {
     "accept": 'application/json',

@@ -216,7 +216,7 @@ import { VueFlip } from 'vue-flip';
 
 const store = useAppStore()
 const { user } = storeToRefs(store)
-const profile_image = ref("http://localhost:8000/" + user.value.Profile_image)
+const profile_image = ref(import.meta.env.VITE_API_ENDPOINT + "/" + user.value.Profile_image)
 
 
 const editSection1 = ref(false)
@@ -242,7 +242,7 @@ const Form = reactive({
 })
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

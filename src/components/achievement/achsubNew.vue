@@ -107,7 +107,7 @@
       </section>
     </section>
   </section>
-  
+
 </template>
 
 <script>
@@ -123,16 +123,16 @@
       }
     },
 
-    
-    methods: {      
+
+    methods: {
       requestAchievement(){
-        axios.post('http://localhost:8000/api/subs/' + this.sub.id + '/request')
+        axios.post(import.meta.env.VITE_API_ENDPOINT + '/api/subs/' + this.sub.id + '/request')
         .then((response)=>{
           this.status = "pending";
         });
       },
       requestdenied(){
-        axios.post('http://localhost:8000/api/subs/requests/' + this.sub.id + '/status', {
+        axios.post(import.meta.env.VITE_API_ENDPOINT +'/api/subs/requests/' + this.sub.id + '/status', {
           status: "pending"
         })
         .then((response)=>{

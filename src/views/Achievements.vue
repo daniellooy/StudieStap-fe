@@ -44,7 +44,7 @@ export default {
   },
 
   mounted() {
-    axios.get('http://localhost:8000/api/achievements').then((res) => {
+    axios.get(import.meta.env.VITE_API_ENDPOINT + '/api/achievements').then((res) => {
       this.achievements = res.data;
       // console.log(this.achievements);
     });
@@ -78,7 +78,7 @@ export default {
 .points__section{
   display: flex;
   flex-direction: row;
-  
+
 }
 
 .sidebar-list-item-icon{

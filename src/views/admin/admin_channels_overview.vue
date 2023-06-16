@@ -24,7 +24,7 @@
         <ul class="channel__list">
             <li class="channel__list__item" v-for="channel, index in channels" :key="channel">
                 <div class="channel__list__item__left">
-                    <img :src="'http://localhost:8000/' + channel.image_path" alt="">
+                    <img :src="import.meta.env.VITE_API_ENDPOINT + '/' + channel.image_path" alt="">
                     <div><Strong>{{ channel.name }}: </Strong>{{ channel.description }}</div>
                 </div>
                 <div class="channel__list__item__buttons">
@@ -53,7 +53,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const channels = ref([]);
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api/',
+    baseURL: import.meta.env.VITE_API_ENDPOINT + '/api/',
     withCredentials: true,
     headers: {
         "accept": 'application/json',
@@ -207,7 +207,7 @@ function deleteChannel(id, index) {
     justify-content : center ;
     align-items : center ;
     position : relative ;
-    z-index : 1 ; 
+    z-index : 1 ;
     width : 100% ;
     height : 100% ;
     border-radius : 40px ;

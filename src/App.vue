@@ -9,7 +9,7 @@ import { useAppStore } from "@/store/store";
 
 const store = useAppStore();
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

@@ -9,7 +9,7 @@
     }"
     >
       <div class="video-list-item-thumbnail" :class="[video.completed ? 'completed-border':'']">
-        <img :src="'http://localhost:8000' + video.thumbnail" alt="">
+        <img :src="import.meta.env.VITE_API_ENDPOINT + video.thumbnail" alt="">
         <span class="video-list-item-thumbnail-check" v-if="video.completed">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="30px" width="30px">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

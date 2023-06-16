@@ -1,7 +1,7 @@
 <template>
-  
-  
-  
+
+
+
   <section class="subcontainer" @mouseenter="hover = true" @mouseleave="hover = false">
   <!-- sub zit al in dubdone => aangevraagd, gedaan of denied-->
     <section class="achsub" v-if="status == 'accepted'">
@@ -38,7 +38,7 @@
         </section>
 
 
-        
+
       </section>
 
       <!-- locked -->
@@ -51,8 +51,8 @@
 
 
 
-      
-      
+
+
     </section>
   </section>
 </template>
@@ -115,7 +115,7 @@
       },
 
       requestAchievement(){
-        axios.post('http://localhost:8000/api/subs/' + this.sub.id + '/request')
+        axios.post(import.meta.env.VITE_API_ENDPOINT + '/api/subs/' + this.sub.id + '/request')
         .then((response)=>{
           this.status = "pending";
           // console.log(this.request);
@@ -198,7 +198,7 @@
   border: 2px solid black;
 }
 .achsub__inside__hover {
-  
+
   border-radius: 1rem;
   background: #339529;
   display: flex;

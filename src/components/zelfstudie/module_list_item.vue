@@ -9,7 +9,7 @@
     }"
      >
       <div class="video-list-item-thumbnail">
-        <img :src="'http://localhost:8000' + module.thumbnail" alt="">
+        <img :src="import.meta.env.VITE_API_ENDPOINT + module.thumbnail" alt="">
       </div>
       <span class="video-list-item-title">
         {{module.title}}

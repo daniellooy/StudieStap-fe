@@ -3,7 +3,7 @@
         <div class="messages__wrapper">
             <div @change="messageContainer" v-for="message in modifiedChannelMessages" :key="message.id">
                 <div :class="[user.id === message.user_id ? 'message__item own' : 'message__item']">
-                    <img :src="'http://localhost:8000/' + message.user.image" v-if="message.user.image">
+                    <img :src="import.meta.env.VITE_API_ENDPOINT + '/' + message.user.image" v-if="message.user.image">
                     <div class="message__content">
                         <div @mousedown="showMessage(message)" class="message__content__header">
                             <h3 class="message__content__header__name">{{ message.user.firstname }} {{ message.user.lastname
@@ -82,7 +82,7 @@
         <!-- Appendix Modal -->
         <div v-if="showModal" class="modal">
             <div class="modal__content">
-                <img class="modal__image" :src="`http://localhost:8000/` + selectedAppendix.appendix_path" alt="">
+                <img class="modal__image" :src="import.meta.env.VITE_API_ENDPOINT + '/' + selectedAppendix.appendix_path" alt="">
                 <button class="modal__close" @click="closeModal">Close</button>
             </div>
         </div>
@@ -147,7 +147,7 @@ const showMessage = (message) => {
     responseTo.value = message
     console.log(message)
 }
-// zet de scroll van de message container op de bodem 
+// zet de scroll van de message container op de bodem
 const setMessageContainerScrollToBottom = () => {
     const container = document.querySelector('.messages__wrapper')
     container.scrollTop = container.scrollHeight;
@@ -155,7 +155,7 @@ const setMessageContainerScrollToBottom = () => {
 
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: import.meta.env.VITE_API_ENDPOINT + '/api',
     withCredentials: true,
     headers: {
         "accept": 'application/json',
@@ -213,7 +213,7 @@ const isVideo = (appendixPath) => {
 }
 
 const getAppendixUrl = (appendixPath) => {
-    return `http://localhost:8000/${appendixPath}`; // Pas de URL-structuur aan als dat nodig is
+    return import.meta.env.VITE_API_ENDPOINT + `/${appendixPath}`; // Pas de URL-structuur aan als dat nodig is
 }
 </script>
 
@@ -397,7 +397,7 @@ const getAppendixUrl = (appendixPath) => {
 }
 
 .post__message__input {
-    
+
     width: 100%;
     outline: none;
 }
