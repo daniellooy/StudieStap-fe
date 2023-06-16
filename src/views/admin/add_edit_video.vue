@@ -4,12 +4,12 @@
 
     <div class="form">
       <div class="form-group" >
-        <img v-if="editmode" :src="import.meta.env.VITE_API_ENDPOINT + video.thumbnail" alt="">
+        <img v-if="editmode" :src="endpoint + video.thumbnail" alt="">
         <label for="thumb">Thumbnail afbeelding</label>
         <input id="file" @change="onFileChange($event)" type="file" >
       </div>
       <div class="form-group" >
-        <video controls v-if="editmode" :src="import.meta.env.VITE_API_ENDPOINT + video.file_path" alt="" />
+        <video controls v-if="editmode" :src="endpoint + video.file_path" alt="" />
         <label for="thumb">Video</label>
         <input id="file" @change="onVideoChange($event)" type="file" >
       </div>
@@ -50,6 +50,7 @@ const file = ref(null);
 const editmode = ref(false);
 const video_file = ref('');
 const chosen_module = ref(1);
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 
 
 const axiosInstance = axios.create({

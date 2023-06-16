@@ -24,7 +24,7 @@
         <ul class="channel__list">
             <li class="channel__list__item" v-for="channel, index in channels" :key="channel">
                 <div class="channel__list__item__left">
-                    <img :src="import.meta.env.VITE_API_ENDPOINT + '/' + channel.image_path" alt="">
+                    <img :src="endpoint + '/' + channel.image_path" alt="">
                     <div><Strong>{{ channel.name }}: </Strong>{{ channel.description }}</div>
                 </div>
                 <div class="channel__list__item__buttons">
@@ -50,6 +50,7 @@ import { onBeforeMount, ref } from 'vue';
 import axios from 'axios';
 import { useRoute } from "vue-router";
 
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 const route = useRoute();
 const channels = ref([]);
 const axiosInstance = axios.create({

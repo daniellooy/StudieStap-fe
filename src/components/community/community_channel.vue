@@ -3,7 +3,7 @@
         <div class="messages__wrapper">
             <div @change="messageContainer" v-for="message in modifiedChannelMessages" :key="message.id">
                 <div :class="[user.id === message.user_id ? 'message__item own' : 'message__item']">
-                    <img :src="import.meta.env.VITE_API_ENDPOINT + '/' + message.user.image" v-if="message.user.image">
+                    <img :src="endpoint + '/' + message.user.image" v-if="message.user.image">
                     <div class="message__content">
                         <div @mousedown="showMessage(message)" class="message__content__header">
                             <h3 class="message__content__header__name">{{ message.user.firstname }} {{ message.user.lastname
@@ -82,7 +82,7 @@
         <!-- Appendix Modal -->
         <div v-if="showModal" class="modal">
             <div class="modal__content">
-                <img class="modal__image" :src="import.meta.env.VITE_API_ENDPOINT + '/' + selectedAppendix.appendix_path" alt="">
+                <img class="modal__image" :src="endpoint + '/' + selectedAppendix.appendix_path" alt="">
                 <button class="modal__close" @click="closeModal">Close</button>
             </div>
         </div>

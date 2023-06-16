@@ -7,7 +7,7 @@
     <ul class="module-list">
       <li class="module-list-item" v-for="(video, index) in videos" :key="video.id + '-' + video.module_id">
         <div class="module-list-item-left">
-          <img :src="import.meta.env.VITE_API_ENDPOINT + video.thumbnail" alt="">
+          <img :src="endpoint + video.thumbnail" alt="">
           <div>{{video.module.title}}: {{ video.title }}</div>
         </div>
         <div class="module-list-item-buttons">
@@ -34,6 +34,7 @@ import axios from "axios";
 import {useRoute} from "vue-router";
 
 const route = useRoute();
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT + '/api/',

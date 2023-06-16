@@ -9,7 +9,7 @@
     }"
      >
       <div class="video-list-item-thumbnail">
-        <img :src="import.meta.env.VITE_API_ENDPOINT + module.thumbnail" alt="">
+        <img :src="endpoint + module.thumbnail" alt="">
       </div>
       <span class="video-list-item-title">
         {{module.title}}
@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 const props = defineProps({
   module: Object
 })

@@ -8,7 +8,7 @@
             <router-link active-class="darkbg" :to="{ name: 'Video', params: { video_id: module_video.id } }">
               <li class="sidebar-item" :class="[module_video.completed ? 'completed':'']">
                 <div class="sidebar-item-left">
-                  <img class="sidebar-item-thumbnail" :src="import.meta.env.VITE_API_ENDPOINT + module_video.thumbnail" alt="">
+                  <img class="sidebar-item-thumbnail" :src="endpoint + module_video.thumbnail" alt="">
                   <span>{{ module_video.title }}</span>
                 </div>
                 <span class="completed-check" v-if="module_video.completed">
@@ -41,6 +41,7 @@ import axios from "axios";
 import {useRoute} from "vue-router";
 const module_videos = ref([]);
 const route = useRoute();
+const endpoint = import.meta.env.VITE_API_ENDPOINT;
 
 const props = defineProps({
   video_id: Number,
