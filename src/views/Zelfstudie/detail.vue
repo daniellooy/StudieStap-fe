@@ -1,7 +1,7 @@
 <template>
   <div class="videowrapper" :key="route.params.video_id">
     <div class="videowrapper-contentholder">
-      <video @ended="onVideoEnded()" :src="'http://localhost:8000' + video.file_path" controls></video>
+      <video @ended="onVideoEnded()" :src="import.meta.env.VITE_API_ENDPOINT + video.file_path" controls></video>
       <div class="videowrapper-text">
         <h2 class="video-title">{{ video.title }}</h2>
         <p>
@@ -46,7 +46,7 @@ const video_id = ref(route.params.video_id);
 const video = ref({});
 const module_videos = ref([]);
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

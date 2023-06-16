@@ -47,7 +47,7 @@ import axios from "axios";
 import {ref} from "vue";
 
 const axiosInstance = axios.create({
-  baseURL: 'https://185-220-205-7.cloud-xip.com/',
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

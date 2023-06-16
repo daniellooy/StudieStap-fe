@@ -7,7 +7,7 @@
         <div class="form-group">
           <div class="form-image-wrapper">
             <img
-              :src="[channelImage ? channelImage : channel.image_path ? ('http://localhost:8000/' + channel.image_path) : 'https://cataas.com/cat']"
+              :src="[channelImage ? channelImage : channel.image_path ? (import.meta.env.VITE_API_ENDPOINT + '/' + channel.image_path) : 'https://cataas.com/cat']"
               alt="">
             <label for="channel-image">+</label>
           </div>
@@ -81,7 +81,7 @@ const selectedUsers = ref([]);
 const searchQuery = ref('');
 const users = ref([]);
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: import.meta.env.VITE_API_ENDPOINT + '/api',
   withCredentials: true,
   headers: {
     "accept": 'application/json',
@@ -133,7 +133,7 @@ axiosInstance.get('/users').then((response) => {
     return {
       id: user.id,
       name: user.firstname + ' ' + user.lastname,
-      image: user.image ? ('http://localhost:8000/' + user.image) : 'https://cataas.com/cat'
+      image: user.image ? (import.meta.env.VITE_API_ENDPOINT + '/' + user.image) : 'https://cataas.com/cat'
     }
   })
 })

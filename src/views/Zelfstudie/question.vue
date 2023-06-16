@@ -35,7 +35,7 @@ const correct = ref(false);
 
 const answerletters = ['A', 'B', 'C', 'D'];
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
   headers: {
     "accept": 'application/json',

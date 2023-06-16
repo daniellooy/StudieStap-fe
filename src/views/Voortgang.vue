@@ -32,7 +32,7 @@ import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
 
 const axiosInstance = axios.create({
-  baseURL: 'https://185-220-205-7.cloud-xip.com/api',
+  baseURL: import.meta.env.VITE_API_ENDPOINT + '/api',
   withCredentials: true,
   headers: {
     "accept": 'application/json',
