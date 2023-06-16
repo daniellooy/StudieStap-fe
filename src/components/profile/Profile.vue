@@ -2,7 +2,7 @@
     <div class="profile">
         <v-row class="d-flex flex-row flex align-center justify-end" >
             <v-avatar color="surface-variant" class="mr-4">
-              <img class="image" :src="endpoint + '/' + user.Profile_image" alt="">
+              <img v-if="user" class="image" :src="endpoint + '/' + user.Profile_image" alt="">
             </v-avatar>
             <div class="mr-4 hideonsmallscreens">
 
