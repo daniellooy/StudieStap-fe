@@ -69,13 +69,13 @@ async function getDashboardContent()
 
 getDashboardContent().then((response)=> {
   console.log(response)
-  users.value = [...response.data.users]
-  funfact.value = response.data.funfact
-  featuredmodule.value = response.data.featuredmodule;
-  moduletitle.value = response.data.featuredmodule.moduledata.title
-  moduleid.value = response.data.featuredmodule.module_id
-  moduledesc.value = response.data.featuredmodule.moduledata.description
-}).catch((error) => console.log(error));
+  users.value = [...response.users]
+  funfact.value = response.funfact
+  featuredmodule.value = response.featuredmodule;
+  moduletitle.value = response.featuredmodule.moduledata.title
+  moduleid.value = response.featuredmodule.module_id
+  moduledesc.value = response.featuredmodule.moduledata.description
+})
 
 
 
