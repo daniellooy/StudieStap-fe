@@ -64,10 +64,7 @@ const moduledesc = ref('');
 
 async function getDashboardContent()
 {
-  await axiosInstance.get('/api/dashboard').then((response) => {
-    console.log(response.data)
-    return response
-  }).catch((error) => console.log(error))
+  return (await axiosInstance.get('/api/dashboard')).data
 }
 
 getDashboardContent().then((response)=> {
