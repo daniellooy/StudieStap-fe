@@ -216,7 +216,9 @@ import { VueFlip } from 'vue-flip';
 
 const store = useAppStore()
 const { user } = storeToRefs(store)
+
 const profile_image = ref(import.meta.env.VITE_API_ENDPOINT + "/" + user.value.Profile_image)
+
 
 
 const editSection1 = ref(false)
