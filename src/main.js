@@ -13,9 +13,7 @@ import { createApp } from 'vue'
 // Plugins
 import { registerPlugins } from '@/plugins'
 import axios from 'axios'
-
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:8000';
+import VueAxios from 'vue-axios'
 
 
 const app = createApp(App)
@@ -23,6 +21,6 @@ const app = createApp(App)
 registerPlugins(app)
 
 app.mount('#app')
-app.use(axios)
+app.use(VueAxios, axios)
 
 

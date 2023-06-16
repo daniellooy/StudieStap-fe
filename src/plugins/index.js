@@ -14,8 +14,7 @@ const pinia = createPinia()
 
 export function registerPlugins (app) {
   loadFonts()
-  app
-    .use(vuetify)
-    .use(router)
-    .use(pinia)
+  app.use(vuetify)
+  app.use(router)
+  app.use(pinia)
 }
