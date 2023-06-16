@@ -67,16 +67,14 @@ async function getDashboardContent()
   return (await axiosInstance.get('/api/dashboard')).data
 }
 
-getDashboardContent().then((response)=> {
-  users.value = response.data.users
-  funfact.value = response.data.funfact
-  featuredmodule.value = response.data.featuredmodule;
-  moduletitle.value = response.data.featuredmodule.moduledata.title
-  moduleid.value = response.data.featuredmodule.module_id
-  moduledesc.value = response.data.featuredmodule.moduledata.description
+getDashboardContent().then((data)=> {
+  users.value = data.users
+  funfact.value = data.funfact
+  featuredmodule.value = data.featuredmodule;
+  moduletitle.value = data.featuredmodule.moduledata.title
+  moduleid.value = data.featuredmodule.module_id
+  moduledesc.value = data.featuredmodule.moduledata.description
 }).catch((error) => console.log(error));
-
-
 
 </script>
 
