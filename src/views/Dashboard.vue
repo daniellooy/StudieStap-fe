@@ -69,7 +69,7 @@ async function getDashboardContent()
 
 getDashboardContent().then((response)=> {
   console.log(response)
-  users.value = response.data.users
+  users.value = [...response.data.users]
   funfact.value = response.data.funfact
   featuredmodule.value = response.data.featuredmodule;
   moduletitle.value = response.data.featuredmodule.moduledata.title
