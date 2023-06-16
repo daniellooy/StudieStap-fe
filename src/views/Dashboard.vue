@@ -44,7 +44,7 @@
 
 <script setup>
 import axios from "axios";
-import {ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
@@ -67,15 +67,19 @@ async function getDashboardContent()
   return (await axiosInstance.get('/api/dashboard')).data
 }
 
-getDashboardContent().then((response)=> {
-  console.log(response)
-  users.value = [...response.users]
-  funfact.value = response.funfact
-  featuredmodule.value = response.featuredmodule;
-  moduletitle.value = response.featuredmodule.moduledata.title
-  moduleid.value = response.featuredmodule.module_id
-  moduledesc.value = response.featuredmodule.moduledata.description
+
+onBeforeMount(async () => {
+  await getDashboardContent().then((response)=> {
+    console.log(response)
+    users.value = [...response.users]
+    funfact.value = response.funfact
+    featuredmodule.value = response.featuredmodule;
+    moduletitle.value = response.featuredmodule.moduledata.title
+    moduleid.value = response.featuredmodule.module_id
+    moduledesc.value = response.featuredmodule.moduledata.description
+  })
 })
+
 
 
 
