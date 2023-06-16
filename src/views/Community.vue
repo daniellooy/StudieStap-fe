@@ -15,7 +15,7 @@ const messages = ref();
 const selectedChannel = ref(1);
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://185-220-205-7.cloud-xip.com/api',
   withCredentials: true,
   headers: {
     "accept": 'application/json',

@@ -9,7 +9,7 @@ import { useAppStore } from "@/store/store";
 
 const store = useAppStore();
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://113-30-188-44.cloud-xip.com/',
   withCredentials: true,
   headers: {
     "accept": 'application/json',
