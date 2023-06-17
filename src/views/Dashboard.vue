@@ -4,9 +4,9 @@
       <div class="dashboard-item-title">
         <p>Wist je dat?</p>
       </div>
-<!--      <div class="dashboard-item-content">-->
-<!--        <p>{{ funfact.fact }}</p>-->
-<!--      </div>-->
+      <div class="dashboard-item-content">
+        <p>{{ funfact.fact }}</p>
+      </div>
     </div>
     <div class="dashboard-item">
       <div class="dashboard-item-title">
