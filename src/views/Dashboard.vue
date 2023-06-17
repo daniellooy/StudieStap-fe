@@ -12,12 +12,12 @@
       <div class="dashboard-item-title">
         <p>Uitgelichte module</p>
       </div>
-<!--      <div class="dashboard-item-content featuredmodule">-->
-<!--        <p>De uitgelichte module van deze week is: <strong>{{ moduletitle }}</strong></p>-->
-<!--        <p>Deze module gaat over:</p>-->
-<!--        <p>{{ moduledesc }}</p>-->
-<!--        <p><strong>Bekijk hem <router-link :to="{name: 'Module overzicht', params: { module_id: moduleid } }">hier!</router-link></strong></p>-->
-<!--      </div>-->
+      <div class="dashboard-item-content featuredmodule">
+        <p>De uitgelichte module van deze week is: <strong>{{ moduletitle }}</strong></p>
+        <p>Deze module gaat over:</p>
+        <p>{{ moduledesc }}</p>
+        <p><strong>Bekijk hem <router-link :to="{name: 'Module overzicht', params: { module_id: moduleid } }">hier!</router-link></strong></p>
+      </div>
     </div>
     <div class="dashboard-item medium">
       <div class="dashboard-item-title">
