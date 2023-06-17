@@ -26,7 +26,13 @@
       <div v-if="users.length > 0" class="dashboard-item-content">
         <ul class="event-list">
           <li  class="event-list-item" v-bind:key="user.id" v-for="user in users.sort(function(a,b){
-            return Date.parse(a) < Date.parse(b) ? 1 : Date.parse(a) > Date.parse(b) ? 1 : 0;
+            date_a = new Date(a);
+            date_b = new Date(b);
+
+            date_a.setFullYear(2023)
+            date_b.setFullYear(2023)
+
+            return Date.parse(date_a) < Date.parse(date_b) ? 1 : Date.parse(date_a) > Date.parse(date_b) ? 1 : 0;
           })">
             <span class="event-list-item-left">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
