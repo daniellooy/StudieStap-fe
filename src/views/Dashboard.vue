@@ -26,7 +26,7 @@
       <div v-if="users.length > 0" class="dashboard-item-content">
         <ul class="event-list">
           <li  class="event-list-item" v-bind:key="user.id" v-for="user in users.sort(function(a,b){
-            return new Date(a) < new Date(b) ? 1 : new Date(a) > new Date(b) ? 1 : 0;
+            return Date.parse(a) < Date.parse(b) ? 1 : Date.parse(a) > Date.parse(b) ? 1 : 0;
           })">
             <span class="event-list-item-left">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
