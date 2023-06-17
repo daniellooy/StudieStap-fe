@@ -26,8 +26,8 @@
       <div v-if="users.length > 0" class="dashboard-item-content">
         <ul class="event-list">
           <li  class="event-list-item" v-bind:key="user.id" v-for="user in users.sort(function(a,b){
-            date_a = new Date(a);
-            date_b = new Date(b);
+            date_a = new Date(a.date_of_birth);
+            date_b = new Date(b.date_of_birth);
 
             date_a.setFullYear(2023)
             date_b.setFullYear(2023)
