@@ -32,7 +32,7 @@
             date_a.setFullYear(2023)
             date_b.setFullYear(2023)
 
-            return Date.parse(date_a) < Date.parse(date_b) ? 1 : Date.parse(date_a) > Date.parse(date_b) ? -1 : 0;
+            return Date.parse(date_a) < Date.parse(date_b) ? 1 : Date.parse(date_a) > Date.parse(date_b) ? 1 : 0;
           })">
             <span class="event-list-item-left">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
