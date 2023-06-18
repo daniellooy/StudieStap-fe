@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-inner">
     <div class="formwrapper">
-      <h1>Leuk feitje bewerken</h1>
+      <h1>Uitgelichte module bewerken</h1>
       <div class="form">
         <div class="form-group">
           <label for="description">Module</label>
