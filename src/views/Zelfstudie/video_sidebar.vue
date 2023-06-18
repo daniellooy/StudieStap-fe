@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" v-bind:key="video_id">
     <div class="sidebar-inner">
       <h3 class="sidebar-title">Content in deze module</h3>
       <ul class="sidebar-list">

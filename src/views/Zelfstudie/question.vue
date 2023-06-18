@@ -16,7 +16,7 @@
         </li>
       </ul>
     </div>
-    <video_sidebar :question="true" :video_id="video_id" />
+    <video_sidebar v-if="video_id != -1" :question="true" :video_id="video_id" />
   </div>
 </template>
 
@@ -27,7 +27,7 @@ import {onBeforeRouteUpdate, useRoute} from "vue-router";
 import Video_sidebar from "@/views/Zelfstudie/video_sidebar.vue";
 const route = useRoute();
 const question = ref({});
-const video_id = ref(1);
+const video_id = ref(-1);
 const answerclicked = ref(false)
 const chosenAnswer = ref(null);
 const correct = ref(false);
@@ -52,7 +52,7 @@ onBeforeMount(async () => {
   await getContent(route.params.question_id).then((data) => {
     console.log(data)
     question.value = data
-    video_id.value = Number(data.video_id);
+    video_id.value = data.video_id
     answerclicked.value = data.answered
     if(data.answered){
       chosenAnswer.value = data.userAnswer.answer_id
@@ -71,7 +71,7 @@ watch(
       chosenAnswer.value = null
       chosenAnswer.value = false
       question.value = data
-      video_id.value = Number(data.video_id)
+      video_id.value = data.video_id
       answerclicked.value = data.answered
       if(data.answered){
         chosenAnswer.value = data.userAnswer.answer_id
