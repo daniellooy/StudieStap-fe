@@ -1,7 +1,7 @@
 <template>
   <div class="videowrapper" :key="route.params.video_id">
     <div class="videowrapper-contentholder">
-      <video @ended="onVideoEnded()" :src="import.meta.env.VITE_API_ENDPOINT + video.file_path" controls></video>
+      <video @ended="onVideoEnded()" :src="endpoint + video.file_path" controls></video>
       <div class="videowrapper-text">
         <h2 class="video-title">{{ video.title }}</h2>
         <p>
@@ -40,6 +40,8 @@ import axios from "axios";
 import {onBeforeMount, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 import Video_sidebar from "@/views/Zelfstudie/video_sidebar.vue";
+
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 
 const route = useRoute();
 const video_id = ref(route.params.video_id);

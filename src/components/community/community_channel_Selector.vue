@@ -10,7 +10,7 @@
             xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0C2.76142 0 5 2.23858 5 5V45C5 47.7614 2.76142 50 0 50V0Z" fill="#2C9B22" />
           </svg>
-          <img class="wrapper__item" :src="URL_BASE + channel.image_path">
+          <img class="wrapper__item" :src="URL_BASE + '/' + channel.image_path">
           <v-tooltip class="tooltip" activator="parent" location="top" >{{ channel.name }}</v-tooltip>
         </div>
       </li>

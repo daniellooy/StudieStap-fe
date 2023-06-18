@@ -4,7 +4,7 @@
 
     <div class="form">
       <div class="form-group" >
-        <img v-if="editmode" :src="import.meta.env.VITE_API_ENDPOINT + module.thumbnail" alt="">
+        <img v-if="editmode" :src="endpoint + module.thumbnail" alt="">
         <label for="thumb">Thumbnail afbeelding</label>
         <input id="file" @change="onFileChange($event)" type="file" >
       </div>
@@ -44,6 +44,7 @@ const file = ref(null);
 const editmode = ref(false);
 const chosen_category = ref(1);
 const categories = ref({});
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT + '/api',

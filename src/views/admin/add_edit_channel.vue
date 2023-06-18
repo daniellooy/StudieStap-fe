@@ -7,7 +7,7 @@
         <div class="form-group">
           <div class="form-image-wrapper">
             <img
-              :src="[channelImage ? channelImage : channel.image_path ? (import.meta.env.VITE_API_ENDPOINT + '/' + channel.image_path) : 'https://cataas.com/cat']"
+              :src="[channelImage ? channelImage : channel.image_path ? (endpoint + '/' + channel.image_path) : 'https://cataas.com/cat']"
               alt="">
             <label for="channel-image">+</label>
           </div>
@@ -71,6 +71,7 @@ import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import { ref, computed } from "vue";
 
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 const route = useRoute();
 const router = useRouter();
 const channel = ref({});

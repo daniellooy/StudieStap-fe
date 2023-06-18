@@ -2,7 +2,7 @@
     <div class="profile">
         <v-row class="d-flex flex-row flex align-center justify-end" >
             <v-avatar color="surface-variant" class="mr-4">
-              <img class="image" :src="import.meta.env.VITE_API_ENDPOINT + '/' + user.Profile_image" alt="">
+              <img v-if="user" class="image" :src="endpoint + '/' + user.Profile_image" alt="">
             </v-avatar>
             <div class="mr-4 hideonsmallscreens">
 
@@ -53,6 +53,8 @@ const { user } = storeToRefs(store)
 const showMenu = ref(props.isShow);
 const menuItems = ref(props.items);
 import router from "@/router";
+
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,

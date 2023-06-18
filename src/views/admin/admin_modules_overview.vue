@@ -7,7 +7,7 @@
     <ul class="module-list">
       <li class="module-list-item" v-for="(module, index) in modules" :key="module.id">
         <div class="module-list-item-left">
-          <img :src="import.meta.env.VITE_API_ENDPOINT + module.thumbnail" alt="">
+          <img :src="endpoint + module.thumbnail" alt="">
           <div>{{ module.title }}</div>
         </div>
         <div class="module-list-item-buttons">
@@ -33,7 +33,7 @@ import {onBeforeMount, onUpdated, ref} from "vue";
 import axios from "axios";
 
 const modules = ref([]);
-
+const endpoint = import.meta.env.VITE_API_ENDPOINT
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT + '/api/',
   withCredentials: true,
