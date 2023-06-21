@@ -59,7 +59,7 @@ if(route.params.module_id !== undefined){
   editmode.value = true;
 }
 
-axiosInstance.get('/categories/').then((response)=>{
+axiosInstance.get('/categories').then((response)=>{
   categories.value = response.data
 })
 
