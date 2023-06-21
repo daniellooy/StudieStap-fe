@@ -37,7 +37,7 @@ const router = useRouter();
 
 const funfact = ref({})
 
-axiosInstance.get('/funfact').then((response)=>{
+axiosInstance.get('funfact').then((response)=>{
   funfact.value = response.data
 })
 
