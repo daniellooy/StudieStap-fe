@@ -48,7 +48,7 @@ const axiosInstance = axios.create({
 
 const videos = ref([])
 async function getContent(){
-  return (await axiosInstance.get('/videos/')).data
+  return (await axiosInstance.get('videos')).data
 }
 
 onBeforeMount(async () => {
