@@ -56,7 +56,7 @@ function deleteModule(id, index) {
 }
 
 async function getContent(){
-  return (await axiosInstance.get('/modules/')).data
+  return (await axiosInstance.get('modules')).data
 }
 
 onBeforeMount(async () => {
