@@ -55,7 +55,7 @@ function deleteCategory(id, index) {
 }
 
 async function getContent(){
-  return (await axiosInstance.get('/categories/')).data
+  return (await axiosInstance.get('categories/')).data
 }
 
 onBeforeMount(async () => {
