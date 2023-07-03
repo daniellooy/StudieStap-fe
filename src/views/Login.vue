@@ -116,7 +116,7 @@ export default {
                 street: data.street,
                 workshop: data.workshop,
                 zip: data.zip,
-
+                points: data.points,
               }
               store.updateUserObj(userobj)
               router.push('/')
